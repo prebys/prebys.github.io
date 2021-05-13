@@ -1,0 +1,1327 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../pizza_talk_20020815.html">
+<link rel=Preview href=preview.wmf>
+<meta name=Robots content=NoIndex>
+<script src=script.js></script><script><!--
+
+if( !(IsWin("PPTOtl")||IsWin("PPTNav")||IsWin("PPTOtlNav")) )
+{
+	obj = document.all.item("Main-File")
+	parent.location.href=obj.href
+}
+
+var gOtlHiliteClr="#000000",gOtlNormalClr="#FFFFFF",gOtlActiveClr="#0000FF",gSelected="",gTxtState=false,gChildEntryTable=new Array()
+
+function Load()
+{
+	if( IsWin("PPTOtl" ) ){ LoadOtl(); parent.gOtlLoaded=true; return }
+	if( IsWin("PPTNav" ) ){ LoadNav("NavObj",UpdNav); parent.gNavLoaded=true; return }
+	if( IsWin("PPTOtlNav" ) ){ LoadNav("OtlNavObj",UpdOtlNav); parent.gOtlNavLoaded=true; return }
+}
+function Upd(){ if( IsWin("PPTNav") ) LoadNav("NavObj",UpdNav) }
+function LoadNav( oId,UpdFunc )
+{
+	document.ondragstart=CancelDrag
+	document.onselectstart=CancelDrag
+	document.body.style.margin=2
+	UpdFunc()
+	obj=document.all.item(oId)
+	obj.style.display="block"
+	obj.style.visibility="visible"
+	document.bgColor="threedface"
+}
+function LoadOtl()
+{
+	document.ondragstart=CancelDrag
+	document.onselectstart=CancelDrag
+	OtlObj.style.display="block"
+	OtlObj.style.visibility="visible"
+	if( gOtlActiveClr == "" ) gOtlActiveClr=document.linkColor
+	if( gOtlHiliteClr == "" ) gOtlHiliteClr=document.fgColor
+	if( gOtlNormalClr == "" )
+		gOtlNormalClr=document.bgColor
+	else
+		document.bgColor=gOtlNormalClr  
+
+	InitArray()
+
+	if( ObjExists( parent.gCurSld ) ) {
+		ChangeState( parent.gCurSld,gOtlNormalClr,gOtlHiliteClr )
+		gSelected=parent.gCurSld
+	}
+	else gSelected = -1
+
+	UpdOtl()
+}
+function UpdOtl(){ UpdIdx(parent.gCurSld) }
+function UpdIdx( idx )
+{
+	if( gSelected != idx ) {
+		if( gSelected > 0 )
+			ChangeState( gSelected,gOtlHiliteClr,gOtlNormalClr )
+
+		if( ObjExists( idx ) ) {
+			gSelected = idx
+			ChangeState( gSelected,gOtlNormalClr,gOtlHiliteClr )
+		}
+		else gSelected = -1
+	}
+
+	if( gTxtState != parent.gOtlTxtExp ) {
+		state = "block"
+		if( !parent.gOtlTxtExp )
+			state="none"
+
+		for(ii=0; ii<gChildEntryTable.length; ii++) {
+			obj=gChildEntryTable[ii];
+			if( obj.id == null ) continue;
+
+			if( obj.id.indexOf("PPTC") >= 0 )
+				obj.style.display=state;
+		} 
+		gTxtState=parent.gOtlTxtExp
+		if( ObjExists( gSelected ) )
+			ChangeState( gSelected,gOtlNormalClr,gOtlHiliteClr )
+	}
+}
+function InitArray()
+{
+	count=0
+	for(ii=0; ii<document.all.tags("DIV").length; ii++) {
+		obj=document.all.tags("DIV").item(ii)
+		if( obj.id == null ) continue
+
+		if( obj.id.indexOf("PPTC") >= 0 ) {   
+			gChildEntryTable[count++]=obj
+			obj.children.tags("TABLE").item(0).style.borderColor=gOtlNormalClr
+		}
+	}
+}
+function ChangeState( idx,fgColor,bgColor )
+{
+	obj=document.all.item("PPTL"+idx)
+	obj.style.color=fgColor
+
+	obj=document.all.item("PPTP"+idx)
+	obj.style.backgroundColor=bgColor
+
+	obj=document.all.item("PPTB"+idx)
+	if( obj )
+		obj.style.borderLeftColor=obj.style.borderBottomColor=bgColor
+}
+function ChgClr( o,clr ){ if( o.id != "PPTL"+gSelected ) o.style.color=clr }
+function Over( obj ){ ChgClr(obj,gOtlActiveClr) }
+function Out( obj ){ ChgClr(obj,gOtlHiliteClr) }
+function ObjExists( ii ) { obj=document.all("PPTP"+ii ); return( obj ) }
+function GoToSld( href ){ UpdIdx(parent.GetSldNum(href)); parent.GoToSld( href ) }
+function CancelDrag(){ window.event.cancelBubble=true;window.event.returnValue=false}
+
+function UpdNav()
+{
+	txt = "<center>";
+	if( parent.GetHrefObj( parent.gCurSld ).mOrigVis == 1 )
+		txt += "Slide " + parent.GetCurSldNum() + " of " + parent.GetNumSlds()
+	else
+		txt += "Hidden Slide"
+	txt += "</center>";
+	nav_text.innerHTML = txt;
+
+	if( !parent.HasPrevSld() )
+		gBtnArr["nb_prev"].Enabled(0)
+	else
+		gBtnArr["nb_prev"].Enabled(1)
+
+	if( !parent.HasNextSld() )
+		gBtnArr["nb_next"].Enabled(0)
+	else
+		gBtnArr["nb_next"].Enabled(1)
+	gBtnArr["nb_nts"].SetEnabled()
+	gBtnArr["nb_nts"].SetFlag( parent.gHasNts )
+
+	gBtnArr["nb_sldshw"].Enabled(1)
+	gBtnArr["nb_voice"].Enabled(1)
+}
+
+function UpdOtlNav()
+{
+	gBtnArr["nb_otl"].SetEnabled();
+
+	if( parent.gOtlOpen )
+		gBtnArr["nb_otlTxt"].Enabled( true );
+	else
+		document.all.item("nb_otlTxtBorder").style.visibility = "hidden";
+}
+
+
+
+//-->
+</script>
+<style>
+<!--.PTxt
+	{position:relative;
+	width:100%;
+	margin-top:5px;
+	padding-left:5px;
+	font-weight:bold;}
+.CTxt
+	{position:relative;
+	width:100%;
+	padding-left:10px;}
+.CBorder
+	{position:relative;
+	width:100%;
+	border-style:solid;
+	border-width:1px;
+	border-color:white;
+	padding-bottom:5px;}
+a
+	{color:black;
+	text-decoration:none;}
+.button
+	{position:absolute;
+	width:32px;
+	height:20px;
+	border-style:solid;
+	border-width:1px;
+	border-color:threedface;}
+-->
+</style>
+</head>
+
+<body onload="Load()">
+
+<div id=NavObj onload="Load()" onmouseover="BtnOnOver()"
+onmousedown="BtnOnDown()" onmouseout="BtnOnOut()" onmouseup="BtnOnUp()"
+onkeypress="_KPH()" style='display:none;visibility:hidden'>
+
+<table style='position:absolute;width:70px;visibility:hidden' align=left
+ cellpadding=0 cellspacing=0>
+ <td nowrap>
+ <div id="nb_ntsElem" align=center style='position:relative;padding:3px;
+ font-family:Arial;color:buttontext;font-size:9pt'><img src="notes_flag.gif"
+ border=0 id="notes_flag" style='display:none'><span style="mso-spacerun:
+ yes">  </span>Notes</div>
+ <div title="Show/Hide Notes" id="nb_nts" style='position:absolute;top:0%;
+ left:0%;width:100%;height:100%'></div>
+ </td>
+</table>
+
+<table style='position:relative' align=right cellpadding=0 cellspacing=0>
+ <td>
+ <div id="nb_sldshwBorder" style='position:absolute;left:-20px;width:20px;
+ height:20px'>
+ <div style='position:absolute;clip:rect(0px, 18px, 18px, 0px)'><img
+ src=buttons.gif id="nb_sldshw" title="Full Screen Slide Show"
+ style='position:relative;left:-254px'></div>
+ </div>
+ </td>
+ <td>
+ <div id="nb_voiceBorder" style='display:none;position:absolute;left:-40px;
+ width:20px;height:20px'>
+ <div style='position:absolute;clip:rect(0px, 18px, 18px, 0px)'><img
+ src=buttons.gif id="nb_voice" title="Pause/Play Narration" style='position:
+ relative;left:-290px'></div>
+ </div>
+ </td>
+</table>
+
+<table style='position:relative' align=center cellpadding=0 cellspacing=0>
+ <td nowrap>
+ <div id="nb_prevBorder" class=button style='left:-30px'>
+ <div style='position:absolute;clip:rect(0px, 30px, 18px, 0px)'><img
+ src=buttons.gif id="nb_prev" title="Previous Slide" style='position:relative;
+ left:0px'></div>
+ </div>
+ <span id="nav_text" style='position:relative;top:3px;width:100px;font-family:
+ Arial;color:buttontext;font-size:9pt'></span>
+ <div id="nb_nextBorder" class=button>
+ <div style='position:absolute;clip:rect(0px, 30px, 18px, 0px)'><img
+ src=buttons.gif id="nb_next" title="Next Slide" style='position:relative;
+ left:-90px'></div>
+ </div>
+ </td>
+</table>
+
+</div>
+
+<div id=OtlNavObj onload="Load()" onmouseover="BtnOnOver()"
+onmousedown="BtnOnDown()" onmouseout="BtnOnOut()" onmouseup="BtnOnUp()"
+onkeypress="_KPH()" style='display:none;visibility:hidden'>
+
+<table style='position:relative;width:70px' align=left cellpadding=0
+ cellspacing=0>
+ <td nowrap>
+ <div id="nb_otlElem" align=center style='position:relative;padding:3px;
+ font-family:Arial;color:buttontext;font-size:9pt'>Outline</div>
+ <div title="Show/Hide Outline" id="nb_otl" style='position:absolute;
+ top:0%;left:0%;width:100%;height:100%'></div>
+ </td>
+</table>
+
+<table style='position:relative' align=center cellpadding=0 cellspacing=0>
+ <td>
+ <div style='position:absolute;left:-18px;width:24px;height:20px;border-style:
+ solid;border-width:1px;border-color:threedface' id="nb_otlTxtBorder">
+ <div style='position:absolute;clip:rect(0px, 22px, 18px, 0px)'><img
+ src=buttons.gif id="nb_otlTxt" title="Expand/Collapse Outline"
+ style='position:relative;left:-157px'></div>
+ </div>
+ </td>
+</table>
+
+</div>
+
+<div id=OtlObj style='display:none;visibility:hidden'>
+
+<table width="100%" style='font-family:Arial;font-size:9pt'>
+ <tr>
+  <td>
+  <div id=PPTP1 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0002.htm');" onmouseover="Over(this)"
+  id=PPTL1 onmouseout="Out(this)">The Fermilab Accelerator Complex: Status and
+  Challenges</a></font></div>
+  <div id=PPTC1 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB1 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Eric Prebys</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>FNAL Beams Division</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP2 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0021.htm');" onmouseover="Over(this)"
+  id=PPTL2 onmouseout="Out(this)">Outline</a></font></div>
+  <div id=PPTC2 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB2 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Basic Accelerator Physics Concepts</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Horizontal motion (lattice functions, emittance)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Tune plane</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Longitudinal motion (phase stability,
+    longitudinal emittance)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>The Accelerator Complex</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Proton Source (Preac, Linac, Booster)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Main Injector</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Pbar source (target, debuncher, accumulator)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Tevatron</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Recycler</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Operational modes</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>The Challenges</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Run II</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>MiniBooNE</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>NUMI</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP3 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0003.htm');" onmouseover="Over(this)"
+  id=PPTL3 onmouseout="Out(this)">Dipole Field, Thin Lens Approximation.</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP4 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0006.htm');" onmouseover="Over(this)"
+  id=PPTL4 onmouseout="Out(this)">Quadrupole Fields (focusing elements)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP5 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0004.htm');" onmouseover="Over(this)"
+  id=PPTL5 onmouseout="Out(this)">Betatron Motion</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP6 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0005.htm');" onmouseover="Over(this)"
+  id=PPTL6 onmouseout="Out(this)">Tune and Tune Plane</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP7 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0009.htm');" onmouseover="Over(this)"
+  id=PPTL7 onmouseout="Out(this)">Emittance</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP8 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0010.htm');" onmouseover="Over(this)"
+  id=PPTL8 onmouseout="Out(this)">Normalized Emittance</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP9 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0008.htm');" onmouseover="Over(this)"
+  id=PPTL9 onmouseout="Out(this)">Slip Factor/Transition</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP10 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0011.htm');" onmouseover="Over(this)"
+  id=PPTL10 onmouseout="Out(this)">Phase Stability</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP11 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0012.htm');" onmouseover="Over(this)"
+  id=PPTL11 onmouseout="Out(this)">Longitudinal Phase Space</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP12 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0013.htm');" onmouseover="Over(this)"
+  id=PPTL12 onmouseout="Out(this)">Longitudinal Emittance</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP13 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0032.htm');" onmouseover="Over(this)"
+  id=PPTL13 onmouseout="Out(this)">Fermilab Accelerators</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP14 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0030.htm');" onmouseover="Over(this)"
+  id=PPTL14 onmouseout="Out(this)">The Fermilab Accelerator Complex</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP15 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0023.htm');" onmouseover="Over(this)"
+  id=PPTL15 onmouseout="Out(this)">Preac(cellerator) and Linac</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP16 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0024.htm');" onmouseover="Over(this)"
+  id=PPTL16 onmouseout="Out(this)">Booster</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP17 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0025.htm');" onmouseover="Over(this)"
+  id=PPTL17 onmouseout="Out(this)">Main Injector</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP18 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0028.htm');" onmouseover="Over(this)"
+  id=PPTL18 onmouseout="Out(this)">Antiproton Source</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP19 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0029.htm');" onmouseover="Over(this)"
+  id=PPTL19 onmouseout="Out(this)">Antiproton Source – Debunching and Cooling</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP20 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0031.htm');" onmouseover="Over(this)"
+  id=PPTL20 onmouseout="Out(this)">Tevatron</a></font></div>
+  <div id=PPTC20 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB20 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>The Tevatron was the world’s first
+    superconducting accelerator.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>It accepts protons AND pbars at 150 GeV from the
+    Main Injector. Typically:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>36 proton bunches with 180E9 protons in each. (Run
+    IIa goal: 270E9)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>36 pbar bunches with 12E9 pbars in each. (Run
+    IIa goal: 33E9)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>These are accelerated to 980 GeV.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Collisions (“low beta”) are initiated at the B0
+    (CDF) and D0 detector regions.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>These “stores” are kept for typically 16 hours,
+    while more antiprotons are made for the next “shot”.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP21 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0026.htm');" onmouseover="Over(this)"
+  id=PPTL21 onmouseout="Out(this)">Recycler</a></font></div>
+  <div id=PPTC21 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB21 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>The Recycler is an 8 GeV storage ring in the
+    same tunnel as the Main Injector.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>The main lattice elements (dipoles and
+    quadrupoles) are made out of permanent magnets).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>The Recycler can accept 8 GeV antiprotons from</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>The antiproton accumulator.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>The Main Injector (after deceleration).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>The Recycler can deliver these antiprotons to
+    the Main Injector for acceleration.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>The goal of the recycler is</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>To store antiprotons from the accumulator,
+    thereby increasing the total antiproton production capacity.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>To recover antiprotons from a Tevatron store for
+    use in subsequent stores.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>At the moment, the recycler is not being used in
+    standard operation.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP22 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0047.htm');" onmouseover="Over(this)"
+  id=PPTL22 onmouseout="Out(this)">Primary Modes of Operation</a></font></div>
+  <div id=PPTC22 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB22 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Stacking: full booster batches (~5E12 p) are
+    accelerated to 120 GeV by the Main Injector, and delivered to the pbar
+    target about once every 3 seconds (limited by the rate at which they can be
+    debunched and cooled.<span style="mso-spacerun: yes">  </span>It takes 10-16
+    hours to get enough pbars for a “shot”.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Shot setup: various beamline tuning takes
+    place.<span style="mso-spacerun: yes">  </span>Most importantly, pbar
+    transfer lines are tuned with reverse protons.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Proton Injection:<span style="mso-spacerun:
+    yes">  </span>about 7<span style="mso-spacerun: yes">  </span>53 MHz
+    booster bunches are injected into the M.I., accelerated to 150 GeV and
+    “coalesced” into a single bunch, which is injected into the Tevatron (x
+    36).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Antiproton Injection:<span style="mso-spacerun:
+    yes">  </span>part of the “core” of the accumulator is manipulated to a
+    separate extraction orbit and about 11 53 MHz bunches are extracted to the
+    M.I., where they are accelerated to 150 GeV, coalesced and injected into
+    the tevatron at 150 GeV.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Acceleration/collision:<span
+    style="mso-spacerun: yes">  </span>The protons and pbars are accelerated
+    together to 980 GeV over a few minutes. The beam is scraped, and the beta
+    is reduced (“squeezed”) at the collision regions.<span style="mso-spacerun:
+    yes">  </span>Physics begins.<span style="mso-spacerun: yes"> 
+    </span>During this time, the rest of the accelerator complex is totally
+    free to do other things (primarily stacking).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>MiniBooNE Operation:<span style="mso-spacerun:
+    yes">  </span>While the M.I. Is ramping, a chain of 8 GeV Booster batches
+    is switched to the MiniBooNE beamline.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>NUMI Operation:<span style="mso-spacerun: yes"> 
+    </span>along with the stacking batch, 5 additional batches are loaded into
+    the Main injector.<span style="mso-spacerun: yes">  </span>These are
+    accelerated along with the stacking batch and extracted to the NUMI line
+    after it has been extracted.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP23 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0035.htm');" onmouseover="Over(this)"
+  id=PPTL23 onmouseout="Out(this)">How is Run II Going?</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP24 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0036.htm');" onmouseover="Over(this)"
+  id=PPTL24 onmouseout="Out(this)">Why Haven’t Run IIa Goals been Met?</a></font></div>
+  <div id=PPTC24 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB24 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Number of pbars!!!</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>NOT (primarily) due to protons on target or pbar
+    production rate.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Typically only around 50% of pbars from the
+    accumulator make it to collisions.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Some of this is due to large emittances out of
+    the accumulator. This gets worse with larger stacks.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Some is due to aperture and matching problems
+    throughout the system.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Long range beam interactions in the Tevatron:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Limit total number of protons.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Due to aperture and helix problems.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>General reliability problems:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>It’s a very complicated system</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>If we lose the antiprotons, it takes at least 12
+    hours to recover.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP25 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0037.htm');" onmouseover="Over(this)"
+  id=PPTL25 onmouseout="Out(this)">The Plan</a></font></div>
+  <div id=PPTC25 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB25 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>New cooling has been installed in the
+    accumulator and is being tested.<span style="mso-spacerun: yes"> 
+    </span>Initial results look good.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Studies continue to understand all the transfer
+    efficiencies of the machines.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Continue to improve helix and aperture in
+    Tevatron to reduce long range beam interaction.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Integrate recycler into accelerator operation
+    some time in 2003.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP26 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0038.htm');" onmouseover="Over(this)"
+  id=PPTL26 onmouseout="Out(this)"><span style="mso-spacerun:
+  yes"> </span>(Near) Future Challenges</a></font></div>
+  <div id=PPTC26 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB26 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Two important neutrino experiments are coming on
+    line soon:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>MiniBooNE will use the 8GeV Booster beam and a
+    detector 500 m away to look for neutrino oscillations in the range<span
+    style="mso-spacerun: yes">  </span>Dm<sup>2</sup>~1 eV<sup>2</sup> – the
+    range indicated by the LSND experiment.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>NUMI will use the 120 GeV Main Injector beam and
+    a detector 750 km away to look for neutrino oscillations in the range of Dm<sup>2</sup>~10<sup>-5</sup>
+    eV<sup>2</sup> – the range indicated by atmospheric and solar neutrino
+    data.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Both of these experiments place a major
+    challenge on the Booster – arguably the only more or less original part of
+    the Fermilab accelerator complex.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP27 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0033.htm');" onmouseover="Over(this)"
+  id=PPTL27 onmouseout="Out(this)">What’s so Hard About Neutrino Physics (from
+  the Accelerator Standpoint)?</a></font></div>
+  <div id=PPTC27 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB27 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Probability that a proton on the AP target will
+    produce an accumulated pbar: <br>
+    <span style="mso-spacerun: yes"> </span>&#9;&#9;&#9;.000015
+    (1.5E-5)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Probability that a proton on the MiniBooNE
+    target will result in a detected neutrino:<br>
+    &#9;&#9; .000000000000004
+    (4E-15)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Probability that a proton on the NUMI target
+    will result in a detected neutrino at the MINOS far detector: <br>
+    &#9;<span style="mso-spacerun: yes">     </span>.000000000000000025
+    (2.5E-17)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font face=Symbol size=2>Þ</font><font face="Times New Roman"
+    size=2> Need more protons in a year than Fermilab has produced in its
+    lifetime!!</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP28 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0034.htm');" onmouseover="Over(this)"
+  id=PPTL28 onmouseout="Out(this)">What Limits Total Proton Intensity?</a></font></div>
+  <div id=PPTC28 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB28 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Maximum number of Protons the Booster can stably
+    accelerate: 5E12</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Maximum average Booster rep. Rate:<span
+    style="mso-spacerun: yes">  </span>currently 2.5 Hz, soon 7.5 Hz</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>(NUMI only) Maximum number of booster batches
+    the Main Injector can hold: currently 6, possibly go to 11</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>(NUMI only) Minimum Main Injector ramp cycle
+    time (NUMI only): 1.4s+loading time</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Losses in the Booster:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Above ground radiation</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Damage and/or activation of tunnel components</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP29 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0040.htm');" onmouseover="Over(this)"
+  id=PPTL29 onmouseout="Out(this)">Proton Timelines</a></font></div>
+  <div id=PPTC29 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB29 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>Everything measured in 15 Hz “clicks”</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>Minimum M.I. Ramp = 22 clicks = 1.4 s</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>MiniBoone batches “don’t count”.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>Cycle times of interest</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Stack cycle: 1 inj + 22 MI ramp = 23 clicks =
+    1.5 s</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>NuMI cycle: 6 inj + 22 MI ramp = 28 clicks = 1.9
+    s</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Full Slipstack cycle (total 11 batches):</font></td>
+   </tr>
+   <tr>
+    <td colspan=3></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">        </span>6
+    inject<br>
+    + 2 capture (6 -&gt; 3)<br>
+    + 2 inject<br>
+    + 2 capture (2 -&gt; 1)<br>
+    + 2 inject<br>
+    + 2 capture (2 -&gt; 1)<br>
+    + 1 inject<br>
+    + 22 M.I. Ramp<br>
+    ----------------------<br>
+    39 clicks = 2.6 s</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP30 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0039.htm');" onmouseover="Over(this)"
+  id=PPTL30 onmouseout="Out(this)">Summary of Proton Ecomomics</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP31 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0041.htm');" onmouseover="Over(this)"
+  id=PPTL31 onmouseout="Out(this)">Booster Repetition Rate Limits</a></font></div>
+  <div id=PPTC31 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB31 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Presently, the Booster is limited to an average
+    rep. Rate of 2.5 Hz, which would only yield a small fraction of the desired
+    MiniBooNE intensity. The primary limitation is the pulsed extraction septum
+    magnet (MP02).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>A new power supply will go in in the next few
+    weeks, which will raise this rate to 4.5 Hz, which would give about half
+    the nominal MiniBooNE rate.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>A new magnet will go in during the January
+    shutdown which will allow the Booster to go to 7.5 Hz – enough for
+    MiniBooNE or NUMI.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>In order to run both MiniBooNE and NUMI, we need</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>More cables for the extraction septum.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Cooling for the RF cavities (or new RF cavities)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>A new “bump” magnet, which steers beam out
+    during injection.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP32 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0042.htm');" onmouseover="Over(this)"
+  id=PPTL32 onmouseout="Out(this)">Above Ground Radiation</a></font></div>
+  <div id=PPTC32 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB32 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Main worry are the high occupancy areas in the
+    Booster towers.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Shielding has been added both in the tunnel and
+    to the first floor of the Booster towers.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Offices have been moved to reclassify some
+    worrisome areas.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP33 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0043.htm');" onmouseover="Over(this)"
+  id=PPTL33 onmouseout="Out(this)">Best Performance + Shielding + BooNE
+  Intensities</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP34 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0044.htm');" onmouseover="Over(this)"
+  id=PPTL34 onmouseout="Out(this)"><span style="mso-spacerun:
+  yes"> </span>Booster Tunnel Losses</a></font></div>
+  <div id=PPTC34 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB34 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Harder to quantify – no hard limits</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Major worry is activation of high maintenance
+    components (e.g. RF cavities).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Administrative limit set at twice the total
+    power loss during “messy” stacking (for 9 times the beam!!!).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>If we had to run tomorrow, we could deliver
+    roughly 20% of the nominal MiniBooNE intensity under this scenario.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Steps are being taken to reduce beam losses and
+    proton source consistency.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP35 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0045.htm');" onmouseover="Over(this)"
+  id=PPTL35 onmouseout="Out(this)">Collimators</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP36 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0046.htm');" onmouseover="Over(this)"
+  id=PPTL36 onmouseout="Out(this)">Other Improvements</a></font></div>
+  <div id=PPTC36 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB36 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Beam control: programmable trim magnet control
+    cards now allow control of the orbit throughout the cycle.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Improved beam monitoring: a number of new beam
+    diagnostics, including a real time tune measurement, had been or are being
+    commissioned.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>New monitoring and analysis tools: we have been
+    pledged support from computing division, which we plan to use to develop
+    improved tools for monitoring and analyzing the performance of the proton
+    source.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP37 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0048.htm');" onmouseover="Over(this)"
+  id=PPTL37 onmouseout="Out(this)">Summary</a></font></div>
+  <div id=PPTC37 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB37 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The Fermilab accelerator complex is very complex
+    and versatile.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>It presents many challenges which keep us busy
+    now and in the foreseeable future.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>We’re always looking for people to help out.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+<div style='display:none'><a href="v3_document.htm"></a><a href=preview.wmf></a><a
+href="v3_next_active.gif"></a><a href="v3_next_disabled.gif"></a><a
+href="v3_prev_active.gif"></a><a href="v3_prev_disabled.gif"></a><a
+href="v3_outline_collapse.gif"></a><a href="v3_outline_expand.gif"></a><a
+href="v3_space.gif"></a><a href="v3_endshow.htm"></a><a
+href="v3_navigation_bar.htm"></a><a href="v3_outline_navigation_bar.htm"></a><a
+href="v3_outline_collapsed.htm"></a><a href="v3_outline_expanded.htm"></a><a
+href="v3_blank_notes.htm"></a><a href=master03.htm></a><a href=master03.xml></a><a
+href=master04.htm></a><a href=master04.xml></a><a href=master02.htm></a><a
+href=pres.xml></a><a href="v3_slide0002.htm"></a><a
+href="v3_master04_background.gif"></a><a href="v3_slide0021.htm"></a><a
+href="v3_master03_background.gif"></a><a href="v3_slide0003.htm"></a><a
+href="v3_slide0003_background.gif"></a><a href="v3_slide0003_image001.gif"></a><a
+href="v3_slide0003_image002.gif"></a><a href="v3_slide0003_image003.gif"></a><a
+href="v3_slide0003_image004.gif"></a><a href="v3_slide0003_image005.gif"></a><a
+href="v3_slide0003_image006.gif"></a><a href="v3_slide0003_image007.gif"></a><a
+href="v3_slide0003_image008.gif"></a><a href="v3_slide0006.htm"></a><a
+href="v3_slide0006_background.jpg"></a><a href="v3_slide0006_image009.gif"></a><a
+href="v3_slide0006_image010.gif"></a><a href="v3_slide0006_image011.gif"></a><a
+href="v3_slide0006_image012.gif"></a><a href="v3_slide0006_image013.gif"></a><a
+href="v3_slide0006_image014.gif"></a><a href="v3_slide0006_image015.gif"></a><a
+href="v3_slide0006_image016.gif"></a><a href="v3_slide0004.htm"></a><a
+href="v3_slide0004_background.gif"></a><a href="v3_slide0004_image017.gif"></a><a
+href="v3_slide0004_image018.gif"></a><a href="v3_slide0005.htm"></a><a
+href="v3_slide0005_background.gif"></a><a href="v3_slide0005_image019.gif"></a><a
+href="v3_slide0009.htm"></a><a href="v3_slide0009_background.gif"></a><a
+href="v3_slide0009_image020.gif"></a><a href="v3_slide0010.htm"></a><a
+href="v3_slide0010_background.gif"></a><a href="v3_slide0010_image021.gif"></a><a
+href="v3_slide0010_image022.gif"></a><a href="v3_slide0010_image023.gif"></a><a
+href="v3_slide0008.htm"></a><a href="v3_slide0008_background.gif"></a><a
+href="v3_slide0008_image024.gif"></a><a href="v3_slide0008_image025.gif"></a><a
+href="v3_slide0011.htm"></a><a href="v3_slide0011_image026.gif"></a><a
+href="v3_slide0011_image027.gif"></a><a href="v3_slide0012.htm"></a><a
+href="v3_slide0012_background.gif"></a><a href="v3_slide0012_image028.gif"></a><a
+href="v3_slide0012_image029.gif"></a><a href="v3_slide0013.htm"></a><a
+href="v3_slide0013_background.gif"></a><a href="v3_slide0013_image030.gif"></a><a
+href="v3_slide0013_image031.gif"></a><a href="v3_slide0013_image032.gif"></a><a
+href="v3_slide0013_image033.gif"></a><a href="v3_slide0013_image034.gif"></a><a
+href="v3_slide0013_image035.gif"></a><a href="v3_slide0032.htm"></a><a
+href="v3_slide0032_image036.gif"></a><a href="v3_slide0032_image037.jpg"></a><a
+href="v3_slide0030.htm"></a><a href="v3_slide0030_image038.gif"></a><a
+href="v3_slide0023.htm"></a><a href="v3_slide0023_background.gif"></a><a
+href="v3_slide0023_image039.gif"></a><a href="v3_slide0023_image040.gif"></a><a
+href="v3_slide0023_image041.gif"></a><a href="v3_slide0023_image042.gif"></a><a
+href="v3_slide0023_image043.gif"></a><a href="v3_slide0023_image044.gif"></a><a
+href="v3_slide0024.htm"></a><a href="v3_slide0024_image045.jpg"></a><a
+href="v3_slide0024_image046.gif"></a><a href="v3_slide0024_image047.gif"></a><a
+href="v3_slide0025.htm"></a><a href="v3_slide0025_background.gif"></a><a
+href="v3_slide0025_image048.gif"></a><a href="v3_slide0028.htm"></a><a
+href="v3_slide0028_background.gif"></a><a href="v3_slide0029.htm"></a><a
+href="v3_slide0029_background.gif"></a><a href="v3_slide0029_image049.jpg"></a><a
+href="v3_slide0029_image050.jpg"></a><a href="v3_slide0029_image051.gif"></a><a
+href="v3_slide0029_image052.jpg"></a><a href="v3_slide0029_image053.gif"></a><a
+href="v3_slide0029_image054.gif"></a><a href="v3_slide0029_image055.gif"></a><a
+href="v3_slide0029_image056.jpg"></a><a href="v3_slide0029_image057.gif"></a><a
+href="v3_slide0029_image058.gif"></a><a href="v3_slide0031.htm"></a><a
+href="v3_slide0031_background.gif"></a><a href="v3_slide0026.htm"></a><a
+href="v3_slide0047.htm"></a><a href="v3_slide0047_image059.gif"></a><a
+href="v3_slide0035.htm"></a><a href="v3_slide0035_image060.gif"></a><a
+href="v3_slide0035_image061.gif"></a><a href="v3_slide0035_image062.gif"></a><a
+href="v3_slide0036.htm"></a><a href="v3_slide0037.htm"></a><a
+href="v3_slide0038.htm"></a><a href="v3_slide0033.htm"></a><a
+href="v3_slide0034.htm"></a><a href="v3_slide0034_background.gif"></a><a
+href="v3_slide0034_image063.gif"></a><a href="v3_slide0040.htm"></a><a
+href="v3_slide0040_image064.gif"></a><a href="v3_slide0039.htm"></a><a
+href="v3_slide0039_background.gif"></a><a href="v3_slide0039_image065.gif"></a><a
+href="v3_slide0041.htm"></a><a href="v3_slide0042.htm"></a><a
+href="v3_slide0043.htm"></a><a href="v3_slide0043_image066.gif"></a><a
+href="v3_slide0044.htm"></a><a href="v3_slide0045.htm"></a><a
+href="v3_slide0045_image067.gif"></a><a href="v3_slide0046.htm"></a><a
+href="v3_slide0048.htm"></a><a href=slide0002.htm></a><a href=slide0021.htm></a><a
+href=slide0003.htm></a><a href="slide0003_image068.wmz"></a><a
+href=oledata.mso></a><a href="slide0003_image069.wmz"></a><a
+href="slide0003_image070.wmz"></a><a href="slide0003_image071.wmz"></a><a
+href="slide0003_image072.wmz"></a><a href="slide0003_image073.wmz"></a><a
+href="slide0003_image074.wmz"></a><a href="slide0003_image075.wmz"></a><a
+href=slide0006.htm></a><a href="slide0006_image076.png"></a><a
+href="slide0006_image077.wmz"></a><a href="slide0006_image078.wmz"></a><a
+href="slide0006_image079.wmz"></a><a href="slide0006_image080.wmz"></a><a
+href=slide0004.htm></a><a href="slide0004_image081.wmz"></a><a
+href="slide0004_image082.wmz"></a><a href="slide0004_image083.wmz"></a><a
+href=slide0005.htm></a><a href="slide0005_image084.wmz"></a><a
+href="slide0005_image085.wmz"></a><a href="slide0005_image086.jpg"></a><a
+href="slide0005_image087.gif"></a><a href=slide0009.htm></a><a
+href="slide0009_image088.wmz"></a><a href="slide0009_image089.wmz"></a><a
+href="slide0009_image090.wmz"></a><a href="slide0009_image091.wmz"></a><a
+href="slide0009_image092.wmz"></a><a href="slide0009_image093.wmz"></a><a
+href="slide0009_image094.wmz"></a><a href="slide0009_image095.wmz"></a><a
+href=slide0010.htm></a><a href="slide0010_image096.wmz"></a><a
+href="slide0010_image097.wmz"></a><a href="slide0010_image098.wmz"></a><a
+href="slide0010_image099.emz"></a><a href=slide0008.htm></a><a
+href="slide0008_image100.wmz"></a><a href="slide0008_image101.wmz"></a><a
+href="slide0008_image102.wmz"></a><a href="slide0008_image103.wmz"></a><a
+href=slide0011.htm></a><a href="slide0011_image104.wmz"></a><a
+href="slide0011_image105.wmz"></a><a href=slide0012.htm></a><a
+href="slide0012_image106.wmz"></a><a href="slide0012_image107.wmz"></a><a
+href="slide0012_image108.wmz"></a><a href="slide0012_image109.wmz"></a><a
+href=slide0013.htm></a><a href="slide0013_image110.wmz"></a><a
+href="slide0013_image111.wmz"></a><a href="slide0013_image112.wmz"></a><a
+href="slide0013_image113.wmz"></a><a href="slide0013_image114.wmz"></a><a
+href="slide0013_image115.wmz"></a><a href="slide0013_image116.wmz"></a><a
+href=slide0032.htm></a><a href="slide0032_image117.jpg"></a><a
+href=slide0030.htm></a><a href="slide0030_image118.png"></a><a
+href="slide0030_image119.gif"></a><a href="slide0030_image120.gif"></a><a
+href=slide0023.htm></a><a href="slide0023_image121.png"></a><a
+href="slide0023_image122.png"></a><a href="slide0023_image123.png"></a><a
+href=slide0024.htm></a><a href="slide0024_image124.jpg"></a><a
+href=slide0025.htm></a><a href="slide0025_image125.jpg"></a><a
+href=slide0028.htm></a><a href="slide0028_image126.jpg"></a><a
+href="slide0028_image127.jpg"></a><a href=slide0029.htm></a><a
+href="slide0029_image128.jpg"></a><a href="slide0029_image129.jpg"></a><a
+href="slide0029_image130.jpg"></a><a href="slide0029_image131.jpg"></a><a
+href="slide0029_image132.jpg"></a><a href=slide0031.htm></a><a
+href=slide0026.htm></a><a href=slide0047.htm></a><a href=slide0035.htm></a><a
+href="slide0035_image133.png"></a><a href="slide0035_image134.png"></a><a
+href=slide0036.htm></a><a href=slide0037.htm></a><a href=slide0038.htm></a><a
+href=slide0033.htm></a><a href=slide0034.htm></a><a href=slide0040.htm></a><a
+href=slide0039.htm></a><a href="slide0039_image135.wmz"></a><a
+href=slide0041.htm></a><a href=slide0042.htm></a><a href=slide0043.htm></a><a
+href="slide0043_image136.emz"></a><a href=slide0044.htm></a><a
+href=slide0045.htm></a><a href=slide0046.htm></a><a href=slide0048.htm></a><a
+href=master01.htm></a><a href="master03_stylesheet.css"></a><a href=script.js></a><a
+href="../pizza_talk_20020815.html"></a><a href=error.htm></a><a
+href=fullscreen.htm></a><a href=buttons.gif></a><a href=frame.htm></a><a
+href=outline.htm></a></div>
+
+</body>
+
+</html>

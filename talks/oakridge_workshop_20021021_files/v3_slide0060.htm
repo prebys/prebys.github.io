@@ -1,0 +1,191 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../oakridge_workshop_20021021.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>RPC Readout in the Belle Experiment</title>
+<meta name=Description content="24-Oct-02: Ramp Monitor Program">
+<link rel=next href="v3_slide0061.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0060.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_master03_background.gif" bgcolor=white alink="#3333cc"
+link="#ccccff" vlink="#b2b2b2" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=25 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=97 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=224 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=118 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=15 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=122 height=24 colspan=2></td>
+  <td width=224 height=24>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=224 height=24 align=center><font face="Times New Roman" size=4>Ramp
+    Monitor Program</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=129 height=24 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=28 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=25 height=234></td>
+  <td width=439 height=234 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=62 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=89 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=30 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=137 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=41 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=34 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=6 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=16 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=21><font face="Times New Roman" color=black size=3>•</font></td>
+    <td width=418 height=21 colspan=10><font face="Times New Roman" size=3>A
+    dedicated task which will loop over all the ramping</font><br>
+    </td>
+    <td width=3 height=21></td>
+   </tr>
+   <tr>
+    <td width=438 height=1 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=21></td>
+    <td width=64 height=21 colspan=2><font face="Times New Roman" size=3>devices.</font><br>
+    </td>
+    <td width=357 height=21 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=438 height=6 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=21><font face="Times New Roman" color=black size=3>•</font></td>
+    <td width=396 height=21 colspan=8><font face="Times New Roman" size=3>For
+    each device, it will calculate a running average</font><br>
+    </td>
+    <td width=25 height=21 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=438 height=1 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=21></td>
+    <td width=421 height=21 colspan=11><font face="Times New Roman" size=3>curve
+    for each type of Booster cycle (pbar production,</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=438 height=1 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=21></td>
+    <td width=320 height=21 colspan=5><font face="Times New Roman" size=3>MiniBooNE,
+    etc), and calculate an RMS.</font><br>
+    </td>
+    <td width=101 height=21 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=438 height=6 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=21><font face="Times New Roman" color=black size=3>•</font></td>
+    <td width=361 height=21 colspan=6><font face="Times New Roman" size=3>Deviations
+    from this curve will be logged, and</font><br>
+    </td>
+    <td width=60 height=21 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=438 height=1 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=21></td>
+    <td width=153 height=21 colspan=3><font face="Times New Roman" size=3>possibly
+    set alarms.</font><br>
+    </td>
+    <td width=268 height=21 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=438 height=6 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=21><font face="Times New Roman" color=black size=3>•</font></td>
+    <td width=395 height=21 colspan=7><font face="Times New Roman" size=3>It’s
+    envisioned that this program will greatly aid in</font><br>
+    </td>
+    <td width=26 height=21 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=438 height=1 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=21></td>
+    <td width=402 height=21 colspan=9><font face="Times New Roman" size=3>debugging
+    problems, and may well migrate to other</font><br>
+    </td>
+    <td width=19 height=21 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=438 height=1 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=21></td>
+    <td width=183 height=21 colspan=4><font face="Times New Roman" size=3>parts
+    of the accelerator.</font><br>
+    </td>
+    <td width=238 height=21 colspan=7></td>
+   </tr>
+  </table>
+  </td>
+  <td width=11 height=234></td>
+ </tr>
+ <tr>
+  <td width=475 height=55 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

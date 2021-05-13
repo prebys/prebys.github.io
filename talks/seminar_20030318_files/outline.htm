@@ -1,0 +1,1661 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../seminar_20030318.htm">
+<link rel=Preview href=preview.wmf>
+<meta name=Robots content=NoIndex>
+<script src=script.js></script><script><!--
+
+if( !(IsWin("PPTOtl")||IsWin("PPTNav")||IsWin("PPTOtlNav")) )
+{
+	obj = document.all.item("Main-File")
+	parent.location.href=obj.href
+}
+
+var gOtlHiliteClr="#000000",gOtlNormalClr="#FFFFFF",gOtlActiveClr="#0000FF",gSelected="",gTxtState=false,gChildEntryTable=new Array()
+
+function Load()
+{
+	if( IsWin("PPTOtl" ) ){ LoadOtl(); parent.gOtlLoaded=true; return }
+	if( IsWin("PPTNav" ) ){ LoadNav("NavObj",UpdNav); parent.gNavLoaded=true; return }
+	if( IsWin("PPTOtlNav" ) ){ LoadNav("OtlNavObj",UpdOtlNav); parent.gOtlNavLoaded=true; return }
+}
+function Upd(){ if( IsWin("PPTNav") ) LoadNav("NavObj",UpdNav) }
+function LoadNav( oId,UpdFunc )
+{
+	document.ondragstart=CancelDrag
+	document.onselectstart=CancelDrag
+	document.body.style.margin=2
+	UpdFunc()
+	obj=document.all.item(oId)
+	obj.style.display="block"
+	obj.style.visibility="visible"
+	document.bgColor="threedface"
+}
+function LoadOtl()
+{
+	document.ondragstart=CancelDrag
+	document.onselectstart=CancelDrag
+	OtlObj.style.display="block"
+	OtlObj.style.visibility="visible"
+	if( gOtlActiveClr == "" ) gOtlActiveClr=document.linkColor
+	if( gOtlHiliteClr == "" ) gOtlHiliteClr=document.fgColor
+	if( gOtlNormalClr == "" )
+		gOtlNormalClr=document.bgColor
+	else
+		document.bgColor=gOtlNormalClr  
+
+	InitArray()
+
+	if( ObjExists( parent.gCurSld ) ) {
+		ChangeState( parent.gCurSld,gOtlNormalClr,gOtlHiliteClr )
+		gSelected=parent.gCurSld
+	}
+	else gSelected = -1
+
+	UpdOtl()
+}
+function UpdOtl(){ UpdIdx(parent.gCurSld) }
+function UpdIdx( idx )
+{
+	if( gSelected != idx ) {
+		if( gSelected > 0 )
+			ChangeState( gSelected,gOtlHiliteClr,gOtlNormalClr )
+
+		if( ObjExists( idx ) ) {
+			gSelected = idx
+			ChangeState( gSelected,gOtlNormalClr,gOtlHiliteClr )
+		}
+		else gSelected = -1
+	}
+
+	if( gTxtState != parent.gOtlTxtExp ) {
+		state = "block"
+		if( !parent.gOtlTxtExp )
+			state="none"
+
+		for(ii=0; ii<gChildEntryTable.length; ii++) {
+			obj=gChildEntryTable[ii];
+			if( obj.id == null ) continue;
+
+			if( obj.id.indexOf("PPTC") >= 0 )
+				obj.style.display=state;
+		} 
+		gTxtState=parent.gOtlTxtExp
+		if( ObjExists( gSelected ) )
+			ChangeState( gSelected,gOtlNormalClr,gOtlHiliteClr )
+	}
+}
+function InitArray()
+{
+	count=0
+	for(ii=0; ii<document.all.tags("DIV").length; ii++) {
+		obj=document.all.tags("DIV").item(ii)
+		if( obj.id == null ) continue
+
+		if( obj.id.indexOf("PPTC") >= 0 ) {   
+			gChildEntryTable[count++]=obj
+			obj.children.tags("TABLE").item(0).style.borderColor=gOtlNormalClr
+		}
+	}
+}
+function ChangeState( idx,fgColor,bgColor )
+{
+	obj=document.all.item("PPTL"+idx)
+	obj.style.color=fgColor
+
+	obj=document.all.item("PPTP"+idx)
+	obj.style.backgroundColor=bgColor
+
+	obj=document.all.item("PPTB"+idx)
+	if( obj )
+		obj.style.borderLeftColor=obj.style.borderBottomColor=bgColor
+}
+function ChgClr( o,clr ){ if( o.id != "PPTL"+gSelected ) o.style.color=clr }
+function Over( obj ){ ChgClr(obj,gOtlActiveClr) }
+function Out( obj ){ ChgClr(obj,gOtlHiliteClr) }
+function ObjExists( ii ) { obj=document.all("PPTP"+ii ); return( obj ) }
+function GoToSld( href ){ UpdIdx(parent.GetSldNum(href)); parent.GoToSld( href ) }
+function CancelDrag(){ window.event.cancelBubble=true;window.event.returnValue=false}
+
+function UpdNav()
+{
+	txt = "<center>";
+	if( parent.GetHrefObj( parent.gCurSld ).mOrigVis == 1 )
+		txt += "Slide " + parent.GetCurSldNum() + " of " + parent.GetNumSlds()
+	else
+		txt += "Hidden Slide"
+	txt += "</center>";
+	nav_text.innerHTML = txt;
+
+	if( !parent.HasPrevSld() )
+		gBtnArr["nb_prev"].Enabled(0)
+	else
+		gBtnArr["nb_prev"].Enabled(1)
+
+	if( !parent.HasNextSld() )
+		gBtnArr["nb_next"].Enabled(0)
+	else
+		gBtnArr["nb_next"].Enabled(1)
+	gBtnArr["nb_nts"].SetEnabled()
+	gBtnArr["nb_nts"].SetFlag( parent.gHasNts )
+
+	gBtnArr["nb_sldshw"].Enabled(1)
+	gBtnArr["nb_voice"].Enabled(1)
+}
+
+function UpdOtlNav()
+{
+	gBtnArr["nb_otl"].SetEnabled();
+
+	if( parent.gOtlOpen )
+		gBtnArr["nb_otlTxt"].Enabled( true );
+	else
+		document.all.item("nb_otlTxtBorder").style.visibility = "hidden";
+}
+
+
+
+//-->
+</script>
+<style>
+<!--.PTxt
+	{position:relative;
+	width:100%;
+	margin-top:5px;
+	padding-left:5px;
+	font-weight:bold;}
+.CTxt
+	{position:relative;
+	width:100%;
+	padding-left:10px;}
+.CBorder
+	{position:relative;
+	width:100%;
+	border-style:solid;
+	border-width:1px;
+	border-color:white;
+	padding-bottom:5px;}
+a
+	{color:black;
+	text-decoration:none;}
+.button
+	{position:absolute;
+	width:32px;
+	height:20px;
+	border-style:solid;
+	border-width:1px;
+	border-color:threedface;}
+-->
+</style>
+</head>
+
+<body onload="Load()">
+
+<div id=NavObj onload="Load()" onmouseover="BtnOnOver()"
+onmousedown="BtnOnDown()" onmouseout="BtnOnOut()" onmouseup="BtnOnUp()"
+onkeypress="_KPH()" style='display:none;visibility:hidden'>
+
+<table style='position:absolute;width:70px;visibility:hidden' align=left
+ cellpadding=0 cellspacing=0>
+ <td nowrap>
+ <div id="nb_ntsElem" align=center style='position:relative;padding:3px;
+ font-family:Arial;color:buttontext;font-size:9pt'><img src="notes_flag.gif"
+ border=0 id="notes_flag" style='display:none'><span style="mso-spacerun:
+ yes">  </span>Notes</div>
+ <div title="Show/Hide Notes" id="nb_nts" style='position:absolute;top:0%;
+ left:0%;width:100%;height:100%'></div>
+ </td>
+</table>
+
+<table style='position:relative' align=right cellpadding=0 cellspacing=0>
+ <td>
+ <div id="nb_sldshwBorder" style='position:absolute;left:-20px;width:20px;
+ height:20px'>
+ <div style='position:absolute;clip:rect(0px, 18px, 18px, 0px)'><img
+ src=buttons.gif id="nb_sldshw" title="Full Screen Slide Show"
+ style='position:relative;left:-254px'></div>
+ </div>
+ </td>
+ <td>
+ <div id="nb_voiceBorder" style='display:none;position:absolute;left:-40px;
+ width:20px;height:20px'>
+ <div style='position:absolute;clip:rect(0px, 18px, 18px, 0px)'><img
+ src=buttons.gif id="nb_voice" title="Pause/Play Narration" style='position:
+ relative;left:-290px'></div>
+ </div>
+ </td>
+</table>
+
+<table style='position:relative' align=center cellpadding=0 cellspacing=0>
+ <td nowrap>
+ <div id="nb_prevBorder" class=button style='left:-30px'>
+ <div style='position:absolute;clip:rect(0px, 30px, 18px, 0px)'><img
+ src=buttons.gif id="nb_prev" title="Previous Slide" style='position:relative;
+ left:0px'></div>
+ </div>
+ <span id="nav_text" style='position:relative;top:3px;width:100px;font-family:
+ Arial;color:buttontext;font-size:9pt'></span>
+ <div id="nb_nextBorder" class=button>
+ <div style='position:absolute;clip:rect(0px, 30px, 18px, 0px)'><img
+ src=buttons.gif id="nb_next" title="Next Slide" style='position:relative;
+ left:-90px'></div>
+ </div>
+ </td>
+</table>
+
+</div>
+
+<div id=OtlNavObj onload="Load()" onmouseover="BtnOnOver()"
+onmousedown="BtnOnDown()" onmouseout="BtnOnOut()" onmouseup="BtnOnUp()"
+onkeypress="_KPH()" style='display:none;visibility:hidden'>
+
+<table style='position:relative;width:70px' align=left cellpadding=0
+ cellspacing=0>
+ <td nowrap>
+ <div id="nb_otlElem" align=center style='position:relative;padding:3px;
+ font-family:Arial;color:buttontext;font-size:9pt'>Outline</div>
+ <div title="Show/Hide Outline" id="nb_otl" style='position:absolute;
+ top:0%;left:0%;width:100%;height:100%'></div>
+ </td>
+</table>
+
+<table style='position:relative' align=center cellpadding=0 cellspacing=0>
+ <td>
+ <div style='position:absolute;left:-18px;width:24px;height:20px;border-style:
+ solid;border-width:1px;border-color:threedface' id="nb_otlTxtBorder">
+ <div style='position:absolute;clip:rect(0px, 22px, 18px, 0px)'><img
+ src=buttons.gif id="nb_otlTxt" title="Expand/Collapse Outline"
+ style='position:relative;left:-157px'></div>
+ </div>
+ </td>
+</table>
+
+</div>
+
+<div id=OtlObj style='display:none;visibility:hidden'>
+
+<table width="100%" style='font-family:Arial;font-size:9pt'>
+ <tr>
+  <td>
+  <div id=PPTP1 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0045.htm');" onmouseover="Over(this)"
+  id=PPTL1 onmouseout="Out(this)">Booster Operation in Support of the Collider
+  Program</a></font></div>
+  <div id=PPTC1 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB1 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Eric Prebys<br>
+    Accelerator Technology
+    Seminar, March 18, 2003</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP2 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0043.htm');" onmouseover="Over(this)"
+  id=PPTL2 onmouseout="Out(this)">The Basics</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP3 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0055.htm');" onmouseover="Over(this)"
+  id=PPTL3 onmouseout="Out(this)">Booster layout</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP4 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0057.htm');" onmouseover="Over(this)"
+  id=PPTL4 onmouseout="Out(this)">Booster Lattice Period</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP5 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0044.htm');" onmouseover="Over(this)"
+  id=PPTL5 onmouseout="Out(this)">Multi-turn Ion Injection</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP6 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0056.htm');" onmouseover="Over(this)"
+  id=PPTL6 onmouseout="Out(this)">Booster RF System</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP7 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0058.htm');" onmouseover="Over(this)"
+  id=PPTL7 onmouseout="Out(this)">Booster Extraction (Long 3 and Long 13)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP8 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0071.htm');" onmouseover="Over(this)"
+  id=PPTL8 onmouseout="Out(this)">Control and Instrumentation</a></font></div>
+  <div id=PPTC8 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB8 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>Every long and short section (2x24=48) has</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>A horizontal and vertical BPM</font></td>
+   </tr>
+   <tr>
+    <td colspan=3></td>
+    <td colspan=1><font size=2>Can read out turn by turn for two or 50 time
+    points for all 96</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>A beam loss monitor</font></td>
+   </tr>
+   <tr>
+    <td colspan=3></td>
+    <td colspan=1><font size=2>Can snapshot all 96 for each cycle</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Horizontal and vertical trims</font></td>
+   </tr>
+   <tr>
+    <td colspan=3></td>
+    <td colspan=1><font size=2>Originally DC.<span style="mso-spacerun: yes"> 
+    </span>Working on active control for the 24 high-b ones in each plane.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Quads and Skew Quads</font></td>
+   </tr>
+   <tr>
+    <td colspan=3></td>
+    <td colspan=1><font size=2>Each has an individual DC setting plus common
+    ramp.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>Chromaticity sextupoles controlled by ramps</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>Some individual loss monitors at key locations.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>Horizontal pinger for tune measurement</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Couples to V plane</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Doesn’t work at the moment (had to steal kicker)</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP9 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0034.htm');" onmouseover="Over(this)"
+  id=PPTL9 onmouseout="Out(this)">8 GeV Proton Run II Goals and Performance</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP10 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0029.htm');" onmouseover="Over(this)"
+  id=PPTL10 onmouseout="Out(this)">Beam Loss Intensity Sensitivity</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP11 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0028.htm');" onmouseover="Over(this)"
+  id=PPTL11 onmouseout="Out(this)">The “Run II Era”</a></font></div>
+  <div id=PPTC11 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB11 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The proton source is very close the the
+    specifications in the Run II Handbook.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Although it’s the highest priority, support of
+    collider operations is a relatively minor facet of life in the proton
+    source.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Proton source activities are dominated by the
+    current and projected needs of the neutrino program (MiniBooNE+NuMI+??)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Whatever a WBS chart may say, there’s not a
+    separate proton source for RunII, MiniBooNE, NuMI, etc.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP12 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0047.htm');" onmouseover="Over(this)"
+  id=PPTL12 onmouseout="Out(this)">Demand for 8 GeV Protons</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP13 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0070.htm');" onmouseover="Over(this)"
+  id=PPTL13 onmouseout="Out(this)">Where do Protons Go Now?</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP14 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0049.htm');" onmouseover="Over(this)"
+  id=PPTL14 onmouseout="Out(this)">Limitations to Total Booster Flux</a></font></div>
+  <div id=PPTC14 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB14 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>Total protons per batch:<span
+    style="mso-spacerun: yes">  </span>4E12 with decent beam loss, 5E12 max.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>Average rep rate of the machine:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Injection bump magnets (7.5Hz)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>RF cavities (7.5Hz, maybe 15 w/cooling)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Kickers (15 Hz)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Extraction septa (was 2.5Hz, now 15Hz)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>Beam loss</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Above ground:</font></td>
+   </tr>
+   <tr>
+    <td colspan=3></td>
+    <td colspan=1><font size=2>Shielding</font></td>
+   </tr>
+   <tr>
+    <td colspan=3></td>
+    <td colspan=1><font size=2>Occupancy class of Booster towers</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Tunnel losses</font></td>
+   </tr>
+   <tr>
+    <td colspan=3></td>
+    <td colspan=1><font size=2>Component damage</font></td>
+   </tr>
+   <tr>
+    <td colspan=3></td>
+    <td colspan=1><font size=2>Activiation of high maintenance items
+    (particularly RF cavities)</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP15 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0052.htm');" onmouseover="Over(this)"
+  id=PPTL15 onmouseout="Out(this)">Typical Booster Cycle</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP16 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0050.htm');" onmouseover="Over(this)"
+  id=PPTL16 onmouseout="Out(this)">Proton Timelines</a></font></div>
+  <div id=PPTC16 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB16 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>Everything measured in 15 Hz “clicks”</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>Minimum Main Injector Ramp = 22 clicks = 1.4 s</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>MiniBoone batches “sneak in” while the MI is
+    ramping.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>Cycle times of interest</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Min. Stack cycle: 1 inj + 22 MI ramp = 23 clicks
+    = 1.5 s</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Min. NuMI cycle: 6 inj + 22 MI ramp = 28 clicks
+    = 1.9 s</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Full “Slipstack” cycle (total 11 batches):</font></td>
+   </tr>
+   <tr>
+    <td colspan=3></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">        </span>6
+    inject<br>
+    + 2 capture (6 -&gt; 3)<br>
+    + 2 inject<br>
+    + 2 capture (2 -&gt; 1)<br>
+    + 2 inject<br>
+    + 2 capture (2 -&gt; 1)<br>
+    + 1 inject<br>
+    + 22 M.I. Ramp<br>
+    ----------------------<br>
+    39 clicks = 2.6 s</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP17 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0051.htm');" onmouseover="Over(this)"
+  id=PPTL17 onmouseout="Out(this)">Summary of Proton Ecomomics</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP18 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0075.htm');" onmouseover="Over(this)"
+  id=PPTL18 onmouseout="Out(this)">Time Line Issues</a></font></div>
+  <div id=PPTC18 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB18 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>The Time Line Generator (TLG) sequences all
+    accelerator operations.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Traditionally, each sequence (“module”) is
+    independent, including any necessary Booster prepulses.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>This wasn’t really compatible with the goal of
+    getting the maximum possible beam out of the Booster.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>In the new scheme:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Standalone sequences are placed in the time
+    line, with necessary prepulses</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>MiniBooNE pulses are “trailer-hitched” to the
+    end of these to achieve a specified average repetition rate, subject to an
+    overall total rate.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>If there aren’t enough modules to trailer-hitch
+    to, new modules will be built (still working the bugs out of this one).</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP19 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0053.htm');" onmouseover="Over(this)"
+  id=PPTL19 onmouseout="Out(this)">Booster Losses (Normalized to Trip Point)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP20 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0022.htm');" onmouseover="Over(this)"
+  id=PPTL20 onmouseout="Out(this)">Booster Tunnel Radiation Levels</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP21 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0069.htm');" onmouseover="Over(this)"
+  id=PPTL21 onmouseout="Out(this)">How Have We Been Doing?</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP22 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0048.htm');" onmouseover="Over(this)"
+  id=PPTL22 onmouseout="Out(this)">Some Cold Hard Facts about the Future</a></font></div>
+  <div id=PPTC22 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB22 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Running as we are now, the Booster can deliver a
+    little<span style="mso-spacerun: yes">  </span>over 1E20 protons per year –
+    this is about a factor of six over typical stacking operations, and gives
+    MiniBooNE about 20% of their baseline.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>NuMI will come on line in 2005, initially
+    wanting about half of MiniBooNE’s rate, but hoping to increase their
+    capacity – through Main Injector Improvements – until it is equal to
+    MiniBooNE.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Whatever the lab’s official policy, there will
+    be great pressure (and good physics arguments) for running MiniBooNE and
+    NuMI at the same time.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-&gt; By 2006 or so, the Proton Source might be
+    called upon to deliver <br>
+    10<span style="mso-spacerun: yes">  </span>times what it is delivering
+    now.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>At the moment, there is no plan for assuring
+    this, short of a complete replacement!</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>So what are we going to try?…</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP23 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0074.htm');" onmouseover="Over(this)"
+  id=PPTL23 onmouseout="Out(this)">Some Things Which Have Been Done</a></font></div>
+  <div id=PPTC23 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB23 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Shielding and new radiation assessment</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Vastly improved loss monitoring.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>New (MP02) extraction septum and power supply
+    (enable high rep. rate running)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>New tuning strategies.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP24 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0030.htm');" onmouseover="Over(this)"
+  id=PPTL24 onmouseout="Out(this)">Booster Collimator System</a></font></div>
+  <div id=PPTC24 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB24 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Unshielded copper secondary collimators were
+    installed in summer 2002, with a plan to shield them later.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Due the the unexpected extent of the shielding
+    and the difficulty of working in the area, the design was ultimately
+    abandoned as unacceptable.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Collimators were removed during the January
+    shutdown.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>A new collimator system is being designed with
+    steel secondary jaws fixed within a movable shielding body.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Hope to have then ready before summer shutdown.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP25 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0059.htm');" onmouseover="Over(this)"
+  id=PPTL25 onmouseout="Out(this)">New Collimator System</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP26 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0013.htm');" onmouseover="Over(this)"
+  id=PPTL26 onmouseout="Out(this)">New RF System?</a></font></div>
+  <div id=PPTC26 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB26 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The existing RF cavities form the primary
+    aperture restriction (2 ¼” vs. 3 ¼”).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>They are high maintenance, so their activation
+    is a worry.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP27 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0037.htm');" onmouseover="Over(this)"
+  id=PPTL27 onmouseout="Out(this)">New RF System (cont’d)</a></font></div>
+  <div id=PPTC27 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB27 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>There is a plan for a new RF system with 5”
+    cavities:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Powered prototype built</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Building two vacuum prototypes for the summer
+    shutdown with substantial machining done at universities.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Evaluate these and procede (hopefully?) with
+    full system.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Total cost: $5.5M cavities + $5.5M power
+    supplies (power supplies would pay for themselves in a few years)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Is it worth it? On of the questions for the
+    study group is how much improvement we might expect.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP28 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0025.htm');" onmouseover="Over(this)"
+  id=PPTL28 onmouseout="Out(this)">Injection Dogleg (ORBUMP)</a></font></div>
+  <div id=PPTC28 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB28 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>The current injection bump dogleg (ORBUMP)
+    magnets can ramp at 7.5 Hz, with a substantial temperature rise.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Need to go to 10 to support MiniBooNE and NuMI.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>2 spares for the 4 (identical) magnets. Most
+    likely failure mode probably repairable.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Considering new design which will stretch
+    existing magnets further apart, which will lower their current, but will
+    require a pulsed injection septum between the first two.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Can new design incorporate injection
+    improvements??</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Some power supply issues as well:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>One full set of replacement SCR’s for the switch
+    network.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>New switchbox being designed, but needs
+    attention (or order more spare SCR’s).</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>No spare for charge recovery choke.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP29 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0032.htm');" onmouseover="Over(this)"
+  id=PPTL29 onmouseout="Out(this)">Multibatch Timing</a></font></div>
+  <div id=PPTC29 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB29 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In order to Reduce radiation, a “notch” is made
+    in the beam early in the booster cycle.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Currently, the extraction time is based on the
+    counted number of revolutions (RF buckets) of the Booster. This ensures
+    that the notch is in the right place.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The actual time can vary by &gt; 5 usec!</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>This is not a problem if booster sets the timing,
+    but it’s incompatible with multi-batch running (e.g. Slipstacking or NuMI)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>We must be able to fix this total time so we can
+    synchronize to the M.I. orbit.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>This is called “beam cogging”.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP30 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0033.htm');" onmouseover="Over(this)"
+  id=PPTL30 onmouseout="Out(this)">Active cogging</a></font></div>
+  <div id=PPTC30 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB30 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Detect slippage of notch relative to nominal and
+    adjust radius of beam to compensate.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP31 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0026.htm');" onmouseover="Over(this)"
+  id=PPTL31 onmouseout="Out(this)">Simulation/Studies</a></font></div>
+  <div id=PPTC31 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB31 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Historically, the booster has lacked a
+    fundamental understanding of beam loss mechanisms.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>If (!!!) it is possible at all to go the the
+    required beam flux, it will require some mitigation of beam loss.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Recently, there has been an great increase in
+    the involvement of the Beam Physics department in the Booster:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Space charge group (W. Chou, et al) has begun to
+    focus on the Booster again.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Chuck Ankenbrandt has moved into Booster group
+    as “Beam Physics Liaison” to help coordinate studies.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Starting to make quantitative comparisons
+    between predictions and measurement.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>An almost immediate result of this increased
+    effort was the discovery of the “dogleg problem”….</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP32 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0060.htm');" onmouseover="Over(this)"
+  id=PPTL32 onmouseout="Out(this)">Dogleg Problem</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP33 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0061.htm');" onmouseover="Over(this)"
+  id=PPTL33 onmouseout="Out(this)">Parasitic Focusing</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP34 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0062.htm');" onmouseover="Over(this)"
+  id=PPTL34 onmouseout="Out(this)">Parasitic Focusing (cont’d)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP35 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0063.htm');" onmouseover="Over(this)"
+  id=PPTL35 onmouseout="Out(this)">Predicted Effect of Doglegs</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP36 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0064.htm');" onmouseover="Over(this)"
+  id=PPTL36 onmouseout="Out(this)">Preliminary Study: Dispersion</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP37 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0065.htm');" onmouseover="Over(this)"
+  id=PPTL37 onmouseout="Out(this)">Dead Dog Studies</a></font></div>
+  <div id=PPTC37 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB37 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Took advantage of recent TeV Magnet failure to
+    raise the Long 13 (dump) septum and turn off the associated dogleg.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Doglegs almost exactly add, so this should
+    reduce the effect by almost half.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The mode of operation prevents short batching,
+    booster study cycles and RDF operation.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Had about 36 hours of study in this mode.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Bottom Line: major improvement.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP38 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0066.htm');" onmouseover="Over(this)"
+  id=PPTL38 onmouseout="Out(this)">Transmission After Tuning</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP39 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0067.htm');" onmouseover="Over(this)"
+  id=PPTL39 onmouseout="Out(this)">Transmission with One Dogleg</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP40 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0068.htm');" onmouseover="Over(this)"
+  id=PPTL40 onmouseout="Out(this)">Record Running w/o Dogleg</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP41 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0072.htm');" onmouseover="Over(this)"
+  id=PPTL41 onmouseout="Out(this)">Short Term Solutions</a></font></div>
+  <div id=PPTC41 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB41 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Tune to minimize current?</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>helped so far, but near limit.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Maybe raise L13 septum a bit?</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Motorize L13 septum to switch modes quickly?</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Operational nightmare</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Eliminate L13?</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Find another way to short-batch</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Make a dump in MI-8 for Booster study cycles?</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Correctors?:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>These don’t look like quads, so can’t find a fix
+    – yet.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Spread out doglegs (effect goes down with square
+    of separation):</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Not a lot of room. Maybe separate downstream
+    magnets?</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Three-legged dog?</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Turn of the third of the four magnets.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Need to increase first two reduces net
+    improvement.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP42 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0073.htm');" onmouseover="Over(this)"
+  id=PPTL42 onmouseout="Out(this)">Long Term Solutions</a></font></div>
+  <div id=PPTC42 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB42 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Large Aperture Lattice Magnets?</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Obviously the “right” idea.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Must match lattice AND (preferrably work with
+    existing resonant circuit).</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Potential for big screw-up.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Pulsed extraction bump?</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Straightforward magnet design.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Only part of the lattice for a short period at
+    the end of the cycle.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>New ideas welcome.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP43 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0039.htm');" onmouseover="Over(this)"
+  id=PPTL43 onmouseout="Out(this)">Longevity Issues (non-radiation)</a></font></div>
+  <div id=PPTC43 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB43 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>GMPS (upgraded, OK)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Transformers (serviced, OK)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Vacuum system (being updated, finished 2003)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Kicker PS charging cables</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Run three times over spec</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Evaluating improved design (better cable,
+    LCW-filled heliac, etc)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Low voltage power supplies, in particular Power
+    10 Series:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Unreliable, some no longer serviced.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Starting search for new supplier and evaluate
+    system to minimize number of different types.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Probably a few $100K to upgrade system.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP44 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0040.htm');" onmouseover="Over(this)"
+  id=PPTL44 onmouseout="Out(this)">Longevity Issues (non-radiation, cont’d)</a></font></div>
+  <div id=PPTC44 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB44 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>RF Hardware</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>(original) Copper tuner cooling lines are
+    beginning to spring leaks.<span style="mso-spacerun: yes"> 
+    </span>Difficult to repair because they’re hot.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>High Level RF</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>More or less original.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Our highest maintenance item.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Will probably last, BUT expensive to maintain.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>John Reid and Ralph Pasquinelli feel a new solid
+    state system would pay for itself ($5.5M) in about four years.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Low Level RF</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Many old modules, some without spares, some
+    without drawings.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>An upgrade plan in place.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Not expensive, but NEED people.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Personnel!!!!</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP45 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0038.htm');" onmouseover="Over(this)"
+  id=PPTL45 onmouseout="Out(this)">Radiation Damage Worries</a></font></div>
+  <div id=PPTC45 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB45 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Cables:<span style="mso-spacerun: yes"> 
+    </span>frequent replacement of HV cables and connectors for ion pumps.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Hoses:<span style="mso-spacerun: yes"> 
+    </span>valve actuator hoses have failed and are now being replaced with
+    stainless steel.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Kicker magnets:<span style="mso-spacerun: yes"> 
+    </span>A kicker which recently failed showed signs of radiation damage to
+    the potting rubber.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Main magnet insulation:<span
+    style="mso-spacerun: yes">  </span>No main magnets have failed in 30 years,
+    but…</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Installed radiation “dose tabs” around the ring
+    in January shutdown to get a real estimate of dosage.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP46 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0027.htm');" onmouseover="Over(this)"
+  id=PPTL46 onmouseout="Out(this)">Conclusions</a></font></div>
+  <div id=PPTC46 class=CTxt style='display:none'>
+  <table style='color:black' id=PPTB46 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The Fermilab Booster has maintained a remarkable
+    level of reliability over the last 30 years.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>It has now reached unprecedented performance
+    levels while maintaining reasonably strict beam loss standards.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>We still have a lot to do to meet the demands of
+    the future.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+<div style='display:none'><a href="v3_document.htm"></a><a href=preview.wmf></a><a
+href="v3_next_active.gif"></a><a href="v3_next_disabled.gif"></a><a
+href="v3_prev_active.gif"></a><a href="v3_prev_disabled.gif"></a><a
+href="v3_outline_collapse.gif"></a><a href="v3_outline_expand.gif"></a><a
+href="v3_space.gif"></a><a href="v3_endshow.htm"></a><a
+href="v3_navigation_bar.htm"></a><a href="v3_outline_navigation_bar.htm"></a><a
+href="v3_outline_collapsed.htm"></a><a href="v3_outline_expanded.htm"></a><a
+href="v3_blank_notes.htm"></a><a href=master03.htm></a><a href=master03.xml></a><a
+href=master04.htm></a><a href=master04.xml></a><a href=master02.htm></a><a
+href=pres.xml></a><a href="v3_slide0045.htm"></a><a
+href="v3_master04_background.gif"></a><a href="v3_slide0045_image001.gif"></a><a
+href="v3_slide0043.htm"></a><a href="v3_master03_background.gif"></a><a
+href="v3_slide0043_image002.gif"></a><a href="v3_slide0043_image003.jpg"></a><a
+href="v3_slide0055.htm"></a><a href="v3_slide0055_background.jpg"></a><a
+href="v3_slide0055_image004.gif"></a><a href="v3_slide0055_image005.gif"></a><a
+href="v3_slide0057.htm"></a><a href="v3_slide0057_image006.jpg"></a><a
+href="v3_slide0057_image007.jpg"></a><a href="v3_slide0057_image008.jpg"></a><a
+href="v3_slide0057_image009.jpg"></a><a href="v3_slide0044.htm"></a><a
+href="v3_slide0044_background.gif"></a><a href="v3_slide0044_image010.gif"></a><a
+href="v3_slide0044_image011.gif"></a><a href="v3_slide0044_image012.gif"></a><a
+href="v3_slide0044_image013.gif"></a><a href="v3_slide0056.htm"></a><a
+href="v3_slide0056_image014.gif"></a><a href="v3_slide0058.htm"></a><a
+href="v3_slide0058_background.jpg"></a><a href="v3_slide0058_image015.gif"></a><a
+href="v3_slide0058_image016.jpg"></a><a href="v3_slide0058_image017.gif"></a><a
+href="v3_slide0071.htm"></a><a href="v3_slide0034.htm"></a><a
+href="v3_slide0034_background.gif"></a><a href="v3_slide0034_image018.gif"></a><a
+href="v3_slide0034_image019.gif"></a><a href="v3_slide0029.htm"></a><a
+href="v3_slide0029_image020.gif"></a><a href="v3_slide0029_image021.gif"></a><a
+href="v3_slide0028.htm"></a><a href="v3_slide0028_background.gif"></a><a
+href="v3_slide0047.htm"></a><a href="v3_slide0047_image022.gif"></a><a
+href="v3_slide0070.htm"></a><a href="v3_slide0070_background.gif"></a><a
+href="v3_slide0049.htm"></a><a href="v3_slide0049_background.gif"></a><a
+href="v3_slide0052.htm"></a><a href="v3_slide0052_background.gif"></a><a
+href="v3_slide0052_image023.gif"></a><a href="v3_slide0052_image024.gif"></a><a
+href="v3_slide0052_image025.gif"></a><a href="v3_slide0050.htm"></a><a
+href="v3_slide0050_image026.gif"></a><a href="v3_slide0051.htm"></a><a
+href="v3_slide0051_background.gif"></a><a href="v3_slide0051_image027.gif"></a><a
+href="v3_slide0075.htm"></a><a href="v3_slide0053.htm"></a><a
+href="v3_slide0053_background.gif"></a><a href="v3_slide0022.htm"></a><a
+href="v3_slide0022_image028.gif"></a><a href="v3_slide0069.htm"></a><a
+href="v3_slide0069_image029.gif"></a><a href="v3_slide0048.htm"></a><a
+href="v3_slide0048_background.gif"></a><a href="v3_slide0074.htm"></a><a
+href="v3_slide0074_image030.jpg"></a><a href="v3_slide0030.htm"></a><a
+href="v3_slide0030_image031.gif"></a><a href="v3_slide0059.htm"></a><a
+href="v3_slide0059_image032.gif"></a><a href="v3_slide0013.htm"></a><a
+href="v3_slide0013_background.jpg"></a><a href="v3_slide0037.htm"></a><a
+href="v3_slide0025.htm"></a><a href="v3_slide0032.htm"></a><a
+href="v3_slide0033.htm"></a><a href="v3_slide0033_background.jpg"></a><a
+href="v3_slide0026.htm"></a><a href="v3_slide0026_background.gif"></a><a
+href="v3_slide0060.htm"></a><a href="v3_slide0060_background.jpg"></a><a
+href="v3_slide0060_image033.gif"></a><a href="v3_slide0061.htm"></a><a
+href="v3_slide0061_background.gif"></a><a href="v3_slide0061_image034.gif"></a><a
+href="v3_slide0061_image035.gif"></a><a href="v3_slide0062.htm"></a><a
+href="v3_slide0062_background.gif"></a><a href="v3_slide0062_image036.gif"></a><a
+href="v3_slide0063.htm"></a><a href="v3_slide0063_background.gif"></a><a
+href="v3_slide0063_image037.gif"></a><a href="v3_slide0063_image038.gif"></a><a
+href="v3_slide0064.htm"></a><a href="v3_slide0064_background.jpg"></a><a
+href="v3_slide0065.htm"></a><a href="v3_slide0066.htm"></a><a
+href="v3_slide0066_image039.gif"></a><a href="v3_slide0067.htm"></a><a
+href="v3_slide0067_image040.gif"></a><a href="v3_slide0068.htm"></a><a
+href="v3_slide0068_image041.gif"></a><a href="v3_slide0072.htm"></a><a
+href="v3_slide0072_background.gif"></a><a href="v3_slide0073.htm"></a><a
+href="v3_slide0039.htm"></a><a href="v3_slide0040.htm"></a><a
+href="v3_slide0038.htm"></a><a href="v3_slide0027.htm"></a><a
+href=slide0045.htm></a><a href="slide0045_image042.gif"></a><a
+href=slide0043.htm></a><a href="slide0043_image043.jpg"></a><a
+href=slide0055.htm></a><a href="slide0055_image044.png"></a><a
+href=slide0057.htm></a><a href="slide0057_image045.png"></a><a
+href=oledata.mso></a><a href="slide0057_image046.png"></a><a
+href="slide0057_image047.png"></a><a href="slide0057_image048.png"></a><a
+href=slide0044.htm></a><a href=slide0056.htm></a><a
+href="slide0056_image049.jpg"></a><a href=slide0058.htm></a><a
+href="slide0058_image050.png"></a><a href="slide0058_image051.jpg"></a><a
+href="slide0058_image052.jpg"></a><a href=slide0071.htm></a><a
+href=slide0034.htm></a><a href=slide0029.htm></a><a
+href="slide0029_image053.emz"></a><a href="slide0029_image054.emz"></a><a
+href=slide0028.htm></a><a href=slide0047.htm></a><a
+href="slide0047_image055.emz"></a><a href=slide0070.htm></a><a
+href="slide0070_image056.png"></a><a href=slide0049.htm></a><a
+href=slide0052.htm></a><a href="slide0052_image057.png"></a><a
+href=slide0050.htm></a><a href=slide0051.htm></a><a
+href="slide0051_image058.wmz"></a><a href=slide0075.htm></a><a
+href=slide0053.htm></a><a href="slide0053_image059.png"></a><a
+href=slide0022.htm></a><a href="slide0022_image060.emz"></a><a
+href=slide0069.htm></a><a href="slide0069_image061.png"></a><a
+href="slide0069_image062.png"></a><a href=slide0048.htm></a><a
+href=slide0074.htm></a><a href="slide0074_image063.jpg"></a><a
+href=slide0030.htm></a><a href=slide0059.htm></a><a
+href="slide0059_image064.wmz"></a><a href="slide0059_image065.png"></a><a
+href=slide0013.htm></a><a href=slide0037.htm></a><a href=slide0025.htm></a><a
+href=slide0032.htm></a><a href=slide0033.htm></a><a
+href="slide0033_image066.png"></a><a href=slide0026.htm></a><a
+href=slide0060.htm></a><a href=slide0061.htm></a><a
+href="slide0061_image067.wmz"></a><a href=slide0062.htm></a><a
+href="slide0062_image068.wmz"></a><a href="slide0062_image069.wmz"></a><a
+href="slide0062_image070.wmz"></a><a href="slide0062_image071.wmz"></a><a
+href="slide0062_image072.wmz"></a><a href="slide0062_image073.gif"></a><a
+href="slide0062_image074.gif"></a><a href=slide0063.htm></a><a
+href="slide0063_image075.jpg"></a><a href="slide0063_image076.jpg"></a><a
+href="slide0063_image077.jpg"></a><a href="slide0063_image078.jpg"></a><a
+href=slide0064.htm></a><a href="slide0064_image079.png"></a><a
+href=slide0065.htm></a><a href=slide0066.htm></a><a
+href="slide0066_image080.jpg"></a><a href=slide0067.htm></a><a
+href="slide0067_image081.jpg"></a><a href=slide0068.htm></a><a
+href="slide0068_image082.png"></a><a href="slide0068_image083.png"></a><a
+href=slide0072.htm></a><a href=slide0073.htm></a><a href=slide0039.htm></a><a
+href=slide0040.htm></a><a href=slide0038.htm></a><a href=slide0027.htm></a><a
+href=master01.htm></a><a href="master03_stylesheet.css"></a><a href=script.js></a><a
+href="../seminar_20030318.htm"></a><a href=error.htm></a><a
+href=fullscreen.htm></a><a href=buttons.gif></a><a href=frame.htm></a><a
+href=outline.htm></a></div>
+
+</body>
+
+</html>
