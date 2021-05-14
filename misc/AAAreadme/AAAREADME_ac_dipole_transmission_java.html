@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Notes on java files to study AC dipole transmission</title></head><body>
+<h1>Notes on Java Files to Study AC Dipole Transmission for Mu2e<br>
+</h1>
+<span style="font-style: italic;">(last updated April 9, 2014)</span><br>
+<br>These are notes on a suite of Java files I wrote to study details
+of bunch transmission through the Mu2e beam line extinction system<br>
+<br>
+<h2>Working Area<br>
+</h2>All source, input, and output files are kept in /Users/prebys/GoogleDrive/eclipse/workspace<br>
+<br>
+<h2>Main Classes<br>
+</h2>The study is based on three major classes:<br>
+<ul>
+  <li>BeamBunch (abstract):&nbsp; This class returns a longitudinal
+probability distribution function (PDF) for a bunch. Derived classes</li>
+  <ul>
+    <li>BeamBunchGaussian: Gaussian bunch</li>
+    <li>BeamBunchLookup: Bunch based on a lookup table.&nbsp; Current best lookup table is time_distribution_new.csv<br>
+    </li>
+  </ul>
+  <li>KickerWave (abstract): This class returns a wave function
+corresponding to the deflection field of the AC diple.&nbsp; In
+general, it's normalized to return a value of 2 (full extinction) at
+the boundaries of a specified transmission window. Derived classes:</li>
+  <ul>
+    <li>KickerSineWave: simple sine wave</li>
+    <li>KickerModifiedSineWave:&nbsp; sine wave plus a higher harmonic.&nbsp; This is the base line for Mu2e.</li>
+    <li>KickerMECOWave: Original MECO waveform</li>
+    <li>KickerUCIWave: Later proposed alternative by UCI</li>
+  </ul>
+  <li>Aperture:&nbsp; This defines the aperture. It returns a
+transmission probability as a function of normalized amplitude, where 1
+corresponds to the beam being centered on the edge of the collimator.
+For backward compatibility, it has two modes, based on which
+constructor is used</li>
+  <ul>
+    <li>Gaussian mode: If constructed with Aperture(double
+emittance95/admittance), it will create a Gausian transverse profile,
+based on the ration between the 95% emittance and the beam admittance.</li>
+    <li>Lookup mode: If constructed with Aperture(File lookupFile), it
+will look up the transmission as a function of normalized
+displacement.&nbsp; Current best transmission file is
+transmission_lookup.csv.</li>
+  </ul>
+</ul>
+There are a number of analysys files using these classes. Their behavior can generally be inferred from the name.<br>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+
+  
+
+</body></html>

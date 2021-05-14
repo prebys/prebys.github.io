@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Notes on updating MacOS</title></head><body>
+<h1>Notes on Updating MacOS</h1>
+<h2>El Capitan (10.11) to Sierra (10.12)</h2>
+<h3>General</h3>
+I had a very bad experience with a Fermilab "official version" of an
+OS, so since then I always just use the vanilla Apple install from the
+App store.<br>
+<br>
+Installation went remarkably quickly compared to some of the previous
+upgrades, and there are no more big changes to access rules that cause
+so much problems a couple of versions ago, so there shouldn't be big
+problems.&nbsp; <br>
+<br>
+Here are some specific issues afterwards...<br>
+<br>
+<h3>Cisco AnyConnect VPN Client</h3>
+Before you upgrade, make sure you have the <a href="http://networking.fnal.gov/vpn/">latest version</a>!
+(3.1.04063).&nbsp; I had an older version, which the upgrade
+broke.&nbsp;&nbsp; If you're at home, make sure you use the old version
+to download the new version, because you won't be able to later. <br>
+<br>
+<h3>Things that Worked Fine</h3>
+<ul>
+  <li>All the normal stuff (browsers, editors, Office, etc)</li>
+  <li>TexWorks. I already did the following workaround from the previous upgrade</li>
+  <ul>
+    <li>Go into "Preferences-&gt;typesetting" and add "/Library/TeX/texbin/" to the search path.&nbsp; <br>
+    </li>
+  </ul>
+
+  <li>Parallels 11<br>
+  </li>
+  <li>MADX</li>
+  <li>ACNET<br>
+  </li>
+
+</ul>
+I don't run local versions of MARS, ART, GEANT4, or Synergia at this time.<br>
+
+<h3>ROOT</h3>It's always kind of a pain to get ROOT to work properly
+after an upgrade.&nbsp; This is because the update upgrades Xcode, but
+not the command line tools.&nbsp; To fix this, you need to:<br>
+<ul>
+  <li>Launch XCode</li>
+  <ul>
+    <li>It will tell you it needs to download and install components.&nbsp; Let it do so</li>
+    <li>Quit<br>
+    </li>
+  </ul>
+  <li>Install the command line tools</li>
+  <ul>
+    <li>If you do the recommended checks, it will tell you they're already there, but this is a lie.<br>
+</li>
+    <li>Go <a href="https://developer.apple.com/download/more/">here</a>. Log in with your Apple credentials</li>
+
+    <li>Download the latest command line tools</li>
+    <li>Install them</li>
+  </ul>
+  <li>Download the latest ROOT from <a href="https://root.cern.ch/downloading-root">here</a></li>
+  <li>To be on the safe side, delete any .so files in your area and let it rebuild them.<br>
+  </li>
+
+</ul>
+<h3>XQuartz/ssh</h3>
+After the upgrade, I found that ssh no was no longer forwarding X11 connections.&nbsp; Reinstalling XQuartz fixed the problem.<br>
+<br>
+<h3>g4Beamline/histoRoot</h3>The g4beamline executables work
+fine.&nbsp; The visualizer has a bug that won't work with XQuartz newer
+than 2.7.8, which still works under Sierra.&nbsp; Tom Roberts is
+working on a fix.<br>
+<br>
+histoRoot works fine<br>
+<h3>MathType</h3>
+
+MathType for Mac continues to only work with Office 2011.&nbsp; I found
+that the first time I used it after the upgrade, it had to download a
+bunch of fonts (around five).&nbsp; After that it worked fine.&nbsp; <br>
+<br>
+
+<br>
+
+<br>
+<span style="font-style: italic;">(last updated 1-MAY-2017 by </span><a style="font-style: italic;" href="http://home.fnal.gov/%7Eprebys/">Eric Prebys</a><span style="font-style: italic;">)</span><br>
+
+  
+
+</body></html>

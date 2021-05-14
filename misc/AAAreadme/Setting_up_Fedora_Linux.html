@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+
+
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Setting up Fedora Linux</title></head><body>
+<h1>Setting up Fedora Linux</h1>
+Installed Fedora 24 on my Parallels VM on my Mac.&nbsp; These are some notes on the initial setup.<br>
+<br>
+VERY IMPORTANT to go into Configuration-&gt;Backup, and turn on SmartGuard to make snapshots!<br>
+<br>
+<h2>Xterm</h2>
+<br>
+xterm was not installed, but typing it caused it to be automatically installed.<br>
+<br>
+<h2>Kerberos</h2>
+Need to install the kerberos client utilities with<br>
+&gt; sudo yum install krb5-workstation krb5-libs krb5-auth-dialog<br>
+<br>
+Then download the correct <a href="http://computing.fnal.gov/authentication/krb5conf/Linux/krb5.conf">krb5.conf file</a> to the /etc/ directory.<br>
+<br>
+Once I did this, kinit and ssh worked fine.<br>
+<br>
+<h2>ROOT</h2>
+There's a Fedora binary distribution, but it had some trouble, so I rebuilt it.&nbsp; <br>
+<br>
+Use yum to install all the <a href="https://root.cern.ch/build-prerequisites#fedora">required packages</a> (some are already there, but a lot aren't).<br>
+<br>
+Follow the <a href="https://root.cern.ch/building-root">build instructions</a>.&nbsp; It takes a 2-3 hours. Although it looks like if I had simply typed 'root', it would have been automatically installed.<br>
+<br>
+After it was built, I manually copied the tree to /usr/local and added the files ROOT.(c)sh to /etc/profile.d with the lines<br>
+<div style="margin-left: 40px;">source /usr/local/root/bin/thisroot.(c)sh<br>
+</div>
+<br>
+<br>
+<h2>Synergia</h2>
+I followed the instructions <a href="https://cdcvs.fnal.gov/redmine/projects/contract-synergia2/wiki/Download_and_build_the_current_Synergia_release">here</a>, with the following changes (discovered by trial and error) prior to building:<br>
+<ul>
+  <li>remove the "--enablerepo=epel" option from the yum install command</li>
+  <li>force svnversion to install by typing "svnversion" and answsering "y"</li>
+  <li>do "yum install openblas openblas-devel redhad-rpm-config"</li>
+  
+</ul>I uncovered a problem with chef-libs that required Jim Amundsen to
+make some changes.&nbsp; After he did, I downloaded the updated version
+and continued the build with<br>
+&gt; cd ~/synergia2-devel<br>
+&gt; git pull<br>
+&gt; ./contract.py chef-libs/clean<br>
+&gt; ./contract.py <br>
+<br>
+and the build completed with no problems.<br>
+<br>
+Other things that can be installed to get the full use of Synergia<br>
+&gt; sudo pip install matplotlib<br>
+&gt; sudo pip install tables<br>
+&gt; sudo yum install tkinter<br>
+<br>
+<br>
+<h2>Upgrading OS<br>
+</h2>
+When I first tried to update to Fedora 25, it screwed up the Parallels too, so they need to be removed.<br>
+<br>
+Make a snapshot!<br>
+&gt; cd /usr/lib/parallels-tools/<br>
+&gt; sudo ./install<br>
+<br>
+Follow instructions to remove.&nbsp; <br>
+Shut down and restart.<br>
+<br>
+Go to Sotware store-&gt;Updates, download and install new OS.<br>
+<br>
+Go to Actions-&gt;Install Parallels tools<br>
+This will mount the disk, then go to <br>
+&gt; cd /run/prebys/media/Parallels\ Tools/<br>
+&gt; sudo ./install-gui<br>
+<br>
+Restart (note, I had trouble restarting, so I had to shut down and then start)<br>
+<br>
+I'm keeping the workaround below, in case I ever need it again, but the
+next Parallels Tools update fixed the issue with the latest kernel.<br>
+<br>
+<div style="margin-left: 40px;">
+It turned out that Parallels tools had an issue with the new kernel, so
+I reverted to a snapshot of Fedora 24.&nbsp; Unfortunately, the latest
+updates installed the new kernel, so I set the default to the old
+kernel by editing the file<br>
+
+/etc/default/grub<br>
+
+I set <br>
+
+GRUB_TIMEOUT=10&nbsp; (this gives a little more time to select the book kernel, if it changes)<br>
+
+and<br>
+
+GRUB_DEFAULT=1&nbsp;&nbsp;&nbsp; (this will select the second kernel in the list)<br>
+<br>
+
+I then did<br>
+
+&gt; sudo grub2-mkconfig -o /boot/grub2/grub.cfg<br>
+<br>
+
+to create a new boot config file. This will have to be modified if I do another kernel upgrade.<br>
+</div>
+
+
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  
+
+</body></html>

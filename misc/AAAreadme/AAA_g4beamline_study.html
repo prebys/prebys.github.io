@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>g4beamline_study Notes</title></head><body>
+<h1>g4beamline_study Notes</h1><span style="font-style: italic;">(last modified December 17, 2018)</span><br>
+<br>
+
+Note: except when otherwise specified, all files are in ~prebys/g4beamline_study<br>
+<h2>Contents</h2>
+<ul>
+  <li><a href="#Generating_Emittance_distributions_for">Generating Emittance Distributions</a></li>
+  <li><a href="#Converting_Vladimirs_files_to_input">Converting Vladimir's Files to Input</a></li>
+  <li><a href="#Standard_Script">Standard Script</a><br>
+  </li>
+</ul>
+Most of the files discussed here are archived in <a href="g4beamline_study/g4beamline_study_20170103.tgz">this tar file</a>.&nbsp; The larger data files are all stored in <a href="g4beamline_study/">this directory</a>.<br>
+
+<h2><a name="Generating_Emittance_distributions_for"></a>Generating Emittance distributions for g4beamline input</h2>
+<br>
+The program EmitGen.C is used to produce emittance distributions in the proper format for g4beamline.<br>
+<br>
+usage:<br>
+void EmitGen(string outputFileName, int nEvents, double emitX, double betaX, <br>
+&nbsp;&nbsp; double alphaX, double emitY, double betaY, double alphaY, double zStart=0.,<br>
+&nbsp;&nbsp; double minEmitX=0., double minEmitY=0. ) {<br>
+<br>
+Where:<br>
+<ul>
+  <li>outputFileName: output root file</li>
+  <li>nEvents: total number of events</li>
+  <li>emitX: normalized (at K=8.0 GeV) emittance in x, in pi-mm-mrad</li>
+  <ul>
+    <li>if emitX&gt;0, then this is the RMS emittance</li>
+    <li>if emitX&lt;0, then the absolute value is used to generate a <span style="font-style: italic;">uniform </span>emittance distribution.</li>
+  </ul>
+  <li>betaX: x-plane beta function [m] at starting point</li>
+  <li>alphaX: x-pane alpha function at starting point</li>
+  <li>emitY, betaY, alphaY: same things for Y-plane</li>
+  <li>zStart:&nbsp; starting position [in mm!]</li>
+  <li>minEmitX,minEmitY:&nbsp; if non-zero, then only emittances greater than these values are generated in each plane.</li>
+</ul>
+This program generates a ROOT file in standard G4Beamline format in the Ntuple VirtualDetector/tracklist.<br>
+<br>
+Useful files:<br>
+<ul>
+  <li>mu2e_upstream: initial distribution for upstream or full beamline, generated with</li>
+  <ul>
+    <li>nEvents=1.1e6 <br>
+    </li>
+  </ul>
+  <ul>
+    <li>emitX=-30.</li>
+    <li>emitY=2.5</li>
+    <li>z=2200. (downstream end of ECMAG)<br>
+    </li>
+    <li>optical functions as defined at s=2.2m&nbsp; in MAD_Eliana/twiss.xlsx</li>
+  </ul>
+  <li><a name="mu2e_downstream"></a>mu2e_downstream: initial distribution for downstream part of experiment, starting at upstream end of AC dipole, generated with</li>
+  <ul>
+    <li>nEvents=1.1e6 <br>
+  </li>
+    <li>emitX=-30.</li>
+    <li>emitY=2.5</li>
+    <li>z=134003.855 (downstream end of DRIFT_74, upstream end of first AC929)<br>
+    </li>
+    <li>optical functions as defined at s=134.003855 m in MAD_Eliana/twiss.xlsx</li>
+  </ul>
+  <li><br>
+  </li>
+
+</ul>
+
+<h2><a name="Converting_Vladimirs_files_to_input"></a>Converting Vladimir's files to input root files</h2>
+<br>
+Vladimir delivers his output files as text files at the downstream end of the C-magnet with columns in the following format<br>
+<br>
+x[mm] xp[mrad] y[mm] yp[mrad] t[ns] Ekin[GeV]<br>
+<br>
+I'll assume the file name is "<a href="g4beamline_study/ExtrBeamTransToCMAG-D.dat">ExtrBeamTransToCMAG-D.dat</a>".<br>
+<br>
+I use text editor add the following line to the first row<br>
+x:xp:y:yp:t:k<br>
+<br>
+I then turn this into an NTuple file with<br>
+[] TFile *f = new
+TFile("ExtTracks.root","RECREATE");&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// next file is hardcoded to use this filename<br>
+[] TTree *t = new TTree("ExtTracks","Tracks converted from Delivery Ring MARS simulation");<br>
+[] t-&gt;ReadFile("ExtrBeamTransToCMAG-D.dat");<br>
+[] t-&gt;MakeClass()&nbsp;&nbsp; // This will make a header file needed to read in this root file.<br>
+[] t-&gt;Write();<br>
+[] f-&gt;Close();<br>
+<br>I then use the program DRGen.C to convert this file into a format
+that
+can be used as an input to the g4Beamline script.&nbsp; It expects to
+fine the ExtTracks.h header created in the previous step.&nbsp; The
+program does the following:<br>
+<ul>
+  <li>Subtracts off the mean values from the original file (not as important as it used to be)<br>
+  </li>
+  <li>Converts units into G4Beamline format (mm,MeV)</li>
+  <li>(optionally) rotates the Y plane optics to match the MADX file used for the G4Beamline study</li>
+  <ul>
+    <li>Input optics are calculated from the MARS file</li>
+    <li>Matched optics are hardcoded in the file from Eliana's MADX file.<br>
+    </li>
+  </ul>
+  <li>(optionally) smears each point to generate a bigger output file</li>
+</ul>
+This file has some important constants hardcoded that will have to be changed if the configuration changes.&nbsp; In particular:<br>
+<ul>
+  <li>xMin, xMax:&nbsp; these are the maximum and minimum x positions,
+set to cut out the scattered tail. To be used in calculating the
+initial optics.</li>
+  <li>From Eliana's optics file:</li>
+  <ul>
+    <li>starting position: zStart=2200.3.&nbsp; Matches end of C-magnet</li>
+    <li>optical functions at this point</li>
+  </ul>
+  <li>resolution used to smear input parameters to increase statistics.<br>
+  </li>
+</ul>
+This program has the following format:<br>
+void DRGen(string outputFileName ,double minXEmittance=0., double minYEmittance=0.,int nSmear=1, bool rotateY=true) <br>
+where:<br>
+<ul>
+  <li>outputFileName: name of output file</li>
+  <li>minXEmittance, minYEmittance:&nbsp; if non-zero, then *at least
+one* of the normalized emittances [mm-mrad] has to exceed these values
+for the event to be written out.</li>
+  <li>nSmear:&nbsp; number of times to smear the input parameters to increase statistics of output file.</li>
+  <li>rotateY:&nbsp; if true, rotate phase space distribution in Y to match Eliana's MADX file.</li>
+</ul>Output is written to a ROOT file in standard G4Beamline format to Ntuple VirtualDetector/tracklist<br>
+<br>
+
+Latest production files (Dec. 11, 2015):<br>
+<ul>
+  <li>ExtrBeamTransToCMAG-D.dat:&nbsp; text file from Vladimir Nagaslaev with 450,000 events at the end of the C-magnet</li>
+  <li>ExtTracks.root:&nbsp; above file, converted to a root file</li>
+  <li>exttracks_rot_1800000.root:&nbsp; above file, rotated and smeared 4 times.</li>
+  <ul>
+    <li>Total events: 1811724<br>
+    </li>
+  </ul>
+
+  <li><a name="exttracks_rot_e30_e40"></a>exttracks_rot_e30_e40_1800000.root:&nbsp; above file, smeared
+four times, with normalized emittance cuts of exn, eyn = 30,40 mm-mrad,
+respectively.&nbsp;&nbsp;</li>
+  <ul>
+    <li>Total events: 6642</li>
+  </ul>
+  <li>Since these represent 1811724 events, they need to be run on 56 nodes to correspond to 1e8 events.</li>
+
+</ul><br>
+<h2><a name="Standard_Script"></a>Standard Script</h2>
+The standard script is mu2e....g4bl.&nbsp; Various versions have
+important parameters hardcoded into the first few lines so they can be
+run with the <a href="AAAREADME_g4beamline_grid.html">mu2egrid</a> script.&nbsp; Important parameters are:<br>
+<ul>
+  <li>upstream:&nbsp; set to 1 to run only upstream of the ACDIPOLE</li>
+  <li>downstream : set to 1 to run only ACDIPOLE&nbsp; and downstream</li>
+  <li>full: set to 1 to run both</li>
+  <li>deltaTheta:&nbsp; bend angle of AC dipole in normalized units <br>
+  </li>
+  <li>kw:&nbsp; a keyword that will be written to the output files to identify them.</li>
+  <li>Num_Events: number of events to run</li>
+  <li>grid: 1 to run on the grid.&nbsp; Determines where it will look for input and other supporting files.</li>
+  <li>verbose: set to 1 to generate additional profile and tracking files.<br>
+  </li>
+</ul>
+The program will read the following files:<br>
+<ul>
+  <li>mu2e_magnets.g4bl:&nbsp; a g4beamline description of the magnets used in the beam line</li>
+  <li>MAD_Eliana/mu2e_upstream.g4bl.seg_* and
+MAD_Eliana/mu2e_downstream.g4bl.seg_*:&nbsp; translations of the MADX
+optics file, automatically generated by<span style="text-decoration: underline;"> mad</span><a href="AAAREADME_mad2g4bl.html">2g4beamline</a>.</li>
+  <li>input track file, in standard g4beamline format, ntuple
+VirtualDetector/tracklist.&nbsp; This can be set with the beamFile
+parameter, but currently defaults to</li>
+  <ul>
+    <li><a href="g4beamline_study/exttracks_rot_e30_e40_1800000.root">exttracks_rot_e30_e40_1800000.root</a> for upstream=1 or full=1 <br>
+</li>
+    <ul>
+      <li>described <a href="#exttracks_rot_e30_e40">here</a><br>
+      </li>
+    </ul>
+
+    <li><a href="g4beamline_study/mu2e_downstream.root">mu2e_downstream.root</a> for downstream=1&nbsp;</li>
+    <ul>
+      <li>Gaussian distribution in y, uniform distribution in x, matched to optics just upstream of AC Dipole<br>
+      </li>
+    </ul>
+
+  </ul>
+</ul>
+&nbsp;The program will create an output file with the following name<br>
+<ul>
+  <li>mu2e-$upstream-$downstream-$kw-$Num_Events.root</li>
+</ul>
+with numerous Z ntuples in the Ntuple subdirector.&nbsp; If the verbose
+keyword is set, it will also have tracking information int he "Tracks"
+subdirectory.&nbsp; If the verbose flag is set, it will also generate a
+file with the same root name ".txt" in standard g4beamline profile
+format.<br>
+<br>
+<h2>Script Sets</h2>
+Numerous runs are made for varying values of deltaTheta.&nbsp; These
+values are hardcoded into individual run files.&nbsp; The sets are
+generated by creating a script with 'xxxx' in the name and
+'deltaTheta=xxxx' in the header of the file.&nbsp; This filename is
+them passed to the makedtscripts.py file, which will generate a set of
+files, replacing 'xxxx' with the each of the following values:
+2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0.&nbsp;
+Each of these sets is kept in a subdirectory.&nbsp; The most current
+subdirectories are:<br>
+<ul>
+  <li>mu2e-1-1-STANDARD/mu2e_full_STANDARD_xxxx.g4bl:&nbsp; Full beam line with all standard collimator settings</li>
+  <li>mu2e-1-1-NOCLEAN/mu2e_full_NOCLEAN_xxxx.g4bl: Full beam line with no collimation upstream of AC dipole</li>
+  <li>mu2e-1-1-NOTAILCOL/mu2e_full_NOTAILCOL_xxxx.g4bl:&nbsp; Full beam
+line with no "tail" collimator (collimator to remove scattered
+extraction tail)</li>
+  <li>mu2e-1-1-NOUSCOL/mu2e_full_NOUSCOL_xxxx.g4bl: Full beam line with no "halo" collmator upstream of AC dipole</li>
+  <li>mu2e-0-1-SS/mu2e_ds_SS_xxxx.g4bl:&nbsp; downstream simulation with a STAINLESS-STEEL collimator</li>
+  <li>mu2e-0-1-W/mu2e_ds_W_xxxx.g4bl: downstream simulation with a tunsten collimator.</li>
+</ul>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+
+
+</body></html>

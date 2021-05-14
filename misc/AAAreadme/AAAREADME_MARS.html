@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>MARS</title></head><body>
+<h1>Running MARS at Fermilab</h1>
+<span style="font-style: italic;">(<span style="color: red;">work in progress</span>, last modified 27-JAN-2016 by <a href="http://home.fnal.gov/%7Eprebys/">Eric Prebys</a>)</span><br>
+<br>
+<h2>General</h2>
+<a href="http://www-ap.fnal.gov/MARS/">MARS</a> is particle simulation
+package which models the interaction of particles with matter,
+including production and tracking of secondaries, energy deposition,
+and residual activation.&nbsp; It is particularly accurate for low
+energy interactions.&nbsp; As of this writing, the current version is
+15(14), and the manual can be found <a href="http://www-ap.fnal.gov/MARS/m1514-manual.pdf">here</a>.<br>
+<br>
+In general, the source and libraries are not made public, so local installations must be made by the primary author, <a href="mailto:mokhov">Nikolai Mokhov</a>.&nbsp;
+It's generally easeier to run the program on a computer where it is
+already installed.&nbsp; This document assumes it is running on one of
+the Solaris "cartoon" cluster nodes at Fermilab: wallace.fnal.gov or
+wally.fnal.gov.&nbsp; Once you have a Fermilab kerberos
+principle,&nbsp; <a href="mailto:mokhov">contact Nikolai</a>
+for access to these nodes. Note: I can't seem to connect to this
+cluster straight from my mac ("permission denied").&nbsp; I have to go
+through flxi02 first.<br>
+<br>
+<h2>Getting Started</h2>
+Once you get an account on wally, create at directory and copy the following files to it from /home/mokhov/restricted/mars15/<br>
+<ul>
+  <li>marsmain.f - main steering program.&nbsp; You shouldn't have to touch this</li>
+  <li>m1514.f - These are the user routines.&nbsp; You may need to
+modify this code for complex jobs, but simpler jobs can be set up with
+the control decks, and leave this alone<br>
+  </li>
+  <li>MARS.INP - main control deck.&nbsp; Uses old school FFREAD four
+character keywords with parameter arrays.&nbsp; Impossible to
+understand without manual.</li>
+  <li>GEOM.INP - used to define more complex geometries.&nbsp; Simple,
+segemented geometries can be set up directly in MARS.INP, in which case
+this file will be ignored.</li>
+  <li>MATER.INP - defines materials, which are referenced by the indices in the other input files</li>
+  <li>XYZHIS.INP - used to define a set of standard histograms.&nbsp; More complex histograms can be defined in m1514.f</li>
+  <li>GNUmakefile - makefile used to build the executable</li>
+</ul>
+All of these are described in detail in <a href="http://www-ap.fnal.gov/MARS/m1514-manual.pdf">the manual</a>, particularly in chapter 4.<br>
+<br>
+Once you've copied these files, you can compile them by typing:<br>
+&gt; gmake<br>
+<br>
+This will compile marsmain.f and m1514.f and link them to the
+appropriate libraries.&nbsp; It will generate a lot of warnings about
+'pawc_' having different sizes (that right, old guys; that's the PAW
+common block!), but you can ignore them. If you've done everything
+right, it should produce an executable called 'rmars-bnab-sun' which
+you can run by typing<br>
+&gt; ./rmars-bnab-sun<br>
+<br>
+This particular example doesn't produce any histograms, just a MARS.OUT output file, summarizing the energy depositions.<br>
+<br>
+You can visualize the elements by editing MARS.INP, replacing "CTRL 0"
+with "CTRL 1" and running it again.&nbsp; A bunch of boxes will pop up
+to select a screen size, and then you will see a visualization of the
+detector.<br>
+<br>
+<h2>A Comment of Versions (important)<br>
+</h2>
+There is no proper version control on MARS.&nbsp; If there are system
+changes, Nikolai will make changes to the files in the above directory
+directly.&nbsp; If your code suddenly stops compiling, try copying the
+latest versions of marsmain.f, m1514.f, and GNUmakefile to your
+directory.<br>
+<br>
+<h2>Thinfoil Example</h2>
+This <a href="thinfoil_20160127.tar">tar file</a>
+contains an example job to do scattering off of a thin foil, set up to
+run on the cartoon cluster.&nbsp; You should copy it to your home
+directory, then type:<br>
+<br>
+&gt; tar xvf thinfoil_20160127.tar<br>
+&gt; cd thinfoil<br>
+&gt; gmake<br>
+<br>
+Because the geometry is quite simple, it's entirely set up in the
+MARS.INP file, and the GEOM.INP file is ingored.&nbsp; In MARS.INP, the
+important lines are:<br>
+<br>
+NLNG 4 <br>
+ZSEC 1. 1.01 2. 5. 2501=0 1 0 0<br>
+<br>
+which sets up the longitudinal segmentation, with a Tungsten foil at 1
+cm.&nbsp; The first four entries define the segmentation, while the
+four starting at 2501 define the materials, based on the MATER.INP
+file.&nbsp; The thin foil is Tunsgten (material 1), while the rest is
+vacuum.&nbsp; The radius is defined with<br>
+<br>
+RSEC 10. <br>
+<br>
+The program is run with<br>
+<br>
+&gt; rmars-bnab-sun<br>
+<br>
+<br>
+
+  
+
+</body></html>

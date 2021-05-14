@@ -1,0 +1,42 @@
+#	main_ring.g4bl
+# put a line of fodo cells
+#
+physics  FTFP_BERT # Physics model.  Don't worry about this.
+
+param -unset nEvents=1000  # Number of events to run.  Can be overriden at command line
+param -unset beamZ=0.      # Starting point.  
+
+# 400 GeV beam
+param M=938.272 KE=400000.0
+param P=sqrt(($M+$KE)*($M+$KE)-$M*$M)  # Calculate the momentum.
+
+# This line defines the beam.  You specify SigmaX,Y [mm], SigmaXp,Yp [Rad], and meam Momentum [MeV/c]
+# 2 micron-radian emittance
+beam gaussian beamZ=$beamZ sigmaX=.682 sigmaXp=.00000686 sigmaY=.351 sigmaYp=.00001332 meanMomentum=$P nEvents=$nEvents particle=proton
+
+
+
+# Main Ring FODO cell
+param L=29740.        # Separation between the centers of the quads [mm]
+param QL=2133.4       # Full length of the quad [mm]
+param aperture=50.    # Not really important
+param -unset gradient=24.479  # gradient [T/m]
+param -unset nCell=8          # total number of (full) cells
+genericquad MRQuad fieldLength=$QL ironLength=$QL apertureRadius=$aperture ironRadius=5*$aperture  kill=1 
+
+param nQuad=2*$nCell
+param zQ=0.
+# Loop over the quads, advancing the position and alternating the gradient each time
+do i 1 $nQuad
+  place MRQuad gradient=$gradient rename=MRQuad# z=$zQ
+  param zQ=$zQ+$L
+  param gradient=(-1)*$gradient
+enddo
+  
+param totlen=2*$nCell*$L
+# This will create a file with fitted profiles, including lattice functions.
+profile zloop=0:$totlen:100 particle=proton file=profile.txt
+
+# This will create a file called g4beamline.root with the individual track information
+trace nTrace=100 oneNTuple=1 primaryOnly=1  #only save 100 tracks
+

@@ -1,0 +1,45 @@
+D. Bruhwiler: RadiaSoft efforts
+-------------------------------
+Preparing for a Phase II proposal in December
+Working on inducing wakefield-induced instabilities and demonstrating that they are ameliorated by nonlinear lattice
+
+Phase I: Show feasibility.  Non-linear magnet model implemented in Synergia.  Running test particles and comparing with MADX and LifeTrack.
+
+Phase II: Use simulations and calculations to prepare an experimental run plan
+
+Suggestion from Sasha: increase space charge to show benefit of non-linear lattice.
+Action item:  Steven will look into this.
+
+Proposed Phase II tasks:
+   - simulate RFQ bunches debunching in the IOTA ring using WARP (or possibly Synergia?)
+        comment: concentrate on halo formation, characterization, and losses
+   - Will iterate on this over the next months
+   
+S. Antipov
+----------
+Looking at injection to ring
+Action item: identify hardware (E. Prebys)
+learning how to do Synergia
+
+E. Prebys
+----------
+Working on Synergia in parallel and simulation of pencil beams in IOTA
+Figuring out what hardware we can scrounge, particularly magnets
+action item: meet with Ollie to look at magnets
+
+H. Piekarz
+----------
+ - Digging up old notes 
+ 	- FNAL TM-2436-APC : RFQ vacuum
+ 	- Hydrogen safety note: 
+ 	- schematic of beam line
+ 	- old budget
+action item: upload documents to RedMine!
+
+Redmine site:
+https://cdcvs.fnal.gov/redmine/projects/iota
+
+Working on access (I don't have privilege.
+
+Submitted by E. Prebys, Oct. 20, 2014
+

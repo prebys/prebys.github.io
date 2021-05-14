@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Jupyter iPython instructions</title></head><body>
+<h1>Using RadiaSofts Jupyter Notebooks</h1>
+As per instruction from Chris Hall on July 26....<br>
+<br>
+<ul>
+  <li>Log into <a href="http://jupyter.radiasoft.org/">http://jupyter.radiasoft.org/</a> with GitHub credentials. <br>
+  </li>
+  <li>Select "New-&gt;terminal" at the upper right hand side</li>
+  <li>The first time, do</li>
+  <ul>
+    <li>&gt; git clone https://github.com/radiasoft/rssynergia</li>
+    <li>&gt; git clone https://github.com/radiasoft/ioptics</li>
+  </ul>
+</ul>
+The 'rssynergia' repo contains an 'examples' folder with several
+notebooks showing the running of Synergia and subsequent data analysis.
+The best places to start are probably either the 'drift_expansion' or
+'iota_examples' folders. <br>
+<br>
+'drift_expansion' has a notebook which examines the expansion of a
+coasting beam in a drift and compares the simulated result to
+theoretical calculation. If you want to see the running of an IOTA
+simulation in Synergia we have two notebooks in 'iota_examples' that
+run through the setup of the lattice and bunch and go through some
+simple analysis, one with a zero-current bunch and the other with space
+charge included.<br>
+<br>
+If you haven't used an IPython notebook it is basically an interactive
+Python environment. The notebook is made up of cells that you can write
+Python code into. A cell can be executed using 'shift + enter'. The
+serial version of Synergia can be run directly within the notebook and
+then the same notebook can be used for post-processing and analysis of
+the data. Plots and graphics, such as from matplotlib can also be
+displayed directly within the notebook.<br>
+<br>To run a parallel job, you first need to convert it from a notebook to a python script.&nbsp; This is done with<br>
+&gt; jupyter nbconvert --to script filename.ipynb<br>
+<br>
+Then do the following (sent from Chris Hall):<br>
+<div style="margin-left: 40px;">Before you run the script:<br>
+-You will probably want to disable any plotting commands as there is no
+renderer for them to be displayed during the run. I normally use a new
+notebook to perform all the analysis after a parallel run, however, if
+you still want plots to be produced you could set the backend with
+'matplotlib.use('Agg')' and then save plots to file as they are created.<br>
+-There are quite a few print statements in most notebooks, they won't
+hurt anything but having them repeated for every processor does clutter
+things up. All the notebooks should already have some setup for running
+in parallel in one of the first few cells. Of particular use here the
+process rank is stored in the 'myrank' variable already. So you can set
+up conditional statements to turn down the printout volume.<br>
+-Finally, to actually submit the job, we aren't currently using any
+sort of job management system when running on a single blade so you can
+just use, eg:<br>
+<br>
+mpiexec -n 16 synergia MyRunFile.py<br>
+</div>
+<br>
+If there's a problem with Jupyter, go <a href="https://github.com/radiasoft/jupyter.radiasoft.org/issues/">here</a> and submit an "New Issue".<br>
+<br>
+<br>
+<br>
+
+  
+
+</body></html>

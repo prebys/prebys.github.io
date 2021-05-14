@@ -1,0 +1,93 @@
+$E=2.5
+OptiM
+# Insert comment after #
+# Remove one of two # in the next two lines and put file name to include external file
+##INCLUDE FileName 
+##END_INCLUDE
+Energy[MeV]=2.5        Mass[MeV]=938      
+Emittance: ex[cm]=(0.17e-3)/0.073  ey[cm]=(0.17e-3)/0.073  DP/P=1e-3.
+Initial:	BetaX[cm]=15.9 	BetaY[cm]=15.9 
+	AlfaX=-0.88 	AlfaY=-0.78 
+	DispersX[cm]=0 	DispersY[cm]=0 
+	Dsp_PrimeX=0 	DspPrimeY=0 
+	X[cm]=0.000    	Y[cm]=0.000    	Z[cm]=0.000    	S[cm]=0.000    
+	tetaX[deg]=0        	tetaY[deg]=0        
+#  Elements: O,I-drift, D,B-sector dipole, G-magnet edge 
+#       Q-quad, S-sextipole, C,CC-solenoid and its focusing part only
+#       M-multipole(length=0), K,Z-transverse and longitudinal correctors
+#       A,W-RF cavity(standing wave), E-electroctatic acc.section
+#       X-transfer matrix (next 6 lines have to hold the matrix itself)
+#       R-combined magneto-electrostatic bend, L - electrostatic quad
+#       F-Litium lens, H-Scraper or aperture
+#       T & U - transverse and longitudinal scattering
+#
+#Uncoment 3 lines below to make a reference to an external file
+#file reference start
+#file_reference_number file_name
+#file reference end
+#Above file_reference_number can be any number within 0-9;
+#You can make references up to 10 files between
+#lines "file reference start" and "file reference end" 
+#
+begin lattice. Number of periods=1
+o1 qF1 o5 qD1 o5 qF11 o2 
+qF3 o qD3 o4 qF2 o qD2 
+o3 DB o_leg1 q_Disp1 o_leg2 q_Disp2 o_leg3 
+q_Disp3 o_leg4 DL 
+end lattice
+begin list: dL=1.  dB=.1  dG=0.01  dS=0.01
+o1 L[cm]=20.
+o2 L[cm]=120
+o3 L[cm]=200
+o4 L[cm] = 300
+o5 L[cm] = 15
+o_leg1 L[cm] = 25
+o_leg2 L[cm] = 20
+o_leg3 L[cm] = 20
+o_leg4 L[cm] = 80
+
+oo L[cm] =15
+o L[cm] = 10
+qF1 	L[cm]=10         	G[kG/cm]=0.9     	Tilt[deg]=0
+qF11 	L[cm]=10         	G[kG/cm]=0.55    	Tilt[deg]=0
+qD1 	L[cm]=10         	G[kG/cm]=-1.0    	Tilt[deg]=0
+qF3 	L[cm]=10         	G[kG/cm]=0.230165 	Tilt[deg]=0
+qD3 	L[cm]=10         	G[kG/cm]=-0.2346747 	Tilt[deg]=0
+qF2 	L[cm]=10         	G[kG/cm]=0.371036 	Tilt[deg]=0
+qD2 	L[cm]=10         	G[kG/cm]=-0.3205972 	Tilt[deg]=0
+q_Disp1 	L[cm]=10         	G[kG/cm]=-0.225	Tilt[deg]=0              
+q_Disp2 	L[cm]=10         	G[kG/cm]=0.45	Tilt[deg]=0              
+q_Disp3 	L[cm]=10         	G[kG/cm]=-0.225 Tilt[deg]=0              
+DL L[cm]=40. B[kG]=-3             
+DB L[cm]=120 B[kG]=1             
+end list of elements
+
+
+# initial values of steps for length, magnetic field and its gradient
+BetaFitBlock dL[cm]=0.01 dB[kG]=0.01 dG[kG/cm]=0.001
+#Required parameters and their accuracy listed below(dPARM<=0. - no fitting)
+#Maximum Betas[cm] and MomentumCompaction are on the next line
+BtXmax=5000.  dBtXmax=0.  BtYmax=5000.  dBtYmax=0.  Alfa=0.  dAlfa=0.
+# Fitting parameters at the end of the lattice
+Beta_X[cm]=100 	dBeta_X[cm]=0.1 	Alfa_X=0.3 	dAlfa_X=0.01
+Beta_Y[cm]=100 	dBeta_Y[cm]=0.1 	Alfa_Y=0.3	dAlfa_Y=0.01 
+
+Disp_X[cm]=-0.3 	dDisp_X[cm]=-0.1	D_prime_X=0 	dD_prime_X=-0.01 
+Disp_Y[cm]=0 	dDisp_Y[cm]=-1 	D_prime_Y=0 	dD_prime_Y=-0.001 
+Qx=0.550986 	dQx=-0.01 
+Qy=0.658466 	dQy=-0.01 
+#
+#Fit at element with number =2 
+#To create a Fitting at intermidiate element: uncomment the line above, 
+# write the correct element number and insert six lines describing the
+# fit parameters. You can use up to 4 intermidiate points
+#Each point has to be determined as described above
+
+#
+# Groups of elements below. Each group has to be located on one line
+# beginning from the letter describing the changeable parameter such as: L:, B:, Q: 
+G: qF3
+G: qD3
+G: qF2
+G: qD2
+EndBetaFitBlock

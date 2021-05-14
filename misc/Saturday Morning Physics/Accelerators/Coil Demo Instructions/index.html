@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+
+
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Discharge Tube and Helmholtz Coil Demonstration</title></head><body>
+<h1 style="text-align: center;">Discharge Tube/Helmholtz Coil Demonstration</h1><br>
+<div style="text-align: center;"><img style="width: 720px; height: 540px;" alt="" src="setup.png"><br>
+</div>
+<br>
+<span style="font-style: italic;">(last updated 7-JUL--2017 by <a href="http://home.fnal.gov/%7Eprebys/">Eric Prebys</a>)</span><br>
+<br>
+This demonstration uses a special discharge tube to create a visible
+beam of electrons and a Helmholtz coil to create magnetic field to bend
+these electrons into a circular path.<br>
+<br>
+<h2>Table of Contents</h2>
+<ul>
+  <li><a href="#Inventory">Inventory</a></li>
+  <li><a href="#Theory_of_Operation_">Theory of Operation</a></li>
+  <li><a href="#Setup">Setup</a></li>
+  <li><a href="#Camera">Camera</a></li>
+  <li><a href="#Operation">Operation</a></li>
+  <li><a href="#Key_Points_in_Demonstration">Key Points in Demonstration</a><br>
+  </li>
+</ul>
+
+
+<h2><a name="Inventory"></a>Inventory</h2>
+<ul>
+  <li>Leybold Heraeus 555 58 discharge tube and stand (<a href="http://science.qom.ac.ir/Portal/File/ShowFile.aspx?ID=2aca01b8-d54b-4d58-b2fe-db84c50f04fd">manual</a>).</li>
+  <li>Custom Helmholtz Coils (mounted on stand)</li>
+  <li><a href="https://www.a3bs.com/dc-power-supply-0-500-v-115-v-5060-hz-u33000-115,p_805_14269.html">B3 U3300 Integrated Power supply</a><br>
+  </li>
+  <li>Custom wire harness</li>
+  <li><a href="https://www.logitech.com/en-us/product/c930e-webcam">Logitech C930e Webcam</a></li>
+  <li><a href="https://www.amazon.com/dp/B00LXG9NN0/ref=asc_df_B00LXG9NN05064682/?tag=hyprod-20&amp;creative=395033&amp;creativeASIN=B00LXG9NN0&amp;linkCode=df0&amp;hvadid=167143377764&amp;hvpos=1o2&amp;hvnetw=g&amp;hvrand=9491117288205869202&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9021657&amp;hvtargid=pla-314119775882">Flexible tripod</a><br>
+</li>
+  <li>Cardboard box with blackened inside, to serve as light shroud.<br>
+  </li>
+</ul>
+
+<br>
+<h2><a name="Theory_of_Operation_"></a>Theory of Operation<br>
+</h2>
+<br>
+<div style="text-align: center;"><img style="width: 674px; height: 314px;" alt="" src="tube_detail.png"><br>
+Figure 1<br>
+</div>
+<br>
+<br>
+Figure1 shows the detail and the theory of operation of the tube.&nbsp;
+A heated filament creates a beam of a electrons, which is accelerated
+by a potential of up to 300 V.&nbsp; A small cylinder, called a
+"Wehnelt Cylinder" is biased slightly negative to focus the
+electrons.&nbsp; The velocity of the electrons is given by:<br>
+<div style="text-align: center;"><img style="width: 241px; height: 73px;" alt="" src="velocity.png"><br>
+</div>
+<br>
+<div style="text-align: center;"><img style="width: 604px; height: 269px;" alt="" src="magnetic_field.png"><br>
+Figure 2<br>
+</div>
+<br>
+A pair of Helmholtz coils is used to create a magnetic field and bend
+the electron beam into a circular path, as shown in Figure 2.&nbsp; The
+magnetic field is given by<br>
+<div style="text-align: center;"><img style="width: 199px; height: 85px;" alt="" src="field.png">&nbsp;&nbsp;&nbsp; <br>
+</div>
+<br>
+And this bends the electron beam into a radius given by<br>
+<div style="text-align: center;"><img style="width: 181px; height: 242px;" alt="" src="force.png"><br>
+</div>
+When we put the equations together, we get a dependence of the radius on the accelerating voltage and coil current given by<br>
+<div style="text-align: center;"><img style="width: 150px; height: 293px;" alt="" src="rho.png"><br>
+</div>
+<br>
+<h2><a name="Setup"></a>Setup</h2>
+<div style="text-align: center;"><img style="width: 720px; height: 540px;" alt="" src="power_supply.png"><br>
+Figure 3<br>
+</div>
+<br>
+Figure 3 shows the integrated power supply for the system, along with
+the special wire harness to make all the connections. This supply
+provides the four voltage which are required:<br>
+<br>
+<ul>
+  <li>Accelerating Voltage (AV):&nbsp; The positive potential used to accelerate the electron (0 to 300V)</li>
+  <li>Wehnelt Cylinder Voltage (WV): The negative potential used to focus the electrons (0 to -50V)</li>
+  <li>Filament Voltage (FV): This provides the filament current to generate electrons (FIXED at 6.3V)</li>
+  <li>Coil
+Votage (CV): This provides the current for the Helmoltz Coil (0 to 12V,
+4A max).&nbsp; With the present coils, it hits the current limit at
+about 7V.<br>
+</li>
+</ul>
+The wire harness connects ground to the negative pole of each of the
+sources, except the Wehnelt bias, where the positive pole is
+grounded.&nbsp; <br>
+<div style="text-align: center;"><img style="width: 720px; height: 540px;" alt="" src="tube_connections.png"><br>
+Figure 4<br>
+</div>
+Figure 4 shows how these power sources are connected to the tube holder.&nbsp;
+There are connections for deflecting plates on the right, which are not
+used.&nbsp; It's important that these be shorted to the accelerating
+voltage with the three connector jumper.<br>
+<div style="text-align: center;"><img style="width: 720px; height: 540px;" alt="" src="helmholtz_connections.png"><br>
+Figure 5<br>
+</div>The coil inputs on the side panel are connected to coil
+connectors on fixture.&nbsp; The two sides are connected to put the two
+coils in series with the indicated polarity. Figure 5 shows the
+connections to the Helmholtz Coil.&nbsp; Current should flow in both
+coils <span style="font-style: italic;">in the same direction as the electrons</span>.<br>
+<br>
+<br>
+<h2><a name="Camera"></a>Camera</h2>
+<br>
+<div style="text-align: center;"><img style="width: 1475px; height: 381px;" alt="" src="camera.jpg"><br>
+Figure 6<br>
+</div>
+<br>The beam is very faint, and only visible in complete
+darkness.&nbsp; To
+use the demo in a lecture all, you'll have to cover the system with an
+opaque shroud and use a camera.&nbsp; In the past, we have enlisted
+<a href="mailto:rhahn@fnal.gov">Reidar Hahn</a> or <a href="mccrory@fnal.gov">Elliott McCrory</a> to use their cameras, and it has worked
+extremely well.&nbsp; If they are not available, we have purchased
+a&nbsp; <a href="https://www.amazon.com/Logitech-Desktop-Laptop-Webcam-Camera/dp/B00CRJWW2G">Logitech 930e webcam</a>
+and tripod for this purpose (Figure 6).&nbsp; You can position the
+camera very close to the tube, so the box the equipment is in can be
+used as a dark shroud, as shown.<br>
+<br>
+With the default
+settings, you will not be able to see the beam.&nbsp; You will need to
+modify the camera settings by using the Logitech Gaming Software, which
+can be downloaded <a href="http://support.logitech.com/en_in/software/lgs">here</a>.&nbsp;
+Connect the camera and launch the software.&nbsp; Click on the "Webcam
+Settings" icon near the bottom right, select "Advanced", and make the following changes:<br>
+<ul>
+  <li>Gain: Uncheck "Auto" and set to 100%</li>
+  <li>Saturation: 100%</li>
+  <li>Contrast: 0% <br>
+  </li>
+</ul>
+Then go to the "Webcam
+control" tab and make the following changes<br>
+<ul>
+  <li>Exposure: uncheck "Auto" and set to 100%&nbsp;</li>
+  <li>If the image of the filament is not clear, you may need to
+uncheck "Auto" on Focus, and manipulated it manually (not usually
+necessary).<br>
+  </li>
+</ul>
+Finally, go back to the
+"Advanced" tab and adjust the "Brightness" for best picture.&nbsp; Note
+that the longer exposure will reduce the frame rate, but this should be
+OK.&nbsp; <br>
+<br>
+Keep the gaming software open, as you may need to visit the settings again (see below).&nbsp; <br>
+<br>
+To view the webcam using, e.g, <a href="https://support.apple.com/quicktime">Quicktime</a>,
+lauch the program, then do "File-&gt;New Movie Recording", and select
+the Logitech Webcam from the pulldown below the little red dot.&nbsp;
+You don't actually need to start a recording.&nbsp; <span style="font-weight: bold;">NOTE: </span>starting Quicktime <span style="font-style: italic;">will probably reset the exposure to the default</span>,
+causing the image of the beam to suddenly disappear, so you will need
+to set it back to maximum as described above.&nbsp; Other things, like
+changing screen resolution by connecting a display, may also reset the
+exposure.&nbsp; Once Quicktime is displaying correctly, you can go to
+full screen mode.<br>
+<h2><a name="Operation"></a>Operation</h2>
+Initially, all voltages should be set to zero.&nbsp; Switch the supply
+on, then set the filament voltage (third knob from left) to <span style="font-style: italic;">exactly</span>
+6.3V.&nbsp; <span style="font-weight: bold;">Do not change this!&nbsp;</span> Exceeding this voltage could permanently damage the filament, ruining the device. <br>
+<br>
+Reasonable initial settings for
+the other supplies are:<br>
+<ul>
+  <li>Accelerating Voltage (AV): 150V</li>
+  <li>Wehnelt Voltage (WV): -20V</li>
+  <li>Coil Voltage (CV): 4V</li>
+</ul>
+It takes a couple of minutes for the beam to become visible and about
+five minutes to reach maximum brightness.&nbsp; Once it has, you can
+use the accelerating voltage and magnetic field to adjust the radius of
+the electron path, as illustrated in <a href="demonstration.mov">this video</a>&nbsp;
+(time sped up). As you change the accelerating voltage, you'll need to
+vary the Wehnelt voltage to maximize the beam's brightness.&nbsp; Note
+that with the present coils, the coil supply hits the 4A current limit
+at about 7V.&nbsp; <br>
+<br>
+<h2><a name="Key_Points_in_Demonstration"></a>Key Points in Demonstration</h2>
+Ask the students which way the field has to point to bend electrons a
+circle, and which way the current needs to flow to generate that field.<br>
+<br>
+Demonstrate that increasing the accelerating voltage increases the radius of curvature, as in a <span style="font-style: italic;">cyclotron</span>, but that simultaneously increasing the coil voltage can keep the radius constant, as in a <span style="font-style: italic;">synchrotron</span>.<br>
+
+<br>
+
+</body></html>

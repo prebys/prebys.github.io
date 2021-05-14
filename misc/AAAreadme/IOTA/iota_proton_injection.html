@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>IOTA Proton Injection</title></head><body>
+<h1>Notes on IOTA proton project</h1><span style="font-style: italic;">(last updated December 6, 2016 by </span><a style="font-style: italic;" href="home.fnal.gov/%7Eprebys/">Eric Prebys</a><span style="font-style: italic;">)</span><br>
+<br>
+
+<h2>Table of Contents</h2>
+<ul>
+  <li><a href="#Basic_Parameters_">Basic Parameters</a></li>
+  <li><a href="#Ion_Source_Information">Ion Source Information</a></li>
+  <li><a href="#Beam_Line_Components">Beam Line Components</a></li>
+  <li><a href="#Beam_Line_Design">Beam Line Design</a></li>
+  <li><a href="#Synergia_Simulation">Synergia Simulation</a></li>
+  <li><a href="#H-_Injection">H- Injection</a></li>
+  <li><a href="#Talks_and_Write-ups">Talks and Write-ups</a></li>
+  <li><a href="#Background_Information_and_References_">Background Information and References</a><br>
+  </li>
+</ul>
+<br>
+<h2><a name="Basic_Parameters_"></a>Basic Parameters<br>
+</h2>
+
+<br>
+<img style="width: 628px; height: 344px;" alt="" src="iota_table.png"><br>
+<img style="width: 638px; height: 354px;" alt="" src="hins_table.png"><br>
+<br>
+<br>
+Additional and calculated parameters<br>
+<ul>
+  <li>New beta functions: 10-20m</li>
+  <li>Beam size @beta=10m (RMS): 4.5mm</li>
+  <li><br>
+  </li>
+</ul><br><br>
+<h2><a name="Ion_Source_Information"></a>Ion Source Information</h2>
+<ul>
+  <li><a href="IS-Electr.jpg">Schematic</a> and <a href="P1010009.JPG">Picture</a><br>
+  </li>
+</ul>
+<br>
+<h2><a name="Beam_Line_Components"></a>Beam Line Components</h2>
+<ul>
+  <li>There are three old Main Ring trim quads (MQT) magnets on the girder&nbsp;<a href="quads.jpg"><img style="border: 0px solid ; width: 150px; height: 112px;" alt="" src="quads.jpg" align="middle"></a></li>
+  <ul>
+    <li>L=12 in</li>
+    <li>Gradient = 8 kG/m</li>
+  </ul>
+  <li>Buncher cavity <a href="http://projectx-docdb.fnal.gov/cgi-bin/RetrieveFile?docid=563&amp;filename=HINS%20Buncher%20Preliminary%20Design-Rev2_JPAW_01_22_2007.doc&amp;version=1">conceptual design document</a>.<br>
+  </li>
+</ul>
+<br>
+<h2><a name="Beam_Line_Design"></a>Beam Line Design</h2>
+From Sergey Antipov<br>
+<ul>
+  <li><a href="On%20Proton%20Experiment%20at%20IOTA.pdf">Space Charge calculations</a></li>
+  <li>OptiM <a href="test-8m-aperture-1.opt">matched optics file</a> (including buncher aperture constraint). Beta functions and beam envelope.<a href="Beamline%20V.2.bmp"><img style="border: 0px solid ; width: 129px; height: 100px;" alt="" src="Beamline%20V.2.bmp" align="middle"></a></li>
+  <li><a href="test-8m-aperture-quads.xlsx">Quad specifications</a><br>
+  </li>
+</ul>
+<h2><a name="Synergia_Simulation"></a>Synergia Simulation</h2>
+The Synergia package has been installed on
+my computer under the Fermilab Scientific Linux virtual machine.&nbsp;
+The Synergia manual can be found <a href="http://compacc.fnal.gov/%7Eamundson/html/">here</a> and the Wiki can be found <a href="https://cdcvs.fnal.gov/redmine/projects/synergia2/wiki">here</a>.&nbsp; <br>
+<br>
+IOTA Simulation files<br>
+<ul>
+  <li>Synergia script with space charge: <a href="iota_workflow.py"><span style="text-decoration: underline;">iota_workflow</span>.py</a></li>
+  <li>Option definition file: <a href="iota_workflow_options.py">iota_workflow_options.py</a><br>
+  </li>
+  <li>Version of MADX file for protons: <a href="iota6_protons.madx">iota6_protons.madx</a></li>
+
+  <li>Run program with:</li>
+  <ul>
+    <li>synergia iota_workflow.py [options]&nbsp;&nbsp; (use option "--help" for a list of all run options)<br>
+    </li>
+  </ul>
+
+  <li><a href="talks/iota_20140918.pptx">Talk </a>with some output plots.</li>
+</ul>Running in parallel on the Wilson cluster<br>
+<ul>
+  <li>Get an account on Wilson (tev.fnal.gov)<br>
+</li>
+  <li>Install a personal copy of Synergia, as described above<br>
+  </li>
+  <li>Rework the .py files into separate <a href="iota_workflow.py">iota_workflow.py</a> and <a href="iota_workflow_options.py">iota_workflow_options.py</a> files.&nbsp; The latter should include the "Job_manager" line at the end</li>
+  <li>copy
+the file
+synergia2-devel/build/synergia2/synergia-script-templates/job_example_wilson
+into the directory and rename it "job" and the file
+synergia2-devel/build/synergias/synergia-script-templates/resume_exampe_wilson
+and name it "resumejob".</li>
+  <li>Copy synergia2-devel/build/synergia2/synergia-script-templates/local_opts_wilson_example.py
+into your directory and rename it "local_opts.py"<br>
+</li>
+  <ul>
+    <li>Edit the file and replace the "override.setupsh" definition with the full path to your synergia-script-templates/setup.sh file.
+  </li>
+  </ul>
+
+<li>do synergia iota_workflow.py createjob=True [options].&nbsp; This
+will build the "run.00" directory, containing the "run.00_job" batch
+file for Wilson</li>
+  <li>Enter the new directory and submit job with "qsub run.00_job".<br>
+  </li>
+
+</ul>
+<h2><a name="H-_Injection"></a><a href="iota_h_minus_injection.html">H- Injection</a></h2>
+<h2><a name="Talks_and_Write-ups"></a>Talks and Write-ups</h2>
+<ul>
+  <li>Talk given at&nbsp; ASTA User's Meeting, June 9, 2014 (<a href="talks/prebys_ASTA_users_meeting_20140609.pptx">PowerPoint)</a></li>
+  <li>Synergia status talk at bi-weekly IOTA meeting, September 18, 2014 (<a href="talks/iota_20140918.pptx">PowerPoint</a>)</li>
+  <li>Discussion of HINS relocation issues at bi-weekly IOTA meeting, October 2, 2014 (<a href="talks/prebys_20141002.pptx">PowerPoint)</a><br>
+  </li>
+</ul>
+<br>
+<h2><a name="Background_Information_and_References_"></a>Background Information and References<br>
+</h2>
+
+
+
+<ul>
+  <li><a href="numbers.xlsx">Calculations (spreadsheet)</a><br>
+  </li>
+  <li><a href="ASTA_Proposal.pdf">ASTA (IOTA) Proposal</a></li>
+  <li><a href="MChung_2013EarlyCareer_Proposal.pdf">Chung's Early Career Grant proposal</a></li><li><a href="http://projectx-docdb.fnal.gov/cgi-bin/ShowDocument?docid=881">HINS performance</a></li>
+  <li><a href="http://tdweb.fnal.gov/HINS">HINS Content Management System</a></li>
+  <li><a href="http://projectx-docdb.fnal.gov/cgi-bin/ShowDocument?docid=563">HINS Baseline design Documents</a></li>
+  <li><a href="http://projectx-docdb.fnal.gov/cgi-bin/ShowDocument?docid=655">HINS Shielding Assessment for 10 MeV</a></li>
+  <li><a href="http://projectx-docdb.fnal.gov/cgi-bin/ShowDocument?docid=520">HINS Safety Documentation for 2.5 MeV</a></li>
+  <li><a href="http://beamdocs.fnal.gov/AD-public/DocDB/ShowDocument?docid=3505">Hydrogen Safety Documents</a><br>
+  </li>
+
+
+  <li><a href="https://cdcvs.fnal.gov/redmine/documents/677">IOTA lattice file</a> (Redmine)<br>
+  </li>
+
+
+
+</ul>
+<br>
+<br>
+
+  
+
+</body></html>

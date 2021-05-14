@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>ACNET Notes</title></head><body>
+<h1>Modifying ACNET Programs</h1>
+Making this page so I can remember how to modify ACNET programs.<br>
+<br>
+<ul>
+  <li>Connect using Cisco VPN client, even if at FNAL!</li>
+  <li>Use 'kinit' to get&nbsp; kerberos ticket</li>
+  <li>Start a console using 'CNSRUN' app.</li>
+  <li>Must connect to the ACNET cluster in two steps</li>
+  <ul>
+    <li>&gt; ssh -XKA outback.fnal.gov</li>
+    <li>outback$ ssh -XKA clxNN.fnal.gov (NN = 1 to 80)</li>
+  </ul>
+  <li>Make a local copy of the ACNET code</li>
+  <ul>
+    <li>Go to page with application</li>
+    <li>Use "Cmnds-&gt;Display Identifiers" to get PA number for app</li>
+    <li>create a paNNNN subdirectory in the ~/mecca/ directory</li>
+    <li>&gt; cd ~/mecca/paNNNN</li>
+    <li>&gt; mecca --copy paNNNN</li>
+  </ul>
+  <li>This will make a copy of all the files associated with the PA</li>
+  <li>Use gedit to edit files</li>
+  <li>Load a test copy of the program with</li>
+  <ul>
+    <li>&gt; mecca --dev</li>
+  </ul>
+  <li>Load the final copy with</li>
+  <ul>
+    <li>&gt; mecca --commit</li>
+  </ul>
+  <li>Close down console with "Shutdown Console" on "Utilities" window<br>
+  </li>
+
+</ul>
+Useful links:<br>
+<ul>
+  <li><a href="http://www-bd.fnal.gov/controls/frames_clib.html">ACNET library documentation</a></li>
+</ul>
+<br>
+(last modified November 23, 2015 by <a href="http://home.fnal.gov/%7Eprebys/">Eric Prebys</a>)<br>
+<br>
+
+  
+
+</body></html>

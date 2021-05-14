@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+
+
+
+
+
+
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Configuring New Mac</title></head><body>
+<h1>Configuring a New MacBook</h1><span style="font-style: italic;">
+Eric Prebys</span><br>
+<br>
+These are some notes on configuring a new Mac, with MacOS 10.12 Sierra,
+assuming it came from the Fermilab pool with the standard setup.<br>
+<br>
+Log into the cloud and all accounts.&nbsp; Mail and calendars should be pulled in automatically.<br>
+<br>
+
+Follow <a href="https://support.apple.com/en-us/HT204012">these instruction</a>
+to enable the root account, then use "visudo" to add the line
+"prebys&nbsp;&nbsp; &nbsp;&nbsp; ALL =&nbsp; (ALL) ALL" under the
+similar line for root to enable "sudo".<br>
+<br>
+
+Go <a href="http://fermiprint.fnal.gov/Managedprint/Managedprint.html">here</a> to install printers.<br>
+<br>
+Install the following:<br>
+<ul>
+  <li><a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a> (then make default browser)</li>
+  <li>OneDrive (from App store, then sign in with services acccount)</li>
+  <li><a href="http://www.dropbox.com/">Dropbox</a> (need to log into online account, then go to "..." pulldown at the lower right to get client)</li>
+  <li><a href="https://tools.google.com/dlpage/drive">Google Drive</a></li>
+  <ul>
+    <li>Before installing it: <br>
+    </li>
+    <ul>
+      <li>&gt; mkdir GoogleDrive</li>
+      <li>&gt; ln -s GoogleDrive Google\ Drive</li>
+      <li>This workaround is needed for a ROOT bug<br>
+      </li>
+
+    </ul>
+  </ul>
+
+  <li>XCode Developer tools (app store).&nbsp; <br>
+  </li>
+  <ul>
+    <li>Start it.&nbsp; It will download some additional components.</li>
+    <li>Then install appropriate "command line tools" from <a href="https://developer.apple.com/download/more/">here</a> with Apple credentials.</li>
+  </ul>
+  <li>TextWrangler (from app store)<br>
+  </li>
+  <ul>
+    <li>Also install <a href="https://www.barebones.com/support/textwrangler/cmd-line-tools.html">command line tools</a><br>
+    </li>
+  </ul>
+  <li><a href="http://www.kompozer.net/download-07.php">Kompozer</a></li>
+  <ul>
+    <li>The page is a little confusing. Be sure to install the "development version" (0.8b3)!</li>
+  </ul>
+
+  <li>Easyfind (from App store)<br>
+  </li>
+
+  <li><a href="https://www.xquartz.org/releases/index.html">XQuartz</a><a href="https://www.xquartz.org/releases/index.html"><br>
+    </a></li>
+  <li><a href="http://www.tug.org/mactex/">MacTex</a></li>
+  <li><a href="https://www.tug.org/texworks/">TexWorks</a></li>
+  <ul>
+    <li>After it's installed, go into "Preferences-&gt;typesetting" and add "/Library/TeX/texbin/" to the search path.&nbsp;&nbsp;</li>
+  </ul>
+  <li><a href="https://root.cern.ch/downloading-root">ROOT</a></li>
+  <ul>
+    <li>unpack file, then move the root tree to /usr/local, <br>
+    </li>
+    <li>create a file in /etc/paths.d called 'root' that contains the line '/usr/local/root/bin'</li>
+  </ul>
+  <li>Install Office 2011 from disk and activate with code on package.<br>
+</li>
+  <ul>
+    <li>Must dowload 14.1.0 Service Pack by hand from <a href="https://www.microsoft.com/en-us/download/details.aspx?id=17198">here</a>, because it will not automatically update.<br>
+</li>
+    <li>Then do "Check for Updates" to automatically get the latest patches.</li>
+  </ul>
+  <li><a href="https://www.dessci.com/en/dl/">MathType</a></li>
+  <ul>
+    <li>MathType corrupts the Symbol fond on Macs, so aftert it's
+installed, you need to search for "Font Book"&nbsp; in Spotlight, and
+remove the Symbol-&gt;Symbol font.<br>
+    </li>
+  </ul>
+
+  
+  <li><a href="https://www.telestream.net/flip4mac/overview.htm">Flip4Mac</a></li>
+  
+  <li><a href="http://www.videolan.org/vlc/download-macosx.html">VLC</a></li>
+  <li><a href="http://www.parallels.com/products/desktop/download/">Parallels</a></li>
+  <ul>
+    
+    <li>Recover VM files from backup or old computer</li>
+
+  </ul>
+  <li><a href="http://public.muonsinc.com/Projects/G4beamline.aspx">G4Beamline</a></li>
+  <ul>
+    <li>Allow it to download and unpack GEANT4 datasets</li>
+  </ul>
+  <li><a href="https://brew.sh/">Homebrew</a></li>
+  <ul>
+    <li>Install homebrew version of python with "brew install python".&nbsp; This makes sure all future paths are right.</li>
+    
+    <li>Then do "hash -r python" or you will get errors.<br>
+    </li>
+
+
+  </ul>
+  <li><a href="https://pip.pypa.io/en/stable/installing/">pip</a></li>
+  <li>Do (at least) "brew install"</li>
+  <ul>
+    <li>opencv (it will probably tell you to do "brew tap homebrew/science first")<br>
+</li>
+    <li>gcc</li>
+    <li>scipy</li>
+    <li>matplotlib</li>
+  </ul>
+  <li>Download <a href="https://zoom.us/download">ZOOM app</a>, install, and log in</li>
+  <li>Use Self-service app to install Fermilab templates for Office 2011 and 2016<br>
+  </li>
+
+
+
+
+</ul>
+<br>
+<br>
+
+  
+
+</body></html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>LabView Notes</title></head><body>
+<h1 style="text-align: center;">Notes on Using LabView for DAQ</h1>
+<br>
+(Last Updated December 14, 2017, by <a href="http://physics.ucdavis.edu/people/faculty/eric-prebys">Eric Prebys</a>)<br>
+<br>
+These notes apply to Windows.&nbsp; I've had less luck running LabView
+on MacOS, but it works with the Windows partition on my Mac.<br>
+<br>
+<h2>Required Software</h2>
+It's sometimes difficult to figure out what software you need for LabView DAQ, but the only two pieces you need are<br>
+<ul>
+  <li><a href="http://www.ni.com/en-us/shop/labview/download.html">LabView</a></li>
+  <ul>
+    <li>Select "Measure Physical Systems..." option</li>
+    <li>Currently using LabView2017</li>
+    <li>You can get a 7 day free trial version, but extend it to 45 days by creating an account at NI.<br>
+    </li>
+  </ul>
+  <li><a href="http://sine.ni.com/nips/cds/view/p/lang/en/nid/10181">DAQmx</a></li>
+  <ul>
+    <li>This has the stuff that communicates with hardware, as well as the all-important "DAQ Assistant"</li>
+  </ul>
+</ul>
+No additional software or drivers should be needed to use hardware with LabView<br>
+<h2>Connecting to Hardware</h2>
+I've tested LabView with a <a href="http://www.ni.com/en-us/support/model.usb-6000.html">USB-6000</a> USB-based module and with a <a href="http://www.ni.com/en-us/support/model.cdaq-9184.html">cDAQ-9184</a> four-slot ethernet-based chassis, populated with <br>
+<ul>
+  <li>1 x <a href="http://www.ni.com/en-us/support/model.ni-9403.html">NI-9403</a> 32 channel digital IO module</li>
+  <li>2 x <a href="http://www.ni.com/en-us/support/model.ni-9205.html">NI-9205</a> 32 channel analog input module</li>
+  <li>1 x <a href="http://www.ni.com/en-us/support/model.ni-9201.html">NI-9201</a> 8 channel analog input module</li>
+</ul>
+When the USB device is connected, the computer should recognize it and download the appropriate drivers.&nbsp; <br>
+<br>
+The ethernet device should just be "discovered" on the local network.&nbsp; <br>
+<br>
+Hardware is managed with the NIMax program, which is installed along
+with DAQmx.&nbsp; When you run the progam, you should see USB devices
+under "My Computer-&gt;Devices and Hardware", and your ethernet devices
+under "My Computer-&gt;Devices and Hardware-&gt;Network Devices".&nbsp;
+If it doesn't see it automatically, you may need to go to the
+"...Network Devices" page, and click "Add Network Device" at the
+top.&nbsp; This should see any networked devices, which you can then
+click on and select "Add".&nbsp; Once you add it, it will recognize any
+modules as separate devices and load the appropriate drivers.<br>
+<br>
+<h2>Incorporating DAQ Hardware into LabView Designs</h2>
+<br>
+The magic tool for inserting DAQ channels into LabView designs is "DAQ
+Assistant", this is available on the block diagram with
+"(Right-click)-&gt;Measurement I/O-&gt;NI DAQmx-&gt;DAQ
+Assistant".&nbsp; The first time you use this, you may get an message
+that your software is unlicensed, so you have to click the box that
+says you agree to follow the licensing rules, and click next.&nbsp;
+Then you will get a pop-up window that allows you to select "Aquire
+Signals" or "Generate Signals", and then select analog or digital input
+or output (or a bunch of other stuff you probably won't use).&nbsp; <br>
+<br>
+Here are some handy vidoes about how to do simple operations:<br>
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=rSNRG_Ddl1s">Simple Analog Input</a></li>
+  <li><a href="https://www.youtube.com/watch?v=jiMXAcXuktM">Digital I/O</a></li>
+</ul>
+<h2>Troubleshooting</h2>
+<h2>Issues with Running a VM</h2>
+<ul>
+  <li>As usual, you have to tell the computer to connect the USB device to the Windows VM when you plug it in</li>
+  <li>It seems to require that the Windows VM have direct access to the
+network, rather than via the default "shared network".&nbsp; This is
+done by going to "Devices-&gt;Network1-&gt;LAN (or whatever)".&nbsp;
+This doesn't appear to affect anything else</li>
+</ul>
+<h2>Trouble with Ethernet Connection</h2>
+If NIMax doesn't see the ethernet device, check the yellow status
+light.&nbsp; It should be off.&nbsp; It is repeating a sequence of
+three flashes, it means the firmware is corrupted, and you need to
+re-flash it by following the instructions <a href="https://knowledge.ni.com/KnowledgeArticleDetails?id=kA00Z000000P7flSAC">here</a>.<br>
+<br>
+<h2>Moving the Ethernet Device from One Host to Another</h2>
+Ethernet devices can only be used by one host at a time.&nbsp; If you
+try to connect to it with another (at least on the same network), you
+will get an error in NIMax.&nbsp; The solution is to right-click on the
+device in the left-hand menu and select "Reserve this Chassis". <br>
+<br>
+
+  
+
+</body></html>

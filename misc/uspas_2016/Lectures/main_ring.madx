@@ -1,0 +1,26 @@
+!
+! One FODO cell from the FNAL Main Ring (NAL Design Report, 1968)
+! The cell lengths and strengths are for a *half* quad.  
+!
+beam, particle=proton,energy=400.938272,npart=1.0E9;
+
+LQ:=1.067;
+LD:=29.74-2*LQ;
+
+qf: QUADRUPOLE, L=LQ, K1=.0195,TYPE="mrquad";
+d: DRIFT, L=LD;
+qd: QUADRUPOLE, L=LQ, K1=-.0195,TYPE="mrquad";
+
+fodo: line = (qf,d,qd,qd,d,qf);
+use, period=fodo;
+
+match,sequence=FODO;
+
+SELECT,FLAG=SECTORMAP,clear;
+SELECT,FLAG=TWISS,column=keyword,name,type,betx,alfx,bety,alfy,mux,muy;
+TWISS,SAVE,file="main_ring.txt";
+
+PLOT,interpolate=true,colour=100,HAXIS=S, VAXIS1=BETX,BETY;
+PLOT,interpolate=true,colour=100,HAXIS=S, VAXIS1=ALFX,ALFY;
+
+stop;

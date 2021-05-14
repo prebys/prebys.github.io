@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>X Windows on MS Windows</title></head><body>
+<h1>Opening X11 Windows on an MS Windows PC<br>
+</h1>
+<br>
+If you're going to interact a lot with Unix, it's probably best to
+install <a href="https://www.cygwin.com/">Cygwin</a> and <a href="http://x.cygwin.com/">Cygwin X</a>, but that's overkill for most people. If the goal is just to be able to log
+into a Fermilab unix node and open X11 windows on your MS Windows
+machine (eg if you need to run ROOT), the easiest way I've found is described below.<br>
+<br>
+<h3>Installing software<br>
+</h3>
+<ul>
+  <li>Install Kerberos</li>
+  <ul>
+    <li>Note! If you already have Kerberos on your system, use that!&nbsp;
+Don't install a second version, because they can interfere with each
+other.&nbsp; Otherwise...<br>
+    </li>
+  </ul>
+
+  <ul>
+    <li>Download and install the latest <a href="http://web.mit.edu/kerberos/dist/#kfw-4.1">kerberos tools</a> from MIT</li>
+    <li>Download the <a href="http://computing.fnal.gov/authentication/krb5conf/">appropriate krb5.conf</a> file for Fermilab and save it to "C:\ProgramData\Kerberos" (overwrite the file that is there).</li>
+  </ul>
+  <li>Install and configure Xming and Putty<br>
+  </li>
+  <ul>
+    <li>Follow the instructions <a href="http://www.geo.mtu.edu/geoschem/docs/putty_install.html">here</a> to install and configure Xming and Putty, with the <span style="font-style: italic;">following addition</span></li>
+    <ul>
+      <li>Before saving the configuration file in Putty, go to the "Connection-&gt;SSH-&gt;Auth-&gt;GSSAPI" screen and make sure <span style="font-style: italic;">both</span> radio button options at the top are selected. <br>
+      </li>
+    </ul>
+    <li><span style="font-weight: bold;">Important note</span>:&nbsp;
+If you want to save separate Putty configurations to connect to
+multiple nodes, it always starts with the default configuration, so you
+have to do <span style="font-style: italic;">all </span>the configuration steps for each one, rather than simply change the node name.</li>
+  </ul>
+</ul>
+<h3>Starting a session</h3>
+<ul>
+  <li>Start the X server by double clicking the "Xming" icon.&nbsp;
+There will be no splash screen or any other indication that you have
+done this. Doing it more than once is OK if you're not sure it's
+running.<br>
+  </li>
+  <li>Open a command window get a kerberos ticket by typing:<br>
+  </li>
+  <ul>
+    <li>&gt; kinit -f (your principle)@FNAL.GOV&nbsp;&nbsp;&nbsp;&nbsp; (capitals are important!)</li>
+  </ul>
+  <li>Double click on the Putty icon, then double-click on the appropriate configuration name</li>
+  <ul>
+    <li>This should open a window on the approriate linux node with
+correct X11 tunneling.&nbsp; To test, try popping an Xwindow by typing<br>
+    </li>
+    <ul>
+      <li>&gt; xterm &amp;</li>
+    </ul>
+  </ul>
+</ul>
+(<span style="font-style: italic;">last modified 9-March-2017 by </span><a style="font-style: italic;" href="http://home.fnal.gov/%7Eprebys/">Eric Prebys</a><span style="font-style: italic;">)</span><br>
+<br>
+
+  
+
+</body></html>

@@ -1,0 +1,385 @@
+! IOTA Version 5.0
+! Date: 10/23/2013
+! By: G.Kafka, A.Valishev
+! Comments:
+! Version to test with protons - 9/4/14 - EjP
+!
+OPTION, -ECHO;
+ASSIGN, ECHO="line.echo";
+
+! Lattice options:
+! 0: OSC
+! 1: One IO Magnet
+! 2: Two IO Magnets  
+
+
+
+
+loption=3;
+
+if ( loption == 0 ){
+beam, particle=electron,energy=0.1005110034,npart=1.0E9, sige=0.00065;
+};
+if ( loption ==1 ){
+beam, particle=electron,energy=0.150511006,npart=1.0E9;
+};
+if ( loption ==2 ){
+beam, particle=electron,energy=0.150511006,npart=1.0E9;
+};
+
+
+
+! Set for protons. 8 mA beam
+
+if ( loption ==3 ){
+beam, particle=proton, pc=.0685;
+
+};
+
+!****************** Create RF Cavity **********************************
+! Replace one of the E drifts with this cavity. Parameters will be 
+! Overwritten by Synergia
+cavity1: rfcavity,L=.51,volt=.000,lag=0,harmon=4;
+cavity2: rfcavity,L=.51,volt=.000,lag=0,harmon=56;
+
+
+!****************** Instrumentation ***********************************
+!
+obpm:    DRIFT,      L=    0.045 ;
+
+ibpm:    MONITOR ;
+
+ibpmA1R: ibpm;
+ibpmA2R: ibpm;
+ibpmA1L: ibpm;
+ibpmA2L: ibpm;
+ibpmB1R: ibpm;
+ibpmB2R: ibpm;
+ibpmB1L: ibpm;
+ibpmB2L: ibpm;
+ibpmC1R: ibpm;
+ibpmC2R: ibpm;
+ibpmC1L: ibpm;
+ibpmC2L: ibpm;
+ibpmD1R: ibpm;
+ibpmD2R: ibpm;
+ibpmD1L: ibpm;
+ibpmD2L: ibpm;
+ibpmE1R: ibpm;
+ibpmE2R: ibpm;
+ibpmE1L: ibpm;
+ibpmE2L: ibpm;
+
+bpmA1R:  LINE=(obpm, ibpmA1R, obpm); 
+bpmA2R:  LINE=(obpm, ibpmA2R, obpm); 
+bpmA1L:  LINE=(obpm, ibpmA1L, obpm); 
+bpmA2L:  LINE=(obpm, ibpmA2L, obpm); 
+bpmB1R:  LINE=(obpm, ibpmB1R, obpm); 
+bpmB2R:  LINE=(obpm, ibpmB2R, obpm); 
+bpmB1L:  LINE=(obpm, ibpmB1L, obpm); 
+bpmB2L:  LINE=(obpm, ibpmB2L, obpm); 
+bpmC1R:  LINE=(obpm, ibpmC1R, obpm); 
+bpmC2R:  LINE=(obpm, ibpmC2R, obpm); 
+bpmC1L:  LINE=(obpm, ibpmC1L, obpm); 
+bpmC2L:  LINE=(obpm, ibpmC2L, obpm); 
+bpmD1R:  LINE=(obpm, ibpmD1R, obpm); 
+bpmD2R:  LINE=(obpm, ibpmD2R, obpm); 
+bpmD1L:  LINE=(obpm, ibpmD1L, obpm); 
+bpmD2L:  LINE=(obpm, ibpmD2L, obpm); 
+bpmE1R:  LINE=(obpm, ibpmE1R, obpm); 
+bpmE2R:  LINE=(obpm, ibpmE2R, obpm); 
+bpmE1L:  LINE=(obpm, ibpmE1L, obpm); 
+bpmE2L:  LINE=(obpm, ibpmE2L, obpm); 
+
+!****************** Dipole magnets ************************************
+b60:   SBEND, L=0.7330382858, ANGLE=1.047197551;  ! 30-degree dipole
+b30:   SBEND, L=0.3665191429, ANGLE=0.5235987756; ! 60-degree dipole
+obcoil:    DRIFT, L= 0.0895; ! Width of coil
+D1R:   LINE=(obcoil, b30, obcoil);
+D2R:   LINE=(obcoil, b60, obcoil);
+D3R:   LINE=(obcoil, b60, obcoil);
+D4R:   LINE=(obcoil, b30, obcoil);
+D4L:   LINE=(obcoil, b30, obcoil);
+D3L:   LINE=(obcoil, b60, obcoil);
+D2L:   LINE=(obcoil, b60, obcoil);
+D1L:   LINE=(obcoil, b30, obcoil);
+oqcoil:    DRIFT, L=     0.0625 ; ! quadrupole "coil-to-iron"
+
+!**************** Quadrupole magnets for 1 IO Magnet *************************
+
+if ( loption == 1 )
+{
+q1: QUADRUPOLE,  L=      0.21,  K1=-8.072427002;
+q2: QUADRUPOLE,  L=      0.21,  K1=14.26726775;
+q3: QUADRUPOLE,  L=      0.21,  K1=-11.88415788;
+q4: QUADRUPOLE,  L=      0.21,  K1=-13.14610552;
+q5: QUADRUPOLE,  L=      0.21,  K1=11.98348508;
+q6: QUADRUPOLE,  L=      0.21,  K1=-13.62421938;
+q7: QUADRUPOLE,  L=      0.21,  K1=-6.650112158;
+q8: QUADRUPOLE,  L=      0.21,  K1=4.609889982;
+q9: QUADRUPOLE,  L=      0.21,  K1=-5.647016383;
+q10: QUADRUPOLE,  L=      0.21,  K1=5.637104976;
+q11: QUADRUPOLE,  L=      0.21,  K1=-4.975556379;
+q12: QUADRUPOLE,  L=      0.21,  K1=5.442378487;
+q13: QUADRUPOLE,  L=     0.105,  K1=-6.771164383;
+q14: QUADRUPOLE,  L=      0.21,  K1=-9.000671334;
+q15: QUADRUPOLE,  L=      0.21,  K1=12.84668182;
+q16: QUADRUPOLE,  L=      0.21,  K1=-13.17447732;
+q17: QUADRUPOLE,  L=      0.21,  K1=20.52183189;
+q18: QUADRUPOLE,  L=      0.21,  K1=-10.08246082;
+q19: QUADRUPOLE,  L=      0.21,  K1=15.94204263;
+q20: QUADRUPOLE,  L=      0.21,  K1=-8.105312319;
+};
+
+!**************** Quadrupole magnets for 2 IO Magents ************************
+
+if ( loption > 1 )
+{
+q1:  QUADRUPOLE,  L=      0.21,  K1=-8.172122694;
+q2:  QUADRUPOLE,  L=      0.21,  K1=13.8013101;
+q3:  QUADRUPOLE,  L=      0.21,  K1=-11.85115505;
+q4:  QUADRUPOLE,  L=      0.21,  K1=-12.76280335;
+q5:  QUADRUPOLE,  L=      0.21,  K1=12.05684862;
+q6:  QUADRUPOLE,  L=      0.21,  K1=-13.43833468;
+q7:  QUADRUPOLE,  L=      0.21,  K1=-6.209442939;
+q8:  QUADRUPOLE,  L=      0.21,  K1=4.489724127;
+q9:  QUADRUPOLE,  L=      0.21,  K1=-5.055287835;
+q10: QUADRUPOLE,  L=      0.21,  K1=5.37999797;
+q11: QUADRUPOLE,  L=      0.21,  K1=-4.478888505;
+q12: QUADRUPOLE,  L=      0.21,  K1=5.03614623;
+q13: QUADRUPOLE,  L=     0.105,  K1=-6.508884562;
+q14: QUADRUPOLE,  L=      0.21,  K1=-9.000671334;
+q15: QUADRUPOLE,  L=      0.21,  K1=12.84668182;
+q16: QUADRUPOLE,  L=      0.21,  K1=-13.17447732;
+q17: QUADRUPOLE,  L=      0.21,  K1=20.52183189;
+q18: QUADRUPOLE,  L=      0.21,  K1=-10.08246082;
+q19: QUADRUPOLE,  L=      0.21,  K1=15.94204263;
+q20: QUADRUPOLE,  L=      0.21,  K1=-8.105312319;
+};
+
+!***************** Quadrupole magnets for OSC ******************************
+
+if ( loption == 0 )
+{
+bChp: SBEND,  L=       0.1,  ANGLE=0.125870848,  E1=0.125870848 ;
+bChm: SBEND,  L=       0.1,  ANGLE=-0.125870848,  E2=-0.125870848 ;
+bWGLp: SBEND,  L=      0.02,  ANGLE=0,  E1=0,  E2=0 ;
+bWGLm: SBEND,  L=      0.02,  ANGLE=0,  E1=0,  E2=0 ;
+bWGLhp: SBEND,  L=      0.01,  ANGLE=0,  E2=0 ;
+bWGLhm: SBEND,  L=      0.01,  ANGLE=0,  E1=0 ;
+
+q1: QUADRUPOLE,  L=      0.21,  K1=6.278088921;
+q2: QUADRUPOLE,  L=      0.21,  K1=-14.58635829;
+q3: QUADRUPOLE,  L=      0.21,  K1=12.54873595;
+q4: QUADRUPOLE,  L=      0.21,  K1=13.27311075;
+q5: QUADRUPOLE,  L=      0.21,  K1=-12.52743037;
+q6: QUADRUPOLE,  L=      0.21,  K1=8.948164551;
+q7: QUADRUPOLE,  L=      0.21,  K1=-8.351620248;
+q8: QUADRUPOLE,  L=      0.21,  K1=11.33434176;
+q9: QUADRUPOLE,  L=      0.21,  K1=7.307667717;
+q10: QUADRUPOLE,  L=      0.21,  K1=-6.860259489;
+q14: QUADRUPOLE,  L=      0.21,  K1=3.951563155;
+q15: QUADRUPOLE,  L=      0.21,  K1=-4.992902822;
+q16: QUADRUPOLE,  L=      0.21,  K1=4.610112273;
+q17: QUADRUPOLE,  L=      0.21,  K1=-4.754332824;
+q18: QUADRUPOLE,  L=      0.21,  K1=6.608150918;
+q19: QUADRUPOLE,  L=      0.21,  K1=-12.03509043;
+q20: QUADRUPOLE,  L=      0.21,  K1=8.738768552;
+qChF: QUADRUPOLE,  L=      0.04,  K1=-5.905788604;
+qChD: QUADRUPOLE,  L=      0.15,  K1=24.42779723;
+qChF1: QUADRUPOLE,  L=      0.15,  K1=-17.35943923;
+q11c: QUADRUPOLE,  L=      0.21,  K1=         0;
+q12c: QUADRUPOLE,  L=      0.21,  K1=         0;
+
+oq: DRIFT, L=      0.0625 ;
+oqo:DRIFT, L=	   0.06;
+oqc: DRIFT, L=      0.22 ;
+oqq: DRIFT, L=     0.105 ;
+oL: DRIFT, L=       0.2065 ;
+odo: DRIFT, L=      0.06 ;
+oW: DRIFT, L=      0.02 ;
+oW1: DRIFT, L=   0.00626 ;
+oWend: DRIFT, L=   0.19848 ;
+obpmo: DRIFT, L=      0.09 ;
+obo: DRIFT, L=      0.31 ;
+o1: DRIFT, L=       0.9 ;
+oqd: DRIFT, L=     0.125 ;
+oq1a: DRIFT, L=      0.01 ;
+oq2a: DRIFT, L=      0.61 ;
+oq3a: DRIFT, L=      0.01 ;
+oq4a: DRIFT, L=      0.85 ;
+oq1: DRIFT, L=      0.01 ;
+oq2: DRIFT, L=     0.005 ;
+oq3: DRIFT, L=      0.01 ;
+o1a: DRIFT, L=     1.245 ;
+};
+
+QA1R: LINE=(oqcoil, q14, oqcoil);
+QA2R: LINE=(oqcoil, q15, oqcoil);
+QA3R: LINE=(oqcoil, q16, oqcoil);
+QA4R: LINE=(oqcoil, q17, oqcoil);
+QA1L: LINE=(oqcoil, q14, oqcoil);
+QA2L: LINE=(oqcoil, q15, oqcoil);
+QA3L: LINE=(oqcoil, q16, oqcoil);
+QA4L: LINE=(oqcoil, q17, oqcoil);
+
+QB1R: LINE=(oqcoil, q18, oqcoil);
+QB2R: LINE=(oqcoil, q19, oqcoil);
+QB3R: LINE=(oqcoil, q20, oqcoil);
+QB4R: LINE=(oqcoil, q1, oqcoil);
+QB5R: LINE=(oqcoil, q2, oqcoil);
+QB6R: LINE=(oqcoil, q3, oqcoil);
+QB1L: LINE=(oqcoil, q18, oqcoil);
+QB2L: LINE=(oqcoil, q19, oqcoil);
+QB3L: LINE=(oqcoil, q20, oqcoil);
+QB4L: LINE=(oqcoil, q1, oqcoil);
+QB5L: LINE=(oqcoil, q2, oqcoil);
+QB6L: LINE=(oqcoil, q3, oqcoil);
+
+QC1R: LINE=(oqcoil, q4, oqcoil);
+QC2R: LINE=(oqcoil, q5, oqcoil);
+QC3R: LINE=(oqcoil, q6, oqcoil);
+QC1L: LINE=(oqcoil, q4, oqcoil);
+QC2L: LINE=(oqcoil, q5, oqcoil);
+QC3L: LINE=(oqcoil, q6, oqcoil);
+
+QD1R: LINE=(oqcoil, q7, oqcoil);
+QD2R: LINE=(oqcoil, q8, oqcoil);
+QD3R: LINE=(oqcoil, q9, oqcoil);
+QD4R: LINE=(oqcoil, q10, oqcoil);
+QD1L: LINE=(oqcoil, q7, oqcoil);
+QD2L: LINE=(oqcoil, q8, oqcoil);
+QD3L: LINE=(oqcoil, q9, oqcoil);
+QD4L: LINE=(oqcoil, q10, oqcoil);
+
+QE1R: LINE=(oqcoil, q11, oqcoil);
+QE2R: LINE=(oqcoil, q12, oqcoil);
+QE3:  LINE=(oqcoil, q13,q13, oqcoil);
+QE1L: LINE=(oqcoil, q11, oqcoil);
+QE2L: LINE=(oqcoil, q12, oqcoil);
+
+QF1R:  LINE=(oqcoil, q11c, oqcoil);
+QF2R:  LINE=(oqcoil, q12c, oqcoil);
+QF1L:  LINE=(oqcoil, q11c, oqcoil);
+QF2L:  LINE=(oqcoil, q12c, oqcoil);
+
+!******************** Drifts *************************************************
+
+oA:    DRIFT, L=      0.76 ;              ! Half of injection drift
+oA1:   DRIFT, L=      0.01 ;              ! gap between QA1 & QA2
+oA2:   DRIFT, L=      0.52 ;              ! drift between QA2 & QA3
+oA3:   DRIFT, L=      0.01 ;              ! gap between QA3 & QA4
+
+oB:    DRIFT, L=      0.9  ;              ! Half of the nonlinear magnet drift
+oB1:   DRIFT, L=     0.005 ;              ! gap between QB1 & QB2 (QB5 & QB6)
+oB2:   DRIFT, L=     0.005 ;              ! gap between QB2 & QB3 (QB4 & QB5)
+
+oC1:   DRIFT, L=      0.23 ;              ! drift between QC1 & QC2
+oC2:   DRIFT, L=      0.23 ;              ! drift between QC2 & QC3
+
+obm:   DRIFT, L=      0.2205 ;            ! drift on both sides of dipole magnet
+
+oD:    DRIFT, L=      0.75 ;              ! Half of long drift in "D" straight
+oD1:   DRIFT, L=       0.2 ;              ! drift between dipole and QD1 (QD4)
+oD2:   DRIFT, L=     0.295 ;              ! drift between QD1 & QD2 (QD3 & QD4)
+
+oE1:   DRIFT, L=       0.1 ;
+oE2:   DRIFT, L=      1.02 ;
+oE3:   DRIFT, L=    0.6825 ;
+
+oF1:   DRIFT, L=    0.01;		  ! gap between QF1 and QF2
+oF2:   DRIFT, L=    0.0625;
+
+BR_Line:  LINE=(obm, QB1R, oB1, QB2R, oB2, QB3R, bpmB1R, oB, oB, bpmB2R, QB4R, oB2, QB5R, oB1, QB6R, obm);
+BL_Line:  LINE=(obm, QB6L, oB1, QB5L, oB2, QB4L, bpmB2L, oB, oB, bpmB1L, QB3L, oB2, QB2L, oB1, QB1L, obm);
+CR_Line:  LINE=(obm, bpmC1R, QC1R, oC1, QC2R, oC2, QC3R, bpmC2R, obm);
+CL_Line:  LINE=(obm, bpmC2L, QC3L, oC2, QC2L, oC1, QC1L, bpmC1L, obm);
+DR_Line:  LINE=(obm, bpmD1R, oD1, QD1R, oD2, QD2R, oD, oD, QD3R, oD2, QD4R, oD1, bpmD2R, obm);
+DL_Line:  LINE=(obm, bpmD2L, oD1, QD4L, oD2, QD3L, oD, oD, QD2L, oD2, QD1L, oD1, bpmD1L, obm);
+WL_Line:  LINE=(bWGLhm, oW1, bWGLp, oW, bWGLm, oW, bWGLp, oW, bWGLm,oW, bWGLp, oW, bWGLm, oW, bWGLp, oW, bWGLm, oW, 
+	  	bWGLp, oW, bWGLm, oW, bWGLp, oW, bWGLm, oW, bWGLp, oW, bWGLm, oW, bWGLp, oW, bWGLm, oW1, bWGLhp, oWend);
+WR_Line:  LINE=(oWend, bWGLhp, oW1, bWGLm, oW, bWGLp, oW, bWGLm, oW, bWGLp, oW, bWGLm, oW, bWGLp, oW, bWGLm, oW, bWGLp,
+	        oW, bWGLm, oW, bWGLp, oW, bWGLm, oW, bWGLp, oW, bWGLm, oW, bWGLp, oW, bWGLm, oW, bWGLp, oW1, bWGLhm); 
+
+!
+! Modified the following lines to be compatible with the Synergia MadX_reader.  They were missing
+! a semicolon at the end -EjP
+
+
+if( loption == 1 )
+{
+E_Line:   LINE=(obm, bpmE1R, oE1, QE1R, oE2, bpmE2R, QE2R, oE3, QE3, oE3, QE2L, bpmE2L, oE2, QE1L, oE1, bpmE1L, obm);
+};
+
+if( loption == 2 )
+{
+E_Line:   LINE=(obm, bpmE1R, oE1, QE1R, oE2, bpmE2R, QE2R, oE3, QE3, oE3, QE2L, bpmE2L, oE2, QE1L, oE1, bpmE1L, obm);
+};
+
+if( loption == 0 )
+{
+E_Line:  LINE=(obo, obpmo, QF1R, oF1, QF2R, oF2, WR_Line, oL, qChF1, oqc, qChD, oqo, bChp, odo, bChm, oqo, qChF,
+qChF, oqo, bChm, odo, bChp, oqo, qChD, oqc, qChF1, oL, WL_Line, oF2, QF2L, oF1, QF1L, obpmo, obo);
+};
+
+if( loption == 3 )
+{
+E_Line:   LINE=(obm, bpmE1R, oE1, QE1R, oE2, bpmE2R, QE2R, oE3, QE3, oE3, QE2L, bpmE2L, cavity1, cavity2 , QE1L, oE1, bpmE1L, obm);
+};
+
+MACHINE: LINE=(
+oA, bpmA1R, QA1R, oA1, QA2R, oA2, bpmA2R, QA3R, oA3, QA4R, obm, 
+D1R, BR_Line, D2R, CR_Line, D3R, DR_Line, 
+D4R, E_Line, D4L, 
+DL_Line, D3L, CL_Line, D2L, BL_Line, D1L, 
+obm, QA4L, oA3, QA3L, bpmA2L, oA2, QA2L, oA1, QA1L, bpmA1L, oA
+);
+
+
+select, flag=twiss,clear;
+select, flag=twiss,column=name,s,betx,alfx,mux,dx,dpx,bety,alfy,muy,dy,dpy;
+
+use,period=machine;
+
+
+twiss, file="out.twiss";
+
+if( loption==0 )
+{
+plot, table=twiss, haxis=s, vaxis1=betx,bety, vaxis2=dx,
+hmin=0,hmax=40,vmin=0,-4,vmax=40,4,
+colour=100, interpolate=true, file="out", title="IOTA Version 5.0 OSC Insert",noversion;
+plot, table=twiss, haxis=s, vaxis=dx,
+colour=100, interpolate=true, file="out", title="IOTA Version 5.0 OSC Insert",noversion;
+};
+
+if( loption==1 )
+{
+plot, table=twiss, haxis=s, vaxis1=betx,bety, vaxis2=dx,
+hmin=0,hmax=40,vmin=0,-3,vmax=10,3,
+colour=100, interpolate=true, file="out", title="IOTA Version 5.0 1-magnet",noversion;
+plot, table=twiss, haxis=s, vaxis=dx,
+colour=100, interpolate=true, file="out", title="IOTA Version 5.0 1-magnet",noversion;
+};
+
+if( loption==2 )
+{
+plot, table=twiss, haxis=s, vaxis1=betx,bety, vaxis2=dx,
+hmin=0,hmax=40,vmin=0,-3,vmax=10,3,
+colour=100, interpolate=true, file="out", title="IOTA Version 5.0 2-magnet",noversion;
+plot, table=twiss, haxis=s, vaxis=dx,
+colour=100, interpolate=true, file="out", title="IOTA Version 5.0 2-magnet",noversion;
+};
+
+if( loption==3 )
+{
+plot, table=twiss, haxis=s, vaxis1=betx,bety, vaxis2=dx,
+hmin=0,hmax=40,vmin=0,-3,vmax=10,3,
+colour=100, interpolate=true, file="out", title="IOTA Version 5.0 2-magnet, RF Cavity",noversion;
+plot, table=twiss, haxis=s, vaxis=dx,
+colour=100, interpolate=true, file="out", title="IOTA Version 5.0 2-magnet, RF Cavity",noversion;
+};
+
+
+
+stop;

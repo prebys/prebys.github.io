@@ -1,0 +1,469 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Computing Tips for Interns at Fermilab</title></head><body>
+<h1>Computing Tips for Newcomers to Fermilab</h1>
+<span style="font-style: italic;"><a name="date"></a>(last updated 10/20/2017 by <a href="http://home.fnal.gov/%7Eprebys/">Eric Prebys</a>)</span><br>
+<br>These are
+some notes I've put together based on the issues that have come up
+again and again over the years.&nbsp; It's mostly aimed at summer
+interns, but other newcomers might find it useful as well.&nbsp; <span style="font-weight: bold;"><br>
+<br>
+</span>Please <a href="mailto:prebys@fnal.gov">contact me</a> with any corrections or suggested improvements.<span style="font-weight: bold;"><br>
+</span><span style="font-weight: bold;"></span>
+<h2>Table of Contents</h2>
+<ul>
+  <li><a href="#Caveat:_Beware_of_stale_information_">Caveat</a></li>
+  <li><a href="#Computing_Rules">Computing Rules</a></li>
+  <li><a href="#Equipment_">Equipment</a></li>
+  <li><a href="#Network_Access">Network Access</a></li>
+  <li><a href="#Computer_Accounts">Standard Computer Accounts (Very Important!)<br>
+</a></li>
+  <li><a href="#Getting_Help">Getting Help</a><br>
+  </li>
+
+  <li><a href="#Exchange_Server">Exchange Server (Mail, Calendars, Office, etc)</a><br>
+  </li>
+
+  <li><a href="#Time_Cards">Time Cards</a></li>
+  <li><a href="#Printing">Printing</a> <br>
+  </li>
+  <li><a href="#Shared_Disks">Shared Disks</a></li>
+  <li><a href="#Personal_Webspace">Personal Webspace</a></li>
+  <li><a href="#Certificate_Authentication">Certificate Authentication</a></li>
+  <li><a href="#Remote_Access_VPN">Remote Access (VPN)</a></li>
+  <li><a href="#Access_to_Unix_Services">Access to Unix Resources<br>
+    </a></li>
+</ul>
+<span style="font-weight: bold;">
+<br>
+</span><span style="font-weight: bold;"></span>
+<h2><a name="Caveat:_Beware_of_stale_information_"></a>Caveat: Beware of stale information!<br>
+</h2>
+<div style="margin-left: 40px;">Computing is constantly changing, and
+the lab is not particularly diligent when it comes to clearing stale
+information off of its websites.&nbsp; If
+you find yourself looking at a page related to computing where the last
+update is more than two years ago, chances are very good it's wrong!<br>
+<br>
+To the best of my knowledge, the advice I'm giving here is valid on the <a href="#date">date
+above</a>. If you're stumbling onto this page years later than that date,&nbsp;
+then do&nbsp; yourself a favor and move on!<br>
+<br>
+I'll try to point out things that have changed within the last couple
+of years, for which you're likely to get stale information elsewhere.<br>
+</div>
+<span style="font-weight: bold;"></span>
+<h2><a name="Computing_Rules"></a>Computing Rules</h2>
+<div style="margin-left: 40px;">Fermilab networks and computing
+resources are there to support work related to the lab's mission.&nbsp;
+Reasonable personal use is permitted, provided that it doesn't use
+significant time or resources.&nbsp; You can find the full computing
+policy <a href="http://security.fnal.gov/Policies/cpolicy.html">here</a>, but the most important thing is to absolutely avoid the "four ps":<br>
+<ul>
+  <li><span style="font-weight: bold;">profit</span> - no commercial activity of any kind may be conducted on Fermilab computers.</li>
+  <li><span style="font-weight: bold;">pornography</span> - I hope that one's self explanatory.</li>
+  <li><span style="font-weight: bold;">piracy</span> - no attempt to violate any copyright or licensing agreements will be tolerated! <br>
+  </li>
+  <li><span style="font-weight: bold;">politics</span> - As a
+government funded organization, none of our resources, including
+computing, can be used in support of partisan political activity.&nbsp;
+This includes lab affiliated email addresses and lab sponsored FaceBook
+groups.</li>
+</ul>Violation of these rules can result in disciplinary action, up to and including termination.&nbsp; <br>
+
+</div>
+<h2><a name="Equipment_"></a>Equipment<br>
+</h2>
+
+
+<div style="margin-left: 40px;">Mentors and interns should be in touch
+with each other well before the beginning of the internship to
+determine what, in any, computer equipment will be required.&nbsp; It's the mentor's
+responsibility to see that these needs are met. We have some spare
+computers that are available for use, but we find that in most cases,
+students are most comfortable using their own computers, although they
+may want a larger monitor and external keyboard/mouse.&nbsp; <br>
+<br>
+In general, the lab supports Unix/Linux, MS Windows, and MacOSX, and you
+will likely encounter an eclectic mix of those systems while you're here.<br>
+</div>
+<h2><a name="Network_Access"></a>Network Access</h2>
+<div style="margin-left: 40px;">When you first arrive at Fermilab, you
+can connect to the "guest" network by answering a few questions, or to
+"eduroam" if you have an account, but these are outside of our firewall
+and have limited access.&nbsp; Once you have an ID number and services account, follow <a href="https://fermi.service-now.com/kb_view_customer.do?sysparm_article=KB0011206">these instructions</a>
+to register your device for the "fgz" network, which is inside the
+firewall and will give you full access to lab resources.&nbsp; If
+you're working
+from outside the lab, you will need to follow the <a href="#Remote_Access_VPN">Remote Access
+instructions</a> below.<br>
+<br>Once you have "fgz" access, make sure to remove "guest"&nbsp; and
+"eduroam" from your connection list, as accidentally connecting to them
+will significantly limit your access to lab resources!<br>
+<br>
+<span style="font-weight: bold;">Note!</span>&nbsp; The lab is <span style="font-style: italic;">extremely</span>
+fussy about what it lets onto the network and is constantly scanning
+all computers for vulerabilities.&nbsp; For example, remote login and
+screen sharing servers will result in your computer being blocked
+unless you take steps to configure them properly. Unless you really
+need them, it's best to just turn them off while you're here.&nbsp; If
+you get an email warning about a blocking event, you need to fix the
+problem <span style="font-style: italic;">and follow the link to verify that you've addressed it</span>.&nbsp; Otherwise, your computer will be auto-blocked.&nbsp; If you have questions or problems with this, visit the <a href="#Getting_Help">Help Desk in Wilson Hall</a>.<br>
+</div>
+<h2><a name="Computer_Accounts"></a>Standard Computer Accounts</h2>
+<div style="margin-left: 40px;">There are several basic accounts you
+will need to work at Fermilab.&nbsp; Some of these will be covered
+during your onboarding orientation, but they sometimes leave <span style="font-style: italic;">really</span> important things out, so please read this.&nbsp; <br>
+<br>
+On your first day, you will be given an accounts on <a href="https://wd5.myworkday.com/fermilab/login.flex">Fermiworks</a>&nbsp;
+and <a href="https://hrweb.fnal.gov:8021/psp/FermiSelfServicePRD/?cmd=login&amp;languageCd=ENG&amp;">Fermi Employee Self Service</a>. You will use these to enter some personal information, fill out your
+W-9, and set up direct deposit, and then you will likely never use them again during your time
+here.&nbsp; <br>
+<br>
+<span style="font-weight: bold;"><a name="services_account"></a>The most important account</span>
+you
+will get at Fermilab is your "services account", <span style="font-weight: bold;">yourusername@services.fnal.gov</span>.&nbsp; This is an <a href="https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol">LDAP</a>
+username and password that will used to authenticate you on a wide
+variety of lab services everything, including SharePoint, your time
+card (more
+about this
+in a minute), your email, and most importantly, the <a href="https://fermi.service-now.com/">Service Now page</a>, where
+you can request any other accounts or computing services you might need.&nbsp; You can't
+really do anything until you get this account.&nbsp; Your services
+account should be set up automatically, and they should tell you about
+it at orientiation.&nbsp; If they don't, then go immediately to the <a href="#Getting_Help">Service Desk</a> and tell them you need
+one.&nbsp; Your services account will have a unique username ("<span style="font-weight: bold;">yourusername</span>" in the on this page), which
+will also be used for other accounts.&nbsp; In addition to your
+services account, you will automatically be given<br>
+</div>
+<ul style="margin-left: 40px;">
+  <li>a<span style="font-weight: bold;"> yourusername@fnal.gov</span> email
+address: This will be forwarded to your personal email.&nbsp; You can
+request an actual email address, but it will go away when your
+internship is over, so it's best to keep using your own in most
+cases.&nbsp; <br>
+  </li>
+  <li>a<span style="font-weight: bold;"> yourusername@FNAL.GOV</span> <a href="https://web.mit.edu/kerberos/">kerberos</a> principle: This will be used to authenticate you on all <a href="#Access_to_Unix_Services">unix/linux systems</a> at the lab.</li>
+  <li>a <span style="font-weight: bold;">FERMI\yourusername</span>
+Windows domain account. You can use this to log into any Windows
+computer at the lab, and it is also used to authenticate you on <a href="#Shared_Disks">Samba shared disks</a>. This account will be automatically created, but you may need to call or visit the <a href="#Getting_Help">Help Desk</a> to activate it.<br>
+  </li>
+
+</ul><br>
+<h2><a name="Getting_Help"></a>Getting Help (Service Desk, Service Now)</h2>
+<div style="margin-left: 40px;">If you have computer problems, you can request help by opening a ticket at the <a href="https://fermi.service-now.com/">Service Now</a>
+webpage using your services account, but it's usually more effective to
+call or visit the Service Desk, and the number is 630-840-2345.&nbsp; It's
+located on the ground floor of Wilson Hall, in the North cross over,
+across from the Credit Union.<br>
+</div>
+<br>
+
+<h2><a name="Exchange_Server"></a>Exchange Server (Calendar, Mail, Office, etc)</h2>
+
+<div style="margin-left: 40px;"><span style="font-weight: bold;">Major changes recently!</span><br>
+<br>
+The lab now outsources most of its
+basic IT services to an offsite Exchange server, hosted by
+Microsoft.&nbsp; In particualar, this is where Email is hosted, as well
+as the calendar that the lab uses for both personal scheduling and to
+schedule things like meeting rooms.<br>
+<br>
+You can access this server directly by going to
+<a href="http://outlook.office365.com/">http://outlook.office365.com/</a> and log in by entering
+"yourusername@services.fnal.gov" as the user and your services password as
+the password.<br>
+<br>
+You can also sync the system to your own Outlook, as well as various
+MacOS, iOS, and Android mail and calendar clients by following the
+instructions <a href="https://fermi.service-now.com/kb_view_customer.do?sysparm_article=KB0011823">here</a>.<br>
+</div>
+
+<br>
+
+<h2><a name="Time_Cards"></a>Time Cards</h2>
+<div style="margin-left: 40px;">Employees need to fill out time cards
+every week.&nbsp; You do this using the "kronos" timekeeping service,
+which you can access <a href="http://www.fnal.gov/pub/ftl/">here</a>.
+Log in with your services credentials.&nbsp; There is an HTML interface
+at the right which will work from any browser, but it's a bit annoying
+to use.<br>
+<br>
+The Java interface is better, but can be a bit fussy, and the Kronos
+site makes it extra confusing.&nbsp; I've only made it work with Safari
+and Explorer.&nbsp; First, go <a href="https://www.java.com/en/download/installed.jsp">here</a> to verify your version of Java, update if necessary, and make sure it's enabled. <br>
+<br>
+To get Java Kronos to work, do the following:<br>
+<ul>
+  <li>Safari: <br>
+  </li>
+  <ul>
+    <li>Go to the <a href="http://timecard.fnal.gov/java">Kronos log in</a> page, and log in with your services password.</li>
+    <li>You will get an error in red telling you that Java is not
+installed, and a link to download a very outdated version. Do not do
+this!</li>
+    <li>Go to "Preferences-&gt;Security-Plug-in Settings-&gt;Java", and turn fermilab.kronos.net to "On".&nbsp; <br>
+    </li>
+  </ul>
+  <li>Explorer:</li>
+  <ul>
+    <li>Go to the <a href="http://timecard.fnal.gov/java">Kronos log in</a> page, and log in with your services password.</li>
+    <li>You will get an error in red telling you that Java is not
+installed, and a link to download a very outdated version. Do not do
+this!</li>
+    <li>Go to "Tools-&gt;Compatibility View Settings".&nbsp; You should see "kronos.net" in the top line.&nbsp; Click "Add" and close.</li>
+  </ul>
+</ul>
+
+In both cases, you will have to OK a number of splashes before Java actually runs the first time.<br>
+<br>
+I've been told that you can get it to work with Firefox on Linux using the <a href="http://icedtea.classpath.org/wiki/IcedTea-Web">Iced Tea plugin</a>, but I have not personally made this work.<br>
+<br>
+Go to "My information-&gt;My timecard" to access&nbsp; your time card, then enter your arrival and departure time each day.<br>
+<br>
+All interns are authorized to work 8 hours per day, 40 hours per week
+(July 4th is an upaid holiday).&nbsp; Any deviation from that requires
+supervisor approval beforehand.&nbsp; You will automatically be given a
+half hour unpaid lunch, so adjust your arrival and/or departure times
+accordingly.<br>
+<br>
+Important! Once you have entered your time, do "Approvals-&gt;approve" to send the timecard to your supervisor.<br>
+<br>
+Your timecard must be filled out by 10AM Monday morning so that your
+supervisor can approve it.&nbsp; The work week runs from Monday through
+Sunday, so if you wait until Monday morning to fill it out, you need to
+select "previous week" in the pulldown (I still make this mistake all the time)!<br>
+</div>
+<br>
+<h2><a name="Printing"></a>Printing</h2>
+
+<div style="margin-left: 40px;">To access lab printers, you must be
+inside the firewall (verify that you're connected to "fgz" rather than
+"guest").&nbsp; Find the name of the printer, which is usually printed
+somewhere on or near it, then go to <a href="http://fermiprint.fnal.gov/Managedprint/Managedprint.html">this page</a> for instructions about how to add it to your system.<br>
+<br>
+Note:&nbsp; I've found that if you already have a printer of the same
+brand as the one you're trying to install, it can screw up the
+automated printer installation (it appears to run successfully, but
+then no printer is added).&nbsp; If this happens, submit a help desk
+ticket at <a href="https://fermi.service-now.com/">SericeNow</a> and they will be able to solve the problem for you.&nbsp; <br>
+</div>
+<h2><a name="Shared_Disks"></a>Shared Disks</h2>
+<div style="margin-left: 40px;">Many groups at the lab use <a href="https://en.wikipedia.org/wiki/Samba_%28software%29">Samba</a>
+shared disks.&nbsp; These are accessed with your Windows FERMI
+domain credentials.&nbsp; The two most commonly accessed Samba servers
+are <span style="font-weight: bold;">filesrv01.fnal.gov</span>, which has experimental data areas and web space,
+and <span style="font-weight: bold;">beamssrv1.fnal.gov</span>, which has lots of stuff for the accelerator
+division.&nbsp; These can only be accessed inside the firewall or via a
+<a href="#Remote_Access_VPN">VPN</a>.<br>
+<br>
+Note that in many cases, you'll need to be given permission to access
+shared disk.&nbsp; These are usually granted to members of a particular
+project or experiment.&nbsp; Go to the <a href="Affiliation%5CExperiment%20Computing%20Account%20Request">service now page</a>
+-&gt; "Request New/Renew Accounts"-&gt;"Affiliation\Experiment
+Computing Account Request", enter your information and select the
+appropriate experiment/project from the pulldown.&nbsp; If it's not
+there, then you need to find out who adminsters the disk and get him or
+her to grant you access.&nbsp; <br>
+<br>
+To access these disks<br>
+</div>
+<ul style="margin-left: 40px;">
+  <li>On MS Windows</li>
+  <ul>
+    <li>open
+a browser window and enter the server name in the address bar preceded
+by "\\", e.g. "\\beamsrv1.fnal.gov".&nbsp; You can add more to the path
+if you want.&nbsp; <br>
+    </li>
+    <li>You will be asked to authenticate with your Windows credentials.&nbsp;</li>
+    <li>Use "FERMI\yourusername" as the username</li>
+    <li>Once you do this, the server will appear under "Network" in your file browser<br>
+    </li>
+
+  </ul>
+  <li>On MacOSX</li>
+  <ul>
+    <li>Open the Finder</li>
+    <li>Do "Go-&gt;Connect to Server..." and ender the servername,
+preceded by "smb://", e.g. "smb://beamsrv1.fnal.gov".&nbsp; You can add
+more of the path if you want</li>
+    <li>You will be asked to authenticate with your Windows credentials.&nbsp;</li>
+    <li>Use "FERMI\yourusername" as the username</li>
+    <li>Once you access the server, the disk you access will show up as
+a mounted disk, and be accessible from your desktop or via /Volumes/<br>
+    </li>
+
+  </ul>
+  <li>On Linux</li>
+  <ul>
+    <li>Use "smbclient" or "smbmount", as described <a href="http://www.tldp.org/HOWTO/SMB-HOWTO-8.html">here</a>.</li>
+    <li>Use the options "--workgroup=FERMI --user=yourusername".&nbsp; It will prompt you for your password.</li>
+  </ul>
+</ul><br>
+<div style="margin-left: 40px;">Sometimes, you will have access to a shared subdirectory, but not one
+or more of the directories above it.&nbsp; In those cases, you will have to
+enter the full path to access the area,
+rather than access the top directory and navigate down.&nbsp; <br>
+
+<br><span style="font-weight: bold;">Recent change: </span>AFS is no longer supported at the lab, so if you see instructions to AFS mount anything, once again, ignore them.<br>
+</div>
+<h2><a name="Personal_Webspace"></a>Personal Webspace</h2>
+<div style="margin-left: 40px;"><span style="font-weight: bold;">Major changes recently!</span><br>
+<br>
+Everyone at the lab has a personal web area, that can be accessed in
+several ways.&nbsp; In the examples below, replace "y" with the first
+letter of your <span style="font-weight: bold;">yourusername</span>.<br>
+<br>
+You can access it via a <a href="#Shared_Disks">Samba shared disk</a><br>
+<span style="font-weight: bold;">\\filesrv01.fnal.gov\publicweb\y\yourusername</span> <br>
+<br>
+If you have an account on the <a href="#Access_to_Unix_Services">unix cluster</a>, you can access it as<br>
+<span style="font-weight: bold;">/publicweb/y/yourusername</span> <br>
+<br>
+or as the <br>
+<span style="font-weight: bold;">~mydisk/public_html</span><br>
+subdirectory of your main account<br>
+<br>
+The space is accessed via the web as:<br>
+<span style="font-weight: bold;">http://home.fnal.gov/~yourusername/</span><br style="font-weight: bold;">
+<br>Your personal webspace is accessible from outside the firewall, so
+be careful what you put there and be especially sure you're adhering to
+the <a href="#Computing_Rules">computing rules</a>!<br>
+</div>
+<h2><a name="Certificate_Authentication"></a>Certificate Authentication</h2>
+<div style="margin-left: 40px;"><span style="font-weight: bold;">Major changes recently!</span> <br>
+<br>
+Some web pages at the lab, particularly
+the Document Database (DocDB) use CILogon certificates for
+access.&nbsp; You can find instructions for using these <a href="https://fermi.service-now.com/kb_view_customer.do?sysparm_article=KB0011531">here</a>.<br>
+<br>
+Ignore any instructions involving KCA certificates, as they are no longer used at the lab.<br>
+</div>
+
+<h2><a name="Remote_Access_VPN"></a>Remote Access (VPN)</h2>
+<div style="margin-left: 40px;">Many resources at the lab, including
+shared <a href="#Shared_Disks">Samba disks</a> and a number of the web pages, are blocked by the
+lab's firewall.&nbsp; To access them from outside, you will need to use
+a virtual private network (VPN) client.&nbsp; <br>
+<br>
+The lab is set up to work with Cisco AnyConnect, which uses "split
+stream"; that is, only fnal domain addresses are routed through the
+VPN.&nbsp; Go <a href="http://networking.fnal.gov/vpn/">here</a> for
+instructions on downloading and installing the software.&nbsp; The
+Catch-22 is that before you have the VPN installed, you only access the
+download link from inside the firewall.&nbsp; <br>
+<br>
+Once you have the software installed, you can connect using your services account credentials.&nbsp; <br>
+</div>
+<h2><a name="Access_to_Unix_Services"></a>Access to Unix Resources</h2>
+<div style="margin-left: 40px;">Most of the "serious computing" at the
+lab is done on linux/unix servers or clusters.&nbsp; Ask your mentor or
+supervisor if you will need access to any of these. If the answer is is
+no, you can ignore this section.<br>
+<br>
+If you need to use unix resources, you should request an account on the central unix cluster, by going to the <a href="Affiliation%5CExperiment%20Computing%20Account%20Request">service now page</a> -&gt; "Request New/Renew Accounts"-&gt;"Requst FNALU Account".&nbsp; Your supervisor will need to approve the request.<br>
+<br>
+All unix systems at the lab are accessed with your kerberos principle,
+but you will need to be granted access to particular machines.&nbsp;
+Your mentor/supervisor should arrange for this.&nbsp; <br>
+<br>
+Note that some unix systems are only accessible inside the
+firewall.&nbsp; To access them from outside the lab, you will either
+have to use VPN, or connect first to FNALU.<br>
+<br>
+To use unix services, you will need Kerberos tools and an xwindows
+server on your computer.&nbsp; You can then connect or copy files with <a href="https://linux.die.net/man/1/ssh">secure shell (ssh)</a> or <a href="https://linux.die.net/man/1/scp">secure copy (scp)</a>, respectively.<br>
+<br>This is a bit different on each operating system.&nbsp; These
+instructions assume you have administrator privileges on your computer.
+Note that in all these examples, the capital letters in
+"yourusername@FNAL.GOV" are important.<br>
+</div>
+<h3 style="margin-left: 40px;">MacOSX</h3>
+<div style="margin-left: 40px;">
+<div style="margin-left: 40px;">The kerberos tools are built-in, but you should download the correct krb5.conf configuration file from <a href="http://computing.fnal.gov/authentication/krb5conf/">here</a>
+and copy it to the /etc/ directory on your main hard disk.&nbsp;&nbsp;
+If you're doing this from the Finder rather than a terminal window, the
+/etc/ directory is hidden, so you will need to do "Go-&gt;Go to
+folder..." and enter /etc.&nbsp; It's probably a good idea to make a
+backup copy of the version of krb5.conf that's already there before
+replacing. <br>
+<br>
+If you don't already have XQuartz, download it from <a href="https://www.xquartz.org/">here</a> and install it. <br>
+<br>You can either install the "<a href="http://web.mit.edu/macdev/KfM/KerberosClients/KerberosApp/Documentation/using-osx.html">Kerberos Extras</a>", and and get a ticket for "yourusername@FNAL.GOV", or just do it from the command line in a terminal window:<br>
+&gt; kinit yourusername@FNAL.GOV&nbsp; <br>
+and enter your kerberos password when prompted.<br>
+<br>
+Once you've got a ticket you can connect to a unix node with:<br>
+<br>
+&gt; ssh -XKA node.fnal.gov<br>
+<br>
+Once you're connected, you can test the link by typing<br>
+<br>
+&gt; xterm<br>
+<br>
+I've found that sometimes OSX updates will cause problems with XQuartz
+and you will be unable to open Xwindows from a remote note.&nbsp;
+Relinstalling XQuartz generally fixes the problem.<br>
+</div>
+<br>
+</div>
+<h3 style="margin-left: 40px;">Linux</h3>
+<div style="margin-left: 40px;">
+<div style="margin-left: 40px;">Xwindows is built into linux.&nbsp; The kerberos tools may or may not be there.&nbsp; Try typing <br>
+&gt; kinit&nbsp; yourusername@FNAL.GOV<br>
+<br>
+If it doesn't work, you'll need to install the kerberos utilities for
+your system.&nbsp; On Redhat, Fedora, Scientific Linux, etc, you can do<br>
+&gt; sudo yum install krb5-workstation krb5-libs krb5-auth-dialog<br>
+<br>
+On Ubuntu, type<br>
+&gt; sudo apt-get install krb5-user<br>
+<br>
+Download the correct krb5.conf configuration file from <a href="http://computing.fnal.gov/authentication/krb5conf/">here</a>
+and copy it to the /etc/ directory on your main hard disk.&nbsp; It's a
+good idea to make a backup copy of the previous version. <br>
+<br>
+Once it's installed, get a ticket with:<br>
+&gt; kinit yourusername@FNAL.GOV<br>
+<br>
+Once you've done that, you can connect to a unix node with<br>
+<br>
+
+&gt; ssh -XKA node.fnal.gov<br>
+<br>
+
+Once you're connected, you can test the link by typing<br>
+<br>
+
+&gt; xterm<br>
+</div>
+<br>
+</div>
+
+
+
+
+<h3 style="margin-left: 40px;">MS Windows</h3>
+<div style="margin-left: 80px;">There are several ways to handle
+kerberos/xwindows access under windows, none of them very good.&nbsp;
+Ask your supervisor if he or she has a preferred solution.&nbsp;
+Otherwise, the simplest solution I found is to use MIT Kerberos for Windows,
+PuTTY, and Xming, as described <a href="http://home.fnal.gov/%7Eprebys/misc/AAAreadme/AAA-MS-Windows-X11.html">here</a>.<br>
+</div>
+<br>
+<br>
+</body></html>
