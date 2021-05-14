@@ -1,0 +1,140 @@
+\documentclass{article}
+\usepackage[top=2cm , bottom=2cm , left=2cm ,  right=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{parskip}
+\usepackage{amsmath}
+
+% Use this to toggle solutions
+\newif\ifsolutions
+\solutionsfalse
+% Uncomment next line to turn on solutions.
+\solutionstrue
+
+\newcommand{\answer}[1]{\ifsolutions\begin{quote}{\color {red} #1 }\end{quote}\fi}
+\newcommand{\points}[1]{\ifsolutions{\color{red}  (#1)}\fi}
+
+%\setlength{\parindent}{0pt}
+\begin{document}
+% ============================================================================
+\begin{centering}
+{\bf Accelerator Physics Lab 4}\\
+January 28, 2015\\
+\end{centering}
+
+In this lab, you will simulate particles going through 10 identical FODO cells, to verify that the calulcations you have
+been doing correctly predict the behavior of an ensemble of particles.  The tool you will use will
+be ``g4beamline"\cite{ref:g4beamline}, which is a script-driven wrapper around the GEANT4 simulation
+package.
+
+Unlike MADX, g4beamline does not work directly with accelerator lattice functions.  Rather, it
+tracks particles through magnetic fields, based on physical models (beam energy and magnetic gradients),
+rather than normalized lattice descriptions.  In short, it's as close as we'll be able to come to actually
+building a beam line.
+
+There are two programs we'll use:
+\begin{itemize}
+\item g4beamline:  The graphical interface to the g4beamline package
+\item historoot: A tool for making plots from the output of g4beamline.  This is a graphical wrapper around the ``root" analysis package.
+\end{itemize}
+
+These should both appear as icons on the screen of the lab computers.
+
+\section{Calculations (10 points)}
+
+You will consider a FODO cell with the the following parameters:
+\begin{itemize}
+\item A proton beam of kinetic energy 400 GeV
+\item A  half cell length (center of quad to center of next quad) of $L$=20 m
+\item Quadrupole lengths of $L_Q$=2m.
+\item A phase advance for each FODO cell of 60$^\circ$
+\end{itemize}
+
+Using the usual thin lens approximations, calculate:
+\begin{itemize}
+\item $\beta_{max}$ at the center of each focusing quad.
+\item $\beta_{min}$ at the center of each defocusing quad.
+\item Focal length $f$ of the quads (as usual, asssume focusing and defocusing quads are equal and opposite)
+\item Magnetic gradient in the quads.
+\end{itemize}
+
+\section{Mismatched Lattice (10 points)}
+
+Download the example file ``example.g4bl" at the course webpage \verb+http//tinyurl.com/prebys-uspas-2015+.
+By default, it will download to \verb+C:\Users\Student\Downloads+, but you can download it wherever you want.
+Examine it with ``Notepad+" (or something else that doesn't screw up the carriage returns like regular ``Notepad").  Read through it.  The syntax is pretty easy to follow (at least compared to MADX!).  
+The beam parameters are defined by the ``beam" command.  The ``genericquad" command defines a quadrupole, and the
+``place" command places these quadrupoles in a beam line.  The program is set up to place ten complete FODO cells.
+Note that elements are placed at their {\em center} location, so the first quad will be placed at $z$=0.
+
+The final commands in the script are
+\begin{itemize}
+\item The ``profile" command will fit the beam distributions at 100 mm intervals along the trajectory.  Among other things, it will use these fits to calculate the RMS and lattice function in each plane.  These will be written to the file  ``example\_profile.txt"
+\item The ``trace" command will write out all the information about the first 100 tracks to the file ``example.root"
+\end{itemize}
+
+This version of the example file has several {\em incorrect} values loaded into it.  Specifically:
+\begin{itemize}
+\item The magnetic gradient (defined by the ``gradient" parameter).
+\item The initial distributions $\sigma_x$, $\sigma_{x'}$, $\sigma_y$, and $\sigma_{y'}$, which are used in the ``beam" command.
+\end{itemize}
+
+Let's go ahead and run it, to see what a badly designed beam line looks like.  Launch the g4beamline application by clicking on the desktop icon.  You should see a window like this.
+
+\centerline{\includegraphics*[width=80 mm]{g4bl.pdf}}
+
+Click the ``browse" button to select the ``example.g4bl" file that you just downloaded.  Click ``run" to run the program.  It should take a couple of minutes to generate 1000 events.
+
+This will produce the files ``example.root" and ``example\_profile.txt" in the same directory where ``example.g4bl" is located.  
+
+Now launch the ``historoot" program, and open both of these files with the 	``File$\rightarrow$Open" command.  Note that you will have to select ``Text Files (.txt)" in the ``Files of type" pulldown menu to see the profile file.   Once you open both of them, they should appear in the ``NTuple" window, as shown here:
+
+\centerline{\includegraphics*[width=80 mm]{historoot1.pdf}}
+
+Selecting one of the NTuples will make the entries appear in the box at the lower left.  Start by selecting the ``AllTracks" Ntuple to get the individual track information.  Generate $x$ vs $z$ track plots by selecting ``X-Y" plot with the radio buttons, and then entering $z$ for the x variable and $x$ for the y variable, as shown here.
+
+\centerline{\includegraphics*[width=80 mm]{historoot2.pdf}}
+
+Click `` Create Plot". Be patient.  It will take a minute or two to make the plot. 
+
+Remember, there are a lot of wrong parameters, so you'll get something that looks crazy, like:
+
+\centerline{\includegraphics*[width=80 mm]{mismatch.pdf}}
+
+Print it by doing the ``File$\rightarrow$save" in the plot window.  Save as a ``.gif" file, because the PDF files get huge.
+
+Now we can examine the $\beta$ functions by looking at the other Ntuple, and  entering ``Z" for the $x$ variable and ``betaX" for the $y$ variable, as shown here:
+
+\centerline{\includegraphics*[width=80 mm]{historoot3.pdf}}
+
+Again, click ``Create Plot".  Again, you'll see something kind of crazy.  Save and print it.
+
+\section{Matched Lattice (10 points)}
+
+Now, edit the ``example.g4bl" file, and plug in the values you calculated in part 1 for the quadrupole gradient and the sigmas of the distributions in the ``beam" command.  Note that g4beamline uses units of mm for length, MeV for energy, and T/m for magnetic gradient!
+
+Repeat part2 with the new file.  If you did it right, you should see reasonable perioding behavior, like this
+
+
+\centerline{\includegraphics*[width=80 mm]{match_tracks.pdf}}
+
+for tracks and this
+
+\centerline{\includegraphics*[width=80 mm]{match_betas.pdf}}
+
+for the $\beta$ function.  The maxima and minima should be pretty close (10\%) to what you calculated in part 1 (remember, this is plotted in mm).  It's not quite perfect, because (a) the calculation assumed thin quadrupoles instead of real quadrupoles and (b) these are fits, which have an uncertaintly.
+
+\section{Mismatching Things Again (10 points)}
+
+Leave everything as it was in the previous section, but start the beam at the {\em beginning} of the first quad rather than the center by entering ``beamZ=-1000" in the ``Parameters" line of g4beamline and clicking ``Run" again.  Redo the ``$x$ vs. $z$" plot and the ``$betaX$ vs $Z$" plot. 
+
+This doesn't seem like a very big change, but you should see that it has a pretty significant effect.
+
+\begin{thebibliography}{2}
+\bibitem{ref:g4beamline} The g4beamline and historoot packages, as well as the users' manual, can be found at 
+\verb+http://www.muonsinternal.com/muons3/G4beamline+
+\end{thebibliography}
+
+
+
+\end{document}

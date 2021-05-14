@@ -1,0 +1,302 @@
+G4beamline Process ID 34987
+
+*************************************************************
+ g4beamline version: 2.16                    (10-Jan-2014-11:13)
+                      Copyright : Tom Roberts, Muons, Inc.
+                        License : Gnu Public License
+                            WWW : http://g4beamline.muonsinc.com
+*************************************************************
+ Geant4 version Name: geant4-09-06-patch-02    (17-May-2013)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+param        beamZ         -1000
+param        viewer        none
+geometry                   nPoints=100 printGeometry=0 visual=0
+                           tolerance=0.002
+param        nEvents       1000
+param        beamZ         -1000  (already defined)
+param        M             938.272
+param        KE            400000.0
+param        P             400937.17
+param        gradient      33.4
+beam    GAUSSIAN particle=proton nEvents=1000 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=-1000.0 maxR=1000000.0 
+		meanMomentum=400937.2 weight=1.000000 
+		sigmaX=0.6 sigmaY=0.3 sigmaZ=0.0 sigmaXp=0.00001 sigmaYp=0.00001 
+		sigmaP=0.0 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
+G4PhysListFactory::GetReferencePhysList <FTFP_BERT>  EMoption= 0
+<<< Geant4 Physics List simulation engine: FTFP_BERT 2.0
+
+<<< Reference Physics List FTFP_BERT is built
+
+*** RegisterPhysics(new G4RadioactiveDecayPhysics()) ***
+physics      FTFP_BERT     disable= inactivate= deactivate= doStochastics=1
+                           fluct=1 minRangeCut=1 list=0 gammaToMuPair=0
+                           spinTracking=0 synchrotronRadiation=0
+                           synchrotronRadiationMuon=0 maxTime=1e+06
+param        L             20000.
+param        QL            2000.
+param        aperture      50.
+param        nCell         10
+genericquad  MRQuad        fieldLength=2000 ironLength=2000 ironRadius=250
+                           apertureRadius=50 poleTipRadius=0 coilRadius=0
+                           coilHalfwidth=0 coilHalfWidth=0 gradient=0
+                           maxStep=100 ironMaterial=Fe fieldMaterial=Vacuum
+                           ironColor=1,1,1 kill=1 fringe= fringeFactor=1
+                           openAperture=0
+param        nQuad         20
+param        zQ            0.
+do i=1,20,1
+(do i=1)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=0.0 rename='MRQuad#'
+                gradient=33.4
+param        zQ            20000
+param        gradient      -33.4
+(do i=2)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=20000.0 rename='MRQuad#'
+                gradient=-33.4
+param        zQ            40000
+param        gradient      33.4
+(do i=3)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=40000.0 rename='MRQuad#'
+                gradient=33.4
+param        zQ            60000
+param        gradient      -33.4
+(do i=4)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=60000.0 rename='MRQuad#'
+                gradient=-33.4
+param        zQ            80000
+param        gradient      33.4
+(do i=5)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=80000.0 rename='MRQuad#'
+                gradient=33.4
+param        zQ            100000
+param        gradient      -33.4
+(do i=6)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=100000.0 rename='MRQuad#'
+                gradient=-33.4
+param        zQ            120000
+param        gradient      33.4
+(do i=7)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=120000.0 rename='MRQuad#'
+                gradient=33.4
+param        zQ            140000
+param        gradient      -33.4
+(do i=8)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=140000.0 rename='MRQuad#'
+                gradient=-33.4
+param        zQ            160000
+param        gradient      33.4
+(do i=9)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=160000.0 rename='MRQuad#'
+                gradient=33.4
+param        zQ            180000
+param        gradient      -33.4
+(do i=10)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=180000.0 rename='MRQuad#'
+                gradient=-33.4
+param        zQ            200000
+param        gradient      33.4
+(do i=11)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=200000.0 rename='MRQuad#'
+                gradient=33.4
+param        zQ            220000
+param        gradient      -33.4
+(do i=12)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=220000.0 rename='MRQuad#'
+                gradient=-33.4
+param        zQ            240000
+param        gradient      33.4
+(do i=13)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=240000.0 rename='MRQuad#'
+                gradient=33.4
+param        zQ            260000
+param        gradient      -33.4
+(do i=14)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=260000.0 rename='MRQuad#'
+                gradient=-33.4
+param        zQ            280000
+param        gradient      33.4
+(do i=15)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=280000.0 rename='MRQuad#'
+                gradient=33.4
+param        zQ            300000
+param        gradient      -33.4
+(do i=16)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=300000.0 rename='MRQuad#'
+                gradient=-33.4
+param        zQ            320000
+param        gradient      33.4
+(do i=17)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=320000.0 rename='MRQuad#'
+                gradient=33.4
+param        zQ            340000
+param        gradient      -33.4
+(do i=18)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=340000.0 rename='MRQuad#'
+                gradient=-33.4
+param        zQ            360000
+param        gradient      33.4
+(do i=19)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=360000.0 rename='MRQuad#'
+                gradient=33.4
+param        zQ            380000
+param        gradient      -33.4
+(do i=20)
+place   MRQuad  copies=1 x=0.0 y=0.0 z=380000.0 rename='MRQuad#'
+                gradient=-33.4
+param        zQ            400000
+param        gradient      33.4
+enddo
+param        totlen        400000
+profile                    z= zloop=0:400000:100 require= particle=proton
+                           file=example_profile.txt
+                           filename=example_profile.txt coordinates=Centerline
+param        histoFile     example.root
+trace                      nTrace=100 format=Trace oneNTuple=1 primaryOnly=1
+                           traceTune=1 filename=AllTracks file=AllTracks
+                           require= coordinates=Centerline
+
+World size (before incrementing by 201.357 mm): 500.0 H  500.0 W  762000.0 L
+
+PARAMETERS:
+             KE=400000.0
+              L=20000.
+              M=938.272
+              P=400937.17
+             QL=2000.
+            Zcl=381000
+       aperture=50.
+          beamZ=-1000
+     deltaChord=3.0
+deltaIntersection=0.1
+   deltaOneStep=0.01
+         epsMax=0.05
+         epsMin=2.5e-7
+ eventTimeLimit=30
+    fieldVoxels=200,200,200
+       gradient=33.4
+      histoFile=example.root
+    histoUpdate=0
+              i=20
+        maxStep=100.0
+        minStep=0.01
+          nCell=10
+        nEvents=1000
+          nQuad=20
+ steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
+steppingVerbose=0
+         totlen=400000
+         viewer=none
+ wallClockLimit=-1
+  worldMaterial=Vacuum
+             zQ=400000
+     zTolerance=2.0
+Checking overlaps for volume MRQuad1 ... OK! 
+Checking overlaps for volume MRQuad1 ... OK! 
+BLCMDgenericquad::Construct MRQuad1 parent= relZ=0.0 globZ=0.0
+Checking overlaps for volume MRQuad2 ... OK! 
+Checking overlaps for volume MRQuad2 ... OK! 
+BLCMDgenericquad::Construct MRQuad2 parent= relZ=20000.0 globZ=20000.0
+Checking overlaps for volume MRQuad3 ... OK! 
+Checking overlaps for volume MRQuad3 ... OK! 
+BLCMDgenericquad::Construct MRQuad3 parent= relZ=40000.0 globZ=40000.0
+Checking overlaps for volume MRQuad4 ... OK! 
+Checking overlaps for volume MRQuad4 ... OK! 
+BLCMDgenericquad::Construct MRQuad4 parent= relZ=60000.0 globZ=60000.0
+Checking overlaps for volume MRQuad5 ... OK! 
+Checking overlaps for volume MRQuad5 ... OK! 
+BLCMDgenericquad::Construct MRQuad5 parent= relZ=80000.0 globZ=80000.0
+Checking overlaps for volume MRQuad6 ... OK! 
+Checking overlaps for volume MRQuad6 ... OK! 
+BLCMDgenericquad::Construct MRQuad6 parent= relZ=100000.0 globZ=100000.0
+Checking overlaps for volume MRQuad7 ... OK! 
+Checking overlaps for volume MRQuad7 ... OK! 
+BLCMDgenericquad::Construct MRQuad7 parent= relZ=120000.0 globZ=120000.0
+Checking overlaps for volume MRQuad8 ... OK! 
+Checking overlaps for volume MRQuad8 ... OK! 
+BLCMDgenericquad::Construct MRQuad8 parent= relZ=140000.0 globZ=140000.0
+Checking overlaps for volume MRQuad9 ... OK! 
+Checking overlaps for volume MRQuad9 ... OK! 
+BLCMDgenericquad::Construct MRQuad9 parent= relZ=160000.0 globZ=160000.0
+Checking overlaps for volume MRQuad10 ... OK! 
+Checking overlaps for volume MRQuad10 ... OK! 
+BLCMDgenericquad::Construct MRQuad10 parent= relZ=180000.0 globZ=180000.0
+Checking overlaps for volume MRQuad11 ... OK! 
+Checking overlaps for volume MRQuad11 ... OK! 
+BLCMDgenericquad::Construct MRQuad11 parent= relZ=200000.0 globZ=200000.0
+Checking overlaps for volume MRQuad12 ... OK! 
+Checking overlaps for volume MRQuad12 ... OK! 
+BLCMDgenericquad::Construct MRQuad12 parent= relZ=220000.0 globZ=220000.0
+Checking overlaps for volume MRQuad13 ... OK! 
+Checking overlaps for volume MRQuad13 ... OK! 
+BLCMDgenericquad::Construct MRQuad13 parent= relZ=240000.0 globZ=240000.0
+Checking overlaps for volume MRQuad14 ... OK! 
+Checking overlaps for volume MRQuad14 ... OK! 
+BLCMDgenericquad::Construct MRQuad14 parent= relZ=260000.0 globZ=260000.0
+Checking overlaps for volume MRQuad15 ... OK! 
+Checking overlaps for volume MRQuad15 ... OK! 
+BLCMDgenericquad::Construct MRQuad15 parent= relZ=280000.0 globZ=280000.0
+Checking overlaps for volume MRQuad16 ... OK! 
+Checking overlaps for volume MRQuad16 ... OK! 
+BLCMDgenericquad::Construct MRQuad16 parent= relZ=300000.0 globZ=300000.0
+Checking overlaps for volume MRQuad17 ... OK! 
+Checking overlaps for volume MRQuad17 ... OK! 
+BLCMDgenericquad::Construct MRQuad17 parent= relZ=320000.0 globZ=320000.0
+Checking overlaps for volume MRQuad18 ... OK! 
+Checking overlaps for volume MRQuad18 ... OK! 
+BLCMDgenericquad::Construct MRQuad18 parent= relZ=340000.0 globZ=340000.0
+Checking overlaps for volume MRQuad19 ... OK! 
+Checking overlaps for volume MRQuad19 ... OK! 
+BLCMDgenericquad::Construct MRQuad19 parent= relZ=360000.0 globZ=360000.0
+Checking overlaps for volume MRQuad20 ... OK! 
+Checking overlaps for volume MRQuad20 ... OK! 
+BLCMDgenericquad::Construct MRQuad20 parent= relZ=380000.0 globZ=380000.0
+### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
+
+Geometry test nPoints=100 tolerance=0.002 mm:
+Testing geometry for children of group 'World':
+Total geometry errors = 0  0 seconds
+
+================== Prepare Tracking Beam ==================
+Stochastic processes are enabled.
+================== Begin Tracking Beam ===============
+fieldVoxels: nx=1 ny=1 nz=1913, 1913 voxels, 20 fields
+fieldVoxels: max field count is 1 fields, # voxels >5: 0, >10: 0, >20: 0
+Event 1 Completed  1 events  realTime=1 sec  1.0 ev/sec
+Event 2 Completed  2 events  realTime=1 sec  2.0 ev/sec
+Event 3 Completed  3 events  realTime=1 sec  3.0 ev/sec
+Event 4 Completed  4 events  realTime=1 sec  4.0 ev/sec
+Event 5 Completed  5 events  realTime=1 sec  5.0 ev/sec
+Event 6 Completed  6 events  realTime=1 sec  6.0 ev/sec
+Event 7 Completed  7 events  realTime=1 sec  7.0 ev/sec
+Event 8 Completed  8 events  realTime=1 sec  8.0 ev/sec
+Event 9 Completed  9 events  realTime=1 sec  9.0 ev/sec
+Event 10 Completed  10 events  realTime=1 sec  10.0 ev/sec
+Event 20 Completed  20 events  realTime=1 sec  20.0 ev/sec
+Event 30 Completed  30 events  realTime=2 sec  15.0 ev/sec
+Event 40 Completed  40 events  realTime=3 sec  13.3 ev/sec
+Event 50 Completed  50 events  realTime=3 sec  16.7 ev/sec
+Event 60 Completed  60 events  realTime=4 sec  15.0 ev/sec
+Event 70 Completed  70 events  realTime=4 sec  17.5 ev/sec
+Event 80 Completed  80 events  realTime=5 sec  16.0 ev/sec
+Event 90 Completed  90 events  realTime=6 sec  15.0 ev/sec
+Event 100 Completed  100 events  realTime=6 sec  16.7 ev/sec
+NTuple wrote Root File 'example.root'
+Event 200 Completed  200 events  realTime=10 sec  20.0 ev/sec
+Event 300 Completed  300 events  realTime=13 sec  23.1 ev/sec
+Event 400 Completed  400 events  realTime=17 sec  23.5 ev/sec
+Event 500 Completed  500 events  realTime=20 sec  25.0 ev/sec
+Event 600 Completed  600 events  realTime=24 sec  25.0 ev/sec
+Event 700 Completed  700 events  realTime=28 sec  25.0 ev/sec
+Event 800 Completed  800 events  realTime=31 sec  25.8 ev/sec
+Event 900 Completed  900 events  realTime=35 sec  25.7 ev/sec
+Event 1000 Completed  1000 events  realTime=38 sec  26.3 ev/sec
+Run complete  1000 Events  38 seconds
+NTuple AllTracks         767700 entries
+profile: wrote 'example_profile.txt'
+
+Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 0 Warnings
+g4beamline: simulation complete

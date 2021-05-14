@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0"
+     xmlns:media="http://search.yahoo.com/mrss/"
+     xmlns:jalbum="http://jalbum.net/jalbumrss">
+    <channel>
+        <title>Lee Teng 2013 Fermilab Visit</title>
+   	<link>.</link>
+        <generator>jAlbum 11</generator>
+   		<description></description>
+        <jalbum:absolutePath></jalbum:absolutePath>
+        <item>
+            <title>IMG_1104</title>
+            <link>slides/IMG_1104.JPG</link>
+            <pubDate>Fri, 09 Aug 2013 15:21:25 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/IMG_1104.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/IMG_1104.JPG" width="960" height="717"/>
+            <jalbum:exif originalDate="6/6/13 2:18 PM" cameraMake="Apple" cameraModel="iPhone 4"/>
+            <guid isPermaLink="false">slides/IMG_1104.JPG</guid>
+        </item>
+        <item>
+            <title>IMG_1105</title>
+            <link>slides/IMG_1105.JPG</link>
+            <pubDate>Fri, 09 Aug 2013 15:21:25 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/IMG_1105.JPG" width="200" height="150"/>
+            <media:content  url="slides/IMG_1105.JPG" width="960" height="717"/>
+            <jalbum:exif originalDate="6/6/13 2:44 PM" cameraMake="Apple" cameraModel="iPhone 4"/>
+            <guid isPermaLink="false">slides/IMG_1105.JPG</guid>
+        </item>
+        <item>
+            <title>IMG_1106</title>
+            <link>slides/IMG_1106.JPG</link>
+            <pubDate>Fri, 09 Aug 2013 15:21:25 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/IMG_1106.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/IMG_1106.JPG" width="960" height="717"/>
+            <jalbum:exif originalDate="6/6/13 2:44 PM" cameraMake="Apple" cameraModel="iPhone 4"/>
+            <guid isPermaLink="false">slides/IMG_1106.JPG</guid>
+        </item>
+        <item>
+            <title>IMG_1107</title>
+            <link>slides/IMG_1107.JPG</link>
+            <pubDate>Fri, 09 Aug 2013 15:21:25 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/IMG_1107.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/IMG_1107.JPG" width="960" height="717"/>
+            <jalbum:exif originalDate="6/6/13 2:45 PM" cameraMake="Apple" cameraModel="iPhone 4"/>
+            <guid isPermaLink="false">slides/IMG_1107.JPG</guid>
+        </item>
+        <item>
+            <title>IMG_1108</title>
+            <link>slides/IMG_1108.JPG</link>
+            <pubDate>Fri, 09 Aug 2013 15:21:25 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/IMG_1108.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/IMG_1108.JPG" width="960" height="717"/>
+            <jalbum:exif originalDate="6/6/13 3:31 PM" cameraMake="Apple" cameraModel="iPhone 4"/>
+            <guid isPermaLink="false">slides/IMG_1108.JPG</guid>
+        </item>
+        <item>
+            <title>IMG_1109</title>
+            <link>slides/IMG_1109.JPG</link>
+            <pubDate>Fri, 09 Aug 2013 15:21:25 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/IMG_1109.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/IMG_1109.JPG" width="960" height="717"/>
+            <jalbum:exif originalDate="6/6/13 3:35 PM" cameraMake="Apple" cameraModel="iPhone 4"/>
+            <guid isPermaLink="false">slides/IMG_1109.JPG</guid>
+        </item>
+        <item>
+            <title>IMG_1110</title>
+            <link>slides/IMG_1110.JPG</link>
+            <pubDate>Fri, 09 Aug 2013 15:21:25 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/IMG_1110.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/IMG_1110.JPG" width="960" height="717"/>
+            <jalbum:exif originalDate="6/6/13 3:35 PM" cameraMake="Apple" cameraModel="iPhone 4"/>
+            <guid isPermaLink="false">slides/IMG_1110.JPG</guid>
+        </item>
+    </channel>
+</rss>

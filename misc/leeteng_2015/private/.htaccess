@@ -1,0 +1,5 @@
+Options +Indexes
+AuthType Basic
+AuthName "Applicant Info"
+AuthUserFile /afs/fnal.gov/files/home/room1/prebys/auth/.htpasswd
+require user iaiadmin

@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+
+
+
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Light Controller Manual</title></head><body>
+  
+<h1>Users&#8217; Guide for Geneva Underground Playhouse Light Controller</h1>
+<div style="text-align: center;"><img style="width: 720px; height: 540px;" alt="" src="chauvet.png"><br>
+</div>
+
+This document is meant as a simple guide to familiarize users with the
+Chauvet StageDesigner 50 DMX light controller as it&#8217;s configured for
+the Geneva Underground Playhouse. It's not meant to replace the manual,
+and doesn't include initial setup instructions or other information not
+relevant to use in the theater.&nbsp; It's meant for those who will be
+programming the board, as well as those who will be using the board
+after it has been programmed by someone else.&nbsp; The full manual can be found <a href="Stage_Designer_50_UM_Rev08.pdf">here</a>.<br>
+<br>
+All users are encouraged to carefully read the <a href="#Startup">Startup</a>, <a href="#Shutdown">Shutdown</a>, and <a href="#Troubleshooting">Troubleshooting</a> sections before using the board.<br>
+<h2>Table of Contents</h2>
+<ul>
+  <li><a href="#Introduction">Introduction</a></li>
+  <li><a href="#Startup">Startup</a></li>
+  <li><a href="#Shutdown">Shutdown</a></li>
+  <li>Non-programmed operation</li>
+  <li><a href="#Programming">Programming</a></li>
+  <ul>
+    <li><a href="#Programming_Steps_and_Scenes_">Programming Steps and Scenes</a><br>
+    </li>
+    <li><a href="#Editing_Steps">Editing steps</a></li>
+    <li>Delecting steps</li>
+    <li>Adding steps</li>
+  </ul>
+  <li>Pre-programmed operation</li>
+  <li><a href="#Troubleshooting">Troubleshooting<br>
+    </a></li>
+</ul>
+<br>
+<h2><a name="Introduction"></a>Introduction</h2>
+The light controller is set up to control up to 12 lights, via two DMX
+6-channel dimmer packs.&nbsp; Channels 1-6 are in the pack on Stage
+Right , and
+channels 7-12 are in the pack on Stage Left.&nbsp; The actual mapping
+of the lights to the channels often changes from show to show, although
+channel 12 will always control the house lights.<br>
+<br>
+In general, there are two modes of operation for the board:<br>
+<ul>
+  <li>Direct (&#8220;12 Channel A/B&#8221;) Mode &#8211; This is the simple,
+non-programmed mode, in which the sliders control the lights
+directly.&nbsp; Sliders 1-12 (top) form bank A, while sliders 13-24
+(bottom) form bank B and control the same lights.&nbsp; Each bank is
+controlled by its own master fader.&nbsp; Thus, while a scene is
+displayed from one bank, the next scene can be set up in the other bank.</li>
+  <li>Programmed
+(&#8220;Chase&lt;-&gt;Scene&#8221;) Mode &#8211; In this mode, complete sets of
+light levels are stored as &#8220;steps&#8221;, then one or more steps are stored
+together as a "scene". Each scene is then assigned to one of the
+sliders
+in the bottom bank, with the overall level set by master fader B.
+Scenes with a single step are referred to as "static" scenes.
+Multi-step scenes can play out in a timed sequence, stepped thropugh
+manually, or synchronized
+to music.&nbsp; <br>
+</li>
+</ul>
+<h2><a name="Startup"></a>Startup</h2>
+There's no power switch on the board.&nbsp; It's usually left plugged
+into the power strip and comes on along with everything else when the
+power strip is turned on.&nbsp; It always comes up in &#8220;blackout&#8221; mode,
+indicated by the green LED above the &#8220;blackout&#8221; button.&nbsp; Push the
+"blackout" button to make the LED go out.<br>
+<br>
+When the board is first powered up and brought out of blackout, the
+lights will still be out, regardless of the position of the sliders. A
+level or scene will not be activated until the associated slider is
+moved.<span style="font-weight: bold;">&nbsp; </span>For this reason, it's generally best to start with all the sliders at "0".<br>
+<h2>Shutdown</h2>
+<span style="font-weight: bold;">Powering down the light board does not shut the lights off!</span>In
+fact, it might send the lights to full on and trip the breakers. Set
+all sliders to "0", hit the BLACKOUT button, and then power down the
+board, either by uplugging the power strip or turning it off.<br>
+<br>
+IMPORTANT:&nbsp; Even if the lights are blacked out, there's a glitch
+that occasionally causes one or more of them to turn on when the board
+is powered down.&nbsp; If this happens, power the board up, toggle the&nbsp; BLACKOUT button off and on, and shut it down again.<br>
+<br>
+Our lights are very old and get very hot.&nbsp; <span style="font-weight: bold;">Never, under any
+circumstances, leave stage lights on when the theater is
+unattended.</span>&nbsp; If all else fails, the lights can be shut off at the
+breaker panel in the HVAC closet at the opposite corner from the tech
+booth.&nbsp; The two breakers which control the dimmer packs are marked
+with blue tape.<br>
+&#8195;<br>
+<h2>Non-Programmed (1-12 A/B) Operation</h2>
+The board can be operated in direct, non-programmed mode even if it's
+been programmed for a different application.&nbsp; To set up for
+non-programmed operation:<br>
+<ol>
+  <li>Verify that the BLACKOUT LED is not lit.&nbsp; If it is, tap the "BLACKOUT" button until it's extinquished.</li>
+  <li>Use the "MODE" button to set the MODE to "(1-12 A/B)" (yellow LED) mode.</li>
+</ol>
+Generally, you will want to set the "FADE" speed to INSTANT (UP), or
+some very short value, and control the speed with the individual
+sliders or master faders.&nbsp; Setting the FADE speed too slow is a
+common way of convincing yourself the board isn't working.<br>
+<br>
+In this mode, the A bank (1-12, top) and the B bank (13-24, bottom)
+each control channels 1 through 12.&nbsp; The overall ampltude is set
+by the A and B master faders just to the right of the banks.&nbsp; In
+general, while a scene is displayed from one bank, the fader for the
+other bank is set to zero, so the next scene can be set up.&nbsp; The A
+fader has the maximum up and the B has the maximum down to simplify
+cross-fading from one scent to the next, although both are independent,
+so any combination of the A and B banks can be displayed.<br>
+<br>
+
+<h2><a name="Programming"></a>Programming</h2>
+Each set of light levels can be saved as a separate "scene" or as
+individual "steps" within a scene.&nbsp; In "Mix&lt;-&gt;Chase"
+playback mode, each scene is assigned to one of the 12 sliders in the
+"B" (bottom) bank, with the "B" master fader controller the overall
+intensity.&nbsp; The steps within a scene can play out in a timed
+sequence, can be synchronized with music, or can be stepped through
+manually.&nbsp; Scenes that contain only a single step are referred to
+as "static" scenes.<br>
+<br>
+Since there are 12 sliders in the bank, up to 12 scenes can be
+controlled at a time.&nbsp; These can be selected from 4 pages, for a total of 48 scenes in memory.&nbsp; Each scene
+can have up to 1000 steps, for a total of 48000 individual lighting
+states.<br>
+<br>
+Lighting transitions in a show can be done either by switching from one
+static scene to another or by stepping through multiple steps withing a
+scene or scenes. The choice is up to the light designer programming the
+board, but in most cases it's easier to do it as a series of static
+scenes.&nbsp; Cases where multi-step scenes are appropriate include:<br>
+<ul>
+  <li>Shows or parts of a show with a very large number of different
+lighting configurations, such that having 12 scenes available at a time
+is not enough.<br>
+  </li>
+  <li>Instances with rapid and/or automated lighting sequences.</li>
+</ul>
+It's worth remembering that the "A" (top) bank continues to control
+individual lights.&nbsp; Among other things, this can be used to
+"sneak" individual lights in and out of a scene. In some cases, this
+could be an alternative to complex programming sequences.<br>
+<br>
+The general procedure for programming is to record a step or sequencial
+series of steps to temporary memory and then assign them to a
+particular page and scene number.&nbsp; The procedure is the same
+for all of the different playback modes.<br>
+<br>
+<h4><a name="Programming_Steps_and_Scenes_"></a>Programming Steps and Scenes<br>
+</h4>
+<ol>
+  <li>Use the "MODE" button to set the mode to "1-24A" (green LED).</li>
+  <li>Set the "FADE" slider to "INSTANT" (UP).<br>
+  </li>
+  <li>To
+put the board into RECORD mode, while holding the
+"RECORD"button, tap "flash" buttons (buttons under the sliders) 1,
+5,6, and 8 in order, then release the "RECORD" button.&nbsp; All the
+blue leds
+above the sliders should FLASH once, indicating the board is in record
+mode.</li>
+  <li>To program a step into local memory, set the sliders to their
+desired configuration and then tap the "RECORD"
+button. All the blue LEDs should FLASH and the display should indicate "STEP 1". </li>
+  <li>If there are multiple steps in the scene, repeat (3) until they
+have all been loaded.&nbsp; The step count on the display should
+increment each time.</li>
+  <li>Use the "PAGE" button to select the page (1 to 4) where you want to store the scene.</li>
+  <li>While
+holding the "RECORD" button, tap the "FLASH" button below
+the slider for which you want to load the scene.&nbsp;All blue LEDs should flash, indicating the scene has been loaded. <br>
+  </li>
+  <li>Loading the scene clears the local memory and resets the step counter to zero in preparation for
+programming the next scene.&nbsp; If you make a mistake, you can
+manually clear the local memory by holding the "RECORD" button and tapping "PAGE/REC CLR".</li>
+  <li>Repeat (4 through 8) for any additional scenes.</li>
+  <li>Exit RECORD mode by holding the "RECORD" button and tapping "REC EXIT".</li>
+</ol>
+Note that temporary memory is erased when you exit record mode or power
+down the board.&nbsp; Scenes remain stored until they are erased or
+replaced.<br>
+<br>
+<h4><a name="Editing_Steps"></a>Editing Steps</h4>
+
+<ol>
+  <li>Use "MODE" button to set the mode to "Chase&lt;-&gt;Scene" (red LED). Yes, this is different than when recording scenes!</li>
+  <li>Set master fader B to max, so you can see the effect of your edits!<br>
+  </li>
+  <li>To
+put the board into RECORD mode, while holding the
+"RECORD"button, tap "flash" buttons (buttons under the sliders) 1,
+5,6, and 8 in order, then release the "RECORD" button.&nbsp; All the
+blue leds
+above the sliders should FLASH once, indicating the board is in record
+mode.</li>
+  <li>While holding the "EDIT" buttons, tap the FLASH button for the
+scene you wish to edit.&nbsp; The yellow LED above the scene should
+come on and the display should read "EDITING".&nbsp;&nbsp;</li>
+  <li>Set the scene's slider to max so you can see the effect of the edits on the scene.<br>
+  </li>
+  <li>If necessary, press "STEP" to select the step within the scene which you wish to edit.</li>
+  <li>To raise (lower) a level hold the UP (DOWN) button, then press
+and hold the FLASH button of the channel you wish to change.&nbsp; The
+display will show the changing level (0-254) of the light
+setting.&nbsp; Hold both buttons until the desired level is reached,
+then release.</li>
+  <li>Repeat (7) for any other levels in the step.</li>
+  <li>Repeat (4) through (8) for any other scenes and steps you wish to edit.</li>
+  <li>Exit EDIT mode by holding the "RECORD" button and tapping "REC EXIT".</li>
+  <li>Exit RECORD mode by holding the "RECORD" button and tapping "REC EXIT" a second time.<br>
+  </li>
+</ol>
+
+<br>
+<h2>Pre-programmed Operation<br>
+</h2>
+To set up the board for programmed playback:<br>
+<ol>
+  <li>Press the "MODE" button to put the board in "Chase&lt;-&gt;Scene" (red LED) mode.</li>
+  <li>Press the "PARK" button to put the board in "Mix Chase" (yellow
+LED) mode.&nbsp; This will allow different scenes to be mixed and to
+allow one to cross-fade one scene to another.</li>
+</ol>
+Now each of the bank B (lower) 12 sliders controls a scene, programmed
+as in the previous section.&nbsp; There are four pages of scenes,
+selected with the "PAGE" button and indicated by the LEDs below.&nbsp;
+A scene starts when its slider is moved to a non-zero value or when its
+FLASH button is tapped or held.&nbsp; You can cross-fade from one scene
+to another by simultaneously lowering one scene's slider and raising
+the other.&nbsp; If you switch pages while a scene is playing, that
+scene will continue to play, rather than switching immediately to the
+scene stored on the new page.&nbsp; In this way, you can cross-face
+scenes between pages <span style="font-style: italic;">unless they have the same scene number</span>.&nbsp;
+To switch to a scene with the same number on a different page, you
+would have to switch pages and lower the slider to 0 (in either
+order).&nbsp; Raising the slider again will load the new scene.<br>
+<br>
+If a scene has multiple steps, there are several ways to step through
+them.&nbsp; In all cases, the steps will continue to cycle through the
+programmed sequence indefinitely; that is, they will not step when they
+get to the last step.<br>
+<br>
+Also for all cases, the FADE speed slider will control how fast one
+step transitions to the next.&nbsp; Most of the range of the slider is
+beyond the range that would normally be used.&nbsp; Setting the FADE
+too slow might give you the impression the board is not working.<br>
+<ul>
+  <li style="font-weight: bold;">Manually</li>
+  <ol>
+    <li>If the green AUDIO LED is lit, tap the "AUDIO" button to extinguish it</li>
+    <li>Slide
+the SPEED lever to "SHOW MODE" (down).&nbsp; The LED above the STEP
+button should not be flashing.&nbsp; If it is, slide the SPEED lever up
+and back down to extinguish it.</li>
+    <li>Use the STEP button to step through the sequence.&nbsp; The
+current step number will show on the display. NOTE: if you step past
+the desired step, there is no way to go back.&nbsp; You will need to
+either cycle through or start the scene over!!</li>
+  </ol>
+  <li>Standard beat<br>
+  </li>
+</ul>
+<br>
+
+<h2><a name="Troubleshooting"></a>Troubleshooting<br>
+</h2>
+
+Here are some common problems with solutions.&nbsp; Anyone using the board should read this table first!<br>
+<br>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: center; font-weight: bold;"><big>Symptom</big></td>
+      <td style="vertical-align: top; text-align: center; font-weight: bold;"><big>Possible Cause</big></td>
+      <td style="vertical-align: top; text-align: center; font-weight: bold;"><big>Solution</big></td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="5" style="vertical-align: middle;">No lights work</td>
+      <td style="vertical-align: top;">BLACKOUT on.&nbsp; Indicated by yellow LED next to &#8220;BLACKOUT&#8221; button. This is
+always the state when the board powers up. &nbsp;&nbsp; <br>
+      </td>
+      <td style="vertical-align: top;"> Press "BLACKOUT" button to
+extinguish yellow blackout LED.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Fade speed too slow.&nbsp; <br>
+      </td>
+      <td style="vertical-align: top;">Set "FADE" speed slider to &#8220;INSTANT&#8221; (up).</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Board in &#8220;CHASE&lt;-&gt;SCENE&#8221; mode with an empty scene playing.&nbsp;&nbsp; <br>
+      </td>
+      <td style="vertical-align: top;">Set mode to &#8220;12 A/B&#8221; (yellow LED) and try operating the lights manually.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Board
+running "B" setup (alternate DMX channels). Indicated by display
+reading "RUNNING PAGE B".&nbsp; This should never happen during normal
+operation.<br>
+      </td>
+      <td style="vertical-align: top;">Hold
+"RECORD/SHIFT" button while pressing and releasing the "AUDIO PAGE A/B"
+button.&nbsp; Verify that the display reads "RUNNING PAGE A"<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Dimmer pack breaker(s) tripped.&nbsp; <br>
+      </td>
+      <td style="vertical-align: top;">Reset breakers in HVAC closet at rear left of theater.&nbsp; Dimmer pack breakers are marked with blue tape.</td>
+    </tr>
+    <tr>
+      <td>While programming, unable to store step(s) to a scene (blue LEDs don't flash).<br>
+      </td>
+      <td style="vertical-align: top;">Board not in 1-24A mode, as indicated by the MODE LEDs.<br>
+      </td>
+      <td style="vertical-align: top;">Press "MODE" button until "1-24A" (green) LED is lit. <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Can't edit a scene (yellow SCENE LED doesn't come on when pressing EDIT).<br>
+      </td>
+      <td style="vertical-align: top;">Board not in "Chase&lt;-&gt;Scene" mode, as indicated by MODE LED.<br>
+      </td>
+      <td style="vertical-align: top;">Press "MODE" button until "Chase&lt;-&gt;Scene" (red) LED is lit. </td>
+    </tr>
+    <tr>
+      <td>Board won't play scenes<br>
+      </td>
+      <td style="vertical-align: top;">Board not in "Chase&lt;-&gt;Scene" mode, as indicated by MODE LED.</td>
+      <td style="vertical-align: top;">Press "MODE" button until "Chase&lt;-&gt;Scene" (red) LED is lit.<br>
+      </td>
+    </tr>
+    <tr>
+      <td>Stuck in first step of each scene<br>
+      </td>
+      <td style="vertical-align: top;">In AUDIO mode, as indicated by green LED above AUDIO LEVEL, with no audio trigger.<br>
+      </td>
+      <td style="vertical-align: top;">If you wish to be in AUDIO mode,
+verify audio source and adjust AUDIO LEVEL. If you want to have timed
+or manual playback, press AUDIO button to extinguish green AUDIO LED.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Can't mix scenes or cross-fade from one scene to another.<br>
+      </td>
+      <td style="vertical-align: top;">Board in "Single Chase" mode, as indicated by (red) LED near PARK button.<br>
+      </td>
+      <td style="vertical-align: top;">Select "Mix Chase" mode by pressing "PARK" button until yellow LED is lit.<br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="2">Board is off, but lights are still on.<br>
+      </td>
+      <td style="vertical-align: top;"> Didn&#8217;t go to &#8220;BLACKOUT&#8221; before powering the board down.&nbsp;&nbsp; <br>
+      </td>
+      <td style="vertical-align: top;">Power up board, toggle BLACKOUT off and on, verify lights are off, and power down board again.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Once in a while, one or more lights come back on even if the board was properly in blackout when it was powered down.</td>
+      <td style="vertical-align: top;">(same procedure)</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; <br>
+<br>
+
+
+</body></html>

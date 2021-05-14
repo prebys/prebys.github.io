@@ -1,0 +1,81 @@
+\documentstyle[12pt]{article}
+
+\begin{document}
+
+\section{Multiple Data Sources}
+
+\section{General}
+
+In MiniBooNE, data will come from several separate sources.  At the time of 
+this writing, these are:
+\begin{itemize}
+\item The Tank - Primarily the data from the BooNE detector, but also some 
+miscellaneous data read out with the same electronics, and trigger information.
+\item ACNET - all data from the accelerator data acquisition system which is
+associated with MiniBooNE operation.  This data will be come from an XML
+server in a well-defined format.  A dedicated computer will read the data
+of interest to MiniBooNE.
+\item Resistive Wall Monitor (RWM) - this is the monitor for the beam time
+profile (bunch structure) just prior to the target. The data acquisition
+engine will be a VXI-based 1 GHz oscilloscope, which is
+read out with a Linux platform computer.
+\item Little Muon Counter (LMC) - the detector to monitor the
+small angle muons flux in the decay region, as a measure of the
+kaon content of our beam.  Data will be read out from a dedicated
+data acquisition computer.
+\end{itemize}
+
+In general, all subsystems will read out data every 1.6 $\mu $s spill, and 
+it will be necessary to merge this data for analysis.  In addition, some 
+subsystems will read out data in between spills, which may be treated
+as asynchronous.
+
+The plan is that each subsystem will run a more or less standalone
+data acquisition system, which writes data to locally accessible file.
+All data will be GPS timestamped for use in subsequent merging. Because
+we are only interested in merging data from a particular spill, and
+spills are 67 ms apart, a timestamp accuracy of 1 ms or so is more
+than sufficient.
+
+The individual data acquisition systems will be controlled by the
+``\"{U}berDAQ'' to insure that the data from all the systems has the
+same run boundaries; however, sub-run boundaries may vary from system
+to system.
+
+\section{Run Control}
+
+Operationally, the integrity of the tank data takes 
+precedence over everything else.  For that reason, the \"UberDAQ
+will send a send control commands to the tank DAQ program, and
+only when it receives an acknowlegement will it proceed to start
+up the other systems.
+
+All other systems are responsible for implementing the following
+commands:
+
+\begin{itemize} 
+\item prepare - Initialize all systems and begin reading and buffering data
+if appropriate.
+\item start_run (number) (timestamp) - Open a file for run (number) and
+begin writing all data after GPS time (timestamp).  Note, if a run is
+already running, that run should be stopped at (timestamp) and the new
+run started.  This is referred to a ``run hot swapping''.
+\item pause_run (timestamp) - pause  run at GPS (timestamp).
+\item resume_run (timestamp) - restart run at GPS (timestamp).
+\item stop_run (timestamp) - Stop current run at GPS (timestamp) and close
+file.
+\item shutdown - Stop data buffering and kill any particularly
+resource intensive processes.  Subsequent runs must be preceeded
+by a ``prepare'' command.
+\end{itemize}
+
+In general, subsystems should allow for (timestamp) to be 
+up to a few seconds {\em either before or after} the current time,
+so in most cases, it will be necessary to establish a data pipeline.
+
+
+
+\end{document}
+
+
+

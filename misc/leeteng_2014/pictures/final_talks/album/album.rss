@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0"
+     xmlns:media="http://search.yahoo.com/mrss/"
+     xmlns:jalbum="http://jalbum.net/jalbumrss">
+    <channel>
+        <title>Final Presentations</title>
+   	<link>.</link>
+        <generator>jAlbum 12</generator>
+   		<description>Final presentations at Fermilab, August 7, 2014</description>
+        <jalbum:absolutePath></jalbum:absolutePath>
+        <item>
+            <title>DSC02043</title>
+            <link>slides/DSC02043.JPG</link>
+            <pubDate>Fri, 08 Aug 2014 09:44:01 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/DSC02043.JPG" width="200" height="150"/>
+            <media:content  url="slides/DSC02043.JPG" width="960" height="720"/>
+            <jalbum:exif originalDate="8/7/14 12:20 PM" cameraMake="SONY" cameraModel="DSC-WX300"/>
+            <guid isPermaLink="false">slides/DSC02043.JPG</guid>
+        </item>
+        <item>
+            <title>DSC02044</title>
+            <link>slides/DSC02044.JPG</link>
+            <pubDate>Fri, 08 Aug 2014 09:44:01 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/DSC02044.JPG" width="200" height="150"/>
+            <media:content  url="slides/DSC02044.JPG" width="960" height="720"/>
+            <jalbum:exif originalDate="8/7/14 12:46 PM" cameraMake="SONY" cameraModel="DSC-WX300"/>
+            <guid isPermaLink="false">slides/DSC02044.JPG</guid>
+        </item>
+        <item>
+            <title>DSC02045</title>
+            <link>slides/DSC02045.JPG</link>
+            <pubDate>Fri, 08 Aug 2014 09:44:01 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/DSC02045.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/DSC02045.JPG" width="960" height="720"/>
+            <jalbum:exif originalDate="8/7/14 1:01 PM" cameraMake="SONY" cameraModel="DSC-WX300"/>
+            <guid isPermaLink="false">slides/DSC02045.JPG</guid>
+        </item>
+        <item>
+            <title>DSC02046</title>
+            <link>slides/DSC02046.JPG</link>
+            <pubDate>Fri, 08 Aug 2014 09:44:01 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/DSC02046.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/DSC02046.JPG" width="960" height="720"/>
+            <jalbum:exif originalDate="8/7/14 1:20 PM" cameraMake="SONY" cameraModel="DSC-WX300"/>
+            <guid isPermaLink="false">slides/DSC02046.JPG</guid>
+        </item>
+        <item>
+            <title>DSC02036</title>
+            <link>slides/DSC02036.JPG</link>
+            <pubDate>Fri, 08 Aug 2014 09:44:01 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/DSC02036.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/DSC02036.JPG" width="960" height="720"/>
+            <jalbum:exif originalDate="8/7/14 10:44 AM" cameraMake="SONY" cameraModel="DSC-WX300"/>
+            <guid isPermaLink="false">slides/DSC02036.JPG</guid>
+        </item>
+        <item>
+            <title>DSC02037</title>
+            <link>slides/DSC02037.JPG</link>
+            <pubDate>Fri, 08 Aug 2014 09:44:01 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/DSC02037.JPG" width="200" height="150"/>
+            <media:content  url="slides/DSC02037.JPG" width="960" height="720"/>
+            <jalbum:exif originalDate="8/7/14 10:56 AM" cameraMake="SONY" cameraModel="DSC-WX300"/>
+            <guid isPermaLink="false">slides/DSC02037.JPG</guid>
+        </item>
+        <item>
+            <title>DSC02038</title>
+            <link>slides/DSC02038.JPG</link>
+            <pubDate>Fri, 08 Aug 2014 09:44:01 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/DSC02038.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/DSC02038.JPG" width="960" height="720"/>
+            <jalbum:exif originalDate="8/7/14 11:12 AM" cameraMake="SONY" cameraModel="DSC-WX300"/>
+            <guid isPermaLink="false">slides/DSC02038.JPG</guid>
+        </item>
+        <item>
+            <title>DSC02039</title>
+            <link>slides/DSC02039.JPG</link>
+            <pubDate>Fri, 08 Aug 2014 09:44:01 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/DSC02039.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/DSC02039.JPG" width="960" height="720"/>
+            <jalbum:exif originalDate="8/7/14 11:25 AM" cameraMake="SONY" cameraModel="DSC-WX300"/>
+            <guid isPermaLink="false">slides/DSC02039.JPG</guid>
+        </item>
+        <item>
+            <title>DSC02040</title>
+            <link>slides/DSC02040.JPG</link>
+            <pubDate>Fri, 08 Aug 2014 09:44:01 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/DSC02040.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/DSC02040.JPG" width="960" height="720"/>
+            <jalbum:exif originalDate="8/7/14 11:42 AM" cameraMake="SONY" cameraModel="DSC-WX300"/>
+            <guid isPermaLink="false">slides/DSC02040.JPG</guid>
+        </item>
+        <item>
+            <title>DSC02041</title>
+            <link>slides/DSC02041.JPG</link>
+            <pubDate>Fri, 08 Aug 2014 09:44:01 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/DSC02041.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/DSC02041.JPG" width="960" height="720"/>
+            <jalbum:exif originalDate="8/7/14 11:59 AM" cameraMake="SONY" cameraModel="DSC-WX300"/>
+            <guid isPermaLink="false">slides/DSC02041.JPG</guid>
+        </item>
+        <item>
+            <title>DSC02042</title>
+            <link>slides/DSC02042.JPG</link>
+            <pubDate>Fri, 08 Aug 2014 09:44:01 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/DSC02042.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/DSC02042.JPG" width="960" height="720"/>
+            <jalbum:exif originalDate="8/7/14 12:20 PM" cameraMake="SONY" cameraModel="DSC-WX300"/>
+            <guid isPermaLink="false">slides/DSC02042.JPG</guid>
+        </item>
+        <item>
+            <title>DSC02048</title>
+            <link>slides/DSC02048.JPG</link>
+            <pubDate>Fri, 08 Aug 2014 09:44:01 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/DSC02048.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/DSC02048.JPG" width="960" height="720"/>
+            <jalbum:exif originalDate="8/7/14 1:40 PM" cameraMake="SONY" cameraModel="DSC-WX300"/>
+            <guid isPermaLink="false">slides/DSC02048.JPG</guid>
+        </item>
+        <item>
+            <title>DSC02049</title>
+            <link>slides/DSC02049.JPG</link>
+            <pubDate>Fri, 08 Aug 2014 09:44:01 -0500</pubDate>
+            <description></description>
+            <media:description type="html"></media:description>
+            <media:thumbnail url="thumbs/DSC02049.JPG" width="200" height="150"/>
+            <media:content type="image/jpeg" url="slides/DSC02049.JPG" width="960" height="720"/>
+            <jalbum:exif originalDate="8/7/14 1:44 PM" cameraMake="SONY" cameraModel="DSC-WX300"/>
+            <guid isPermaLink="false">slides/DSC02049.JPG</guid>
+        </item>
+    </channel>
+</rss>

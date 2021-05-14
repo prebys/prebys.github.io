@@ -1,0 +1,58 @@
+#	example.g4bl
+# put a line of fodo cells
+#
+# Note: These parameters are *wrong*! Students need to correct them to make the
+# cell work properly
+
+# These are parameters which can be overridden on the command line
+param -unset nEvents=1000     #number of events (duh)
+param -unset beamZ=0.         #starting position for the beam
+
+# 400 GeV beam
+param M=938.272 
+param KE=400000.0
+param P=sqrt(($M+$KE)*($M+$KE)-$M*$M)
+
+# These parameters are set incorrectly.  Students will need to redefine them to make
+# cell work
+param gradient=33.4
+# !! You will need to recalculate the values for sigmaX(mm), sigmaXp, sigmaY(mm), sigmaYp to match the optics
+beam gaussian beamZ=$beamZ sigmaX=.569 sigmaXp=.000008219 sigmaY=.328769 sigmaYp=.00001423 meanMomentum=$P nEvents=$nEvents particle=proton
+###############################################################################
+# after here, it should all be pretty much OK
+
+physics FTFP_BERT   # This defines the physics package
+
+
+# Example FODO cell
+# These define the quad length and distance between quads (half length of cell)
+param L=20000. 
+param QL=2000. 
+param aperture=50.    # Not really important
+
+param nCell=10         # number of FODO cells to place
+# This command defines a quadrupole with a length, aperture and gradient
+genericquad MRQuad fieldLength=$QL ironLength=$QL apertureRadius=$aperture ironRadius=5*$aperture  kill=1 
+
+# This set of commands places nCell FODO cells
+param nQuad=2*$nCell
+param zQ=0.
+# Loop over the quads, advancing the position and alternating the gradient each time
+do i 1 $nQuad
+  place MRQuad gradient=$gradient rename=MRQuad# z=$zQ
+  param zQ=$zQ+$L
+  param gradient=(-1)*$gradient
+enddo
+
+# Total length  
+param totlen=2*$nCell*$L
+
+# This command will fit the profile of the beam at 100 points along the length
+# And write them to the file "example_profile.txt"
+profile zloop=0:$totlen:100 particle=proton file=example_profile.txt
+
+# This command will track the details of 100 particles and write them them to the 
+# file example.root
+param histoFile=example.root
+trace nTrace=100 oneNTuple=1 primaryOnly=1 
+
